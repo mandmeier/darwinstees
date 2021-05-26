@@ -1,11 +1,11 @@
 import React from 'react'
 
-const App = () => {
+const EvoPanel = () => {
     return (
         <div>
-            Darwin's Tees
+            "EVOS HERE"
         </div>
     )
 }
 
-export default App
+export default EvoPanel

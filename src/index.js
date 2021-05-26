@@ -1,17 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'; // HashRouter is for deploy
+// import { BrowserRouter as Router, Route } from 'react-router-dom'; // BrowserRouter is for dev only
+import Home from './pages/Home';
+import About from './pages/About';
+import NotFound from './pages/NotFound';
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <Router>
+      <div>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/about" component={About}/>
+        <Route exact path="/404" component={NotFound}/>
+      </div>
+    </Router>
+    ,document.getElementById('root'));
+    
