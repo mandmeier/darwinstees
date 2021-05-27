@@ -1,6 +1,6 @@
 import React from 'react'
 import SVG from 'react-inlinesvg';
-import { SvgFrame } from './EvoTeeElements'
+// import { SvgFrame } from './EvoTeeElements'
 
 
 const EvoTee = ({evo}) => {
