@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 import {Provider} from "react-redux"
-import {store} from "./state/store"
+import store from "./state/store"
 
 
 ReactDOM.render(
