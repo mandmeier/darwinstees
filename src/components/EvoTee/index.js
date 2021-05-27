@@ -5,9 +5,7 @@ import { SvgFrame } from './EvoTeeElements'
 
 const EvoTee = ({evo}) => {
     return (
-        <SvgFrame>
             <SVG src={evo.svg} />
-        </SvgFrame>
     )
 }
 

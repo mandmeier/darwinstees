@@ -1,15 +1,15 @@
 import React from 'react'
 
-// import EvoCarousel from './components/EvoCarousel'
-// import Navbar from './components/Navbar'
-
-import {EvoCarousel, Navbar} from './components'
+import Navbar from './components/Navbar'
+import ImageSlider from './components/ImageSlider'
 
 const App = () => {
     return (
         <div>
             <Navbar/>
-            <EvoCarousel/>
+            <main>
+                <ImageSlider/>
+            </main>
         </div>
     )
 }
