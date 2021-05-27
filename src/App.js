@@ -1,9 +1,15 @@
 import React from 'react'
 
+// import EvoCarousel from './components/EvoCarousel'
+// import Navbar from './components/Navbar'
+
+import {EvoCarousel, Navbar} from './components'
+
 const App = () => {
     return (
         <div>
-            Darwin's Tees
+            <Navbar/>
+            <EvoCarousel/>
         </div>
     )
 }

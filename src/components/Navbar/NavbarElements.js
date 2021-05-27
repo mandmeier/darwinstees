@@ -1,66 +1,68 @@
-import styled from 'styled-components'
-import { NavLink as Link } from 'react-router-dom'
+import { makeStyles, fade } from '@material-ui/core/styles';
 
-export const Nav = styled.nav`
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem calc((100vw - 1000px) / 2);
-    margin-top: 2rem;
-    z-index: 10;
-    margin-bottom: 30px;
+const drawerWidth = 0;
 
-    & > a {
-        display: flex;
-        justify-content: center;
-    }
-
-    @media screen and (max-width: 560px) {
-        flex-direction: column;
-        justify-content: center;
-    } 
-
-
-`
-
-export const NavLink = styled(Link)`
-    font-family: 'Caveat', cursive;
-    font-size: 200%;
-    color: mediumblue;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 2px 2rem;
-    height: 100%;
-    cursor: pointer;
-    &.active {
-        color: brown;
-        font-weight: 800;
-    }
-`
-
-// export const Bars = styled(FaBars)`
-//     display: none;
-//     color: #fff;
-
-//     @media screen and (max-width: 768px) {
-//         display: block;
-//         position: absolute;
-//         top: 0;
-//         right: 0;
-//         transform: translate(-100%, 75%);
-//         font-size: 1.8rem;
-//         cursor: pointer
-//     }
-// `
-
-export const NavMenu = styled.div`
-    display: flex;
-    justify-content: center;
-    /* margin-right: -24px; */
-
-    /* @media screen and (max-width: 768px) {
-        margin-right: 0px;
-        display: none;
-    }  */
-`
+export default makeStyles((theme) => ({
+  appBar: {
+    boxShadow: 'none',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+  },
+  title: {
+    flexGrow: 1,
+    alignItems: 'center',
+    display: 'flex',
+    textDecoration: 'none',
+  },
+  image: {
+    marginRight: '10px',
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 'auto',
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));

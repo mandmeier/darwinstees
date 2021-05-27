@@ -1,13 +1,10 @@
 import React from 'react'
-import Layout from '../components/Layout'
-import EvoPanel from '../components/EvoPanel'
+import EvoCarousel from '../components/EvoCarousel'
 
 const Home = () => {
     return (
         <div>
-            <Layout>
-                <EvoPanel/>
-            </Layout>
+            <EvoCarousel/>
         </div>
     )
 }
