@@ -3,6 +3,8 @@ import ImageSlider from '../ImageSlider'
 import {Panel} from './EvoPanelElements'
 import { useSelector, useDispatch } from "react-redux"
 import { getEvos } from '../../state/actions/evoActions';
+import Mutants from '../Mutants'
+import { ShoppingCart } from '@material-ui/icons'
 
 const EvoPanel = () => {
 
@@ -24,8 +26,13 @@ const EvoPanel = () => {
     
     return (
     <Panel>
+        <div className="evo-panel-header">
+            <h1>Biomorph</h1>
+            <span>Add to cart <ShoppingCart/></span>
+        </div>
         <h3>Generation {generation}</h3>
         <ImageSlider/>
+        <Mutants/>
     </Panel>
     )
 }

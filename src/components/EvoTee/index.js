@@ -1,11 +1,13 @@
 import React from 'react'
 import SVG from 'react-inlinesvg';
-// import { SvgFrame } from './EvoTeeElements'
+import { Portrait } from './EvoTeeElements'
 
 
 const EvoTee = ({evo}) => {
     return (
-            <SVG src={evo.svg} />
+            <Portrait>
+                <SVG src={evo.svg} />
+            </Portrait>
     )
 }
 

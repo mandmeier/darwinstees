@@ -3,5 +3,15 @@ import styled from 'styled-components'
 
 
 export const Panel = styled.div`
-    /* background-color: yellow; */
+    margin: 1rem auto;
+    background-color: #d0fffe;
+    max-width: 400px ;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    padding: 5px;
+
+    & .evo-panel-header {
+        display: flex;
+        justify-content: space-between;
+    }
 `

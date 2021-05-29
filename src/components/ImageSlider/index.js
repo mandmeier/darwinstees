@@ -4,6 +4,7 @@ import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 import {Slider} from './ImageSliderElements'
 import { useSelector, useDispatch } from "react-redux"
 import { nextEvo, prevEvo } from '../../state/actions/evoActions';
+import evolution from '../../assets/evolution.png'
 
 
 
@@ -31,19 +32,24 @@ const ImageSlider = () => {
     }
 
     return (
-        <Slider>
-            <FaArrowAltCircleLeft className="slider-arrow left-arrow" onClick={prevSlide}/>
-         {
-            evos.map((evo, idx) => {
-                return <div className={idx === current ? 'slide active' : 'slide'}>
+            <Slider>
+                
+            {
+                evos.map((evo, idx) => {
+                    return <div className={idx === current ? 'slide active' : 'slide'}>
+                            
+                                <EvoTee evo={evo}/>
                         
-                            <EvoTee evo={evo}/>
-                    
+                    </div>
+                })
+            }   
+                <div className="slider-controls">
+                    <FaArrowAltCircleLeft className="slider-arrow left-arrow" onClick={prevSlide}/>
+                    <img src={evolution} />
+                    <FaArrowAltCircleRight className="slider-arrow right-arrow" onClick={nextSlide}/>
                 </div>
-            })
-        }   
-            <FaArrowAltCircleRight className="slider-arrow right-arrow" onClick={nextSlide}/>
-        </Slider>
+                
+            </Slider>
     )
 }
 
