@@ -16,9 +16,9 @@ const EvoPanel = () => {
 
     const evoState = useSelector((state) => state.evoState)
 
-    const {current, loading, evos} = evoState
+    const {current, evosLoading, evos} = evoState
 
-    if (loading) {
+    if (evosLoading) {
         <h1>loading</h1>
     } 
 

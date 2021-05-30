@@ -1,9 +1,14 @@
-const reducer = (state = { current: 0, loading: true, evos: [] }, action) => {
+const reducer = (state = { current: 0, evos: [], evosLoading: true, mutants: [], mutantsLoading: true }, action) => {
     switch (action.type) {
         case "GET_EVOS":
             return {...state,
-                loading: false,
+                evosLoading: false,
                 evos: action.payload
+            }
+        case "GET_MUTANTS":
+            return {...state,
+                mutantsLoading: false,
+                mutants: action.payload
             }
         case "NEXT_EVO":
             return {...state,

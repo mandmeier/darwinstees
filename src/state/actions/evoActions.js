@@ -15,6 +15,20 @@ export const getEvos = () => async dispatch => {
 }
 
 
+export const getMutants = () => async dispatch => {
+    try {
+        const { data } = await api.getMutants();
+        console.log("Fetched Data")
+        console.log(data)
+        dispatch({type: "GET_MUTANTS", payload: data})         
+      } catch (error) {
+        console.log(error);
+      }
+
+}
+
+
+
 
 export const nextEvo = (current, length) => {
     return (dispatch) => {
