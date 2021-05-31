@@ -31,7 +31,7 @@ export const mutateEvo = parent => {
     });
 
 
-    //create mutant id
+    //create mutant name
 
     Number.prototype.pad = function(size) {
         var s = String(this);
@@ -40,12 +40,12 @@ export const mutateEvo = parent => {
     }
 
 
-    const nextGenId = `${parent.id.split('-')[0]}-${(Number(parent.id.split('-')[1]) + 1).pad(6)}`
+    const nextGenName = `${parent.name.split('-')[0]}-${(Number(parent.name.split('-')[1]) + 1).pad(6)}`
 
     const mutants = []
 
     mutantGenomes.forEach((genome, idx) => {
-        mutants.push({id: `${nextGenId}-${idx+1}`, genome: genome, likes: 0, svg: drawEvo(genome) })
+        mutants.push({name: `${nextGenName}-${idx+1}`, genome: genome, likes: 0, svg: drawEvo(genome) })
     })
 
    

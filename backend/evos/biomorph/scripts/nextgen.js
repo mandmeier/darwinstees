@@ -1,33 +1,103 @@
+//// create next generation of evos
+
 import fs from 'fs'
-import {drawEvo} from './drawEvo.js';
 import {mutateEvo} from './mutateEvo.js';
 import path from 'path'
+import Evo from '../../../models/Evo.js';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+// connect to MongoDB
+
+dotenv.config();
+const MONGODB_URI = process.env.MONGODB_URI;
+
+mongoose
+  .connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+
+const connection = mongoose.connection;
+
+connection.once("open", function() {
+  console.log("MongoDB database connection established successfully");
+});
 
 
-const species = "biomorph"
-const dir = path.join('evos', species)
+// select lineage (cmd line argument?)
+const lineage = "biomorph"
+const dir = path.join('evos', lineage)
+
+
 
 // get winner genome from MongoDB
+
+// try {
+
+//         const query = new RegExp(`^${lineage}-`,"g");
+//         console.log("QUERY")
+//         console.log(query)
+
+//         const winner = await Evo.find({name: query})
+//                 .sort({ likes: -1 })
+//                 .limit(1);
+
+//         console.log("WINNER")
+//         console.log(winner)
+
+// } catch (error) {
+//         console.log("failed to retreive winner")
+// }
+
 
 const winner = 1
 const rawdata = fs.readFileSync(path.join(dir, 'mutants/mutants.json'));
 const muts = JSON.parse(rawdata);
-const parent = muts.find(mutant => mutant.id.endsWith(winner));
+const parent = muts.find(mutant => mutant.name.endsWith(winner));
 
 
-// make mutant genomes
+// add winner to evos.json
+const evodir = path.join(dir, 'evos.json')
+const evos = JSON.parse(fs.readFileSync(evodir))
+evos.push({name: parent.name, svg: parent.svg})
+fs.writeFileSync(evodir, JSON.stringify(evos))
+console.log(`added next gen ${parent.name} to evos.json`)
 
+
+// make mutants (next gen)
 const mutants = mutateEvo(parent)
 
-console.log(mutants)
 
 
+// save mutants to mongodb
+mutants.forEach(mutant => {
+        var newEvo = new Evo({
+        name: mutant.name,
+        lineage: mutant.name.split('-')[0],
+        generation: Number(mutant.name.split('-')[1]),
+        genome: mutant.genome,
+        svg: mutant.svg,
+        });
+        newEvo.save(function(err, evo) {
+                if (err) throw err;
+                if (evo) {
+                        console.log(`Evo ${evo.name} added to MongoDB`)
+                }
+        })
+
+})
 
 
+// save to mutants.json file
 const mutantData = JSON.stringify(mutants)
-        fs.writeFileSync(path.join(dir, 'mutants.json'), mutantData)
+fs.writeFileSync(path.join(dir, 'mutants.json'), mutantData)
 
 
+
+
+        
 
 
 
