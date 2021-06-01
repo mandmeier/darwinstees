@@ -6,6 +6,7 @@ import path from 'path'
 import Evo from '../../../models/Evo.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import {drawEvo} from './drawEvo.js';
 
 // connect to MongoDB
 
@@ -30,48 +31,51 @@ connection.once("open", function() {
 const lineage = "biomorph"
 const dir = path.join('evos', lineage)
 
-
-
 // get winner genome from MongoDB
-
-// try {
-
-//         const query = new RegExp(`^${lineage}-`,"g");
-//         console.log("QUERY")
-//         console.log(query)
-
-//         const winner = await Evo.find({name: query})
-//                 .sort({ likes: -1 })
-//                 .limit(1);
-
-//         console.log("WINNER")
-//         console.log(winner)
-
-// } catch (error) {
-//         console.log("failed to retreive winner")
-// }
+const query = new RegExp(`^${lineage}-`,"g");
+var [winner] = await Evo.find({name: query}).sort({ generation: -1 }).limit(3).sort({ likes: -1 }).limit(1)
 
 
-const winner = 1
-const rawdata = fs.readFileSync(path.join(dir, 'mutants/mutants.json'));
-const muts = JSON.parse(rawdata);
-const parent = muts.find(mutant => mutant.name.endsWith(winner));
+// if starting new lineage
+if (winner === undefined) {
+  console.log(`creating new lineage for ${lineage}`)
+  const start_genome = [0,1,1,1,1,1,1,1,1]
+  winner = {
+    name: `${lineage}-000000-1`,
+    lineage: lineage,
+    generation: 1,
+    likes: 0,
+    genome: start_genome,
+    svg: drawEvo(start_genome)
+  }
 
+  const firstEvo = JSON.stringify([winner])
+  fs.writeFileSync(path.join(dir, "evos.json"), firstEvo)
+}
+
+console.log(`Winner is ${winner.name} with ${winner.likes} likes`)
 
 // add winner to evos.json
 const evodir = path.join(dir, 'evos.json')
 const evos = JSON.parse(fs.readFileSync(evodir))
-evos.push({name: parent.name, svg: parent.svg})
+evos.push({name: winner.name, svg: winner.svg})
 fs.writeFileSync(evodir, JSON.stringify(evos))
-console.log(`added next gen ${parent.name} to evos.json`)
+console.log(`added next gen ${winner.name} to evos.json`)
 
 
 // make mutants (next gen)
-const mutants = mutateEvo(parent)
+const mutants = mutateEvo(winner)
+
+// save to mutants.json file
+const mutantData = JSON.stringify(mutants)
+fs.writeFileSync(path.join(dir, 'mutants.json'), mutantData)
 
 
 
 // save mutants to mongodb
+
+var responses = []; // count responses to track when done
+
 mutants.forEach(mutant => {
         var newEvo = new Evo({
         name: mutant.name,
@@ -84,154 +88,16 @@ mutants.forEach(mutant => {
                 if (err) throw err;
                 if (evo) {
                         console.log(`Evo ${evo.name} added to MongoDB`)
+                        responses.push(evo)
+                        if(responses.length  === mutants.length) {
+                          console.log("All done, disconnecting MongoDB")
+                          mongoose.connection.close()
+
+                  }
                 }
         })
 
+
 })
-
-
-// save to mutants.json file
-const mutantData = JSON.stringify(mutants)
-fs.writeFileSync(path.join(dir, 'mutants.json'), mutantData)
-
-
-
-
-        
-
-
-
-
-// console.log(nextGenId)
-
-
-
-
-
-// add parent to evos.json as latest gen
-
-
-// mutate parent
-
-
-
-
-// mutate parent genome
-
-
-
-// draw children
-// drawEvo(winnerEvo.genome);
-
-
-
-
-
-// draw winner and add winner to lineage
-
-
-
-
-
-
-// mutate winner and add offspring to mutants, update mutants.json
-
-
-
-
-
-
-
-
-
-// import { buildBiomorph } from './embryology.js';
-
-
-
-
-
-
-
-
-
-
-
-// import fs from 'fs'
-
-// const species = "biomorph"
-
-
-// const testsvg = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2"><line x1="150" y1="108" x2="150" y2="128"></line></svg>`
-
-
-// var num = "00001-1"
-// fs.writeFileSync(`evos/biomorphs/${species}-${num}.svg`, testsvg)
-
-
-
-// const testsvg2 = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2"><line x1="150" y1="108" x2="150" y2="128"></line></svg>`
-
-
-// var num = "00002-2"
-// fs.writeFileSync(`evos/biomorphs/${species}-${num}.svg`, testsvg2)
-
-
-
-// const testsvg3 = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2"><line x1="150" y1="108" x2="150" y2="128"></line><line x1="150" y1="128" x2="166" y2="160"></line></svg>`
-
-
-// var num = "00003-3"
-// fs.writeFileSync(`evos/biomorphs/${species}-${num}.svg`, testsvg3)
-
-
-// const testsvg4 = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2"><line x1="150" y1="108" x2="150" y2="128"></line><line x1="150" y1="128" x2="166" y2="160"></line><line x1="166" y1="160" x2="166" y2="136"></line></svg>`
-
-
-// var num = "00004-1"
-// fs.writeFileSync(`evos/biomorphs/${species}-${num}.svg`, testsvg4)
-
-
-// const testsvg5 = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2"><line x1="150" y1="108" x2="150" y2="128"></line><line x1="150" y1="128" x2="166" y2="160"></line><line x1="166" y1="160" x2="166" y2="136"></line><line x1="166" y1="136" x2="150" y2="128"></line></svg>`
-
-
-// var num = "00005-2"
-// fs.writeFileSync(`evos/biomorphs/${species}-${num}.svg`, testsvg5)
-
-
-// const testsvg6 = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2"><line x1="150" y1="108" x2="150" y2="128"></line><line x1="150" y1="128" x2="166" y2="160"></line><line x1="166" y1="160" x2="166" y2="136"></line><line x1="166" y1="136" x2="150" y2="128"></line><line x1="150" y1="128" x2="150" y2="124"></line></svg>`
-
-
-
-// var num = "00006-3"
-// fs.writeFileSync(`evos/biomorphs/${species}-${num}.svg`, testsvg6)
-
-
-// const testsvg7 = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2"><line x1="150" y1="108" x2="150" y2="128"></line><line x1="150" y1="128" x2="166" y2="160"></line><line x1="166" y1="160" x2="166" y2="136"></line><line x1="166" y1="136" x2="150" y2="128"></line><line x1="150" y1="128" x2="150" y2="124"></line><line x1="150" y1="124" x2="150" y2="124"></line></g></svg>`
-
-
-// var num = "00007-1"
-// fs.writeFileSync(`evos/biomorphs/${species}-${num}.svg`, testsvg7)
-
-
-
-// console.log(process.cwd())
-
-//console.log('TEST')
-
-//console.log(readMe)
-
-
-// produce next generation of evos
-
-
-// const testgenome = [0, 2, 4, 5, 4, 4, 1, 1, 2]
-
-
-
-
-// const bm = svgBiomorph(testgenome)
-
-
-// console.log(bm)
 
 

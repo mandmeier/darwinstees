@@ -100,7 +100,7 @@ export const drawEvo = genome => {
 
     const svglines = []
     for (let i = 0; i < x1s.length; i++) {
-        svglines.push(`<line x1="${x1s[i]}" y1="${y1s[i]}" x2="${x2s[i]}" y2="${y2s[i]}"></line>`)
+        svglines.push(`<line x1="${x1s[i]}" y1="${y1s[i]}" x2="${x2s[i]}" y2="${y2s[i]}"/>`)
     }
 
     const svg = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2">${svglines.join('')}</g></svg>`

@@ -29,8 +29,6 @@ const Mutants = () => {
         <h1>loading</h1>
     } 
 
-
-
     return (
         <>
         <br/>

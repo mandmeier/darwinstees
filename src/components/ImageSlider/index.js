@@ -14,7 +14,7 @@ const ImageSlider = () => {
 
     const evoState = useSelector((state) => state.evoState)
     const {current, loading, evos} = evoState
-    const generation = evos.length > 0 ? evos[current].id.split("-")[1].replace(/^0+/, '') : 0
+    const generation = evos.length > 0 ? evos[current].generation : 0
 
     const dispatch = useDispatch();
 

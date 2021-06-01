@@ -22,8 +22,10 @@ const EvoPanel = () => {
         <h1>loading</h1>
     } 
 
-    const generation = evos.length > 0 ? evos[current].id.split("-")[1].replace(/^0+/, '') : 0
-    
+    var generation = evos.length > 0 ? evos[current].name.split("-")[1].replace(/^0+/, '') : 0
+    if (generation == '') {generation = 0}
+
+
     return (
     <Panel>
         <div className="evo-panel-header">

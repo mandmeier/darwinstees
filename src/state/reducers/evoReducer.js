@@ -1,9 +1,17 @@
 const reducer = (state = { current: 0, evos: [], evosLoading: true, mutants: [], mutantsLoading: true }, action) => {
     switch (action.type) {
         case "GET_EVOS":
+
+            const generations = []
+            action.payload.forEach( evo => {
+                generations.push(Number(evo.name.split('-')[1]))
+            })
+            const latestGen = Math.max(...generations)
+
             return {...state,
                 evosLoading: false,
-                evos: action.payload
+                evos: action.payload,
+                current: latestGen
             }
         case "GET_MUTANTS":
             return {...state,
