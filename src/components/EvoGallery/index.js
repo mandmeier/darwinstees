@@ -4,12 +4,12 @@ import {Gallery} from './EvoGalleryElements'
 
 const EvoGallery = () => {
 
-    const lineages = ["biomorph", 'ellimorph']
+    const lineages = ["biomorph", 'ellimorph', 'mandamorph']
 
     return (
         <Gallery>
              {
-                lineages.map((lineage, idx) => {
+                lineages.map((lineage) => {
                     return <EvoPanel lineage={lineage} key={lineage}/>
                 })
             }   

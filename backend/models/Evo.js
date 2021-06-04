@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 
 // Create Schema
-const EvoSchema = new mongoose.Schema({
+export const EvoSchema = new mongoose.Schema({
     name: {
       type: String,
       default: 'species-000000-1',
@@ -33,7 +33,7 @@ const EvoSchema = new mongoose.Schema({
       },
   });
   
-  const Evo = mongoose.model('Evo', EvoSchema);
+
+
   
-  export default Evo;
   

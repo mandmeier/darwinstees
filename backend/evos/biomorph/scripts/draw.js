@@ -1,6 +1,5 @@
-
-export const draw = (genome) => {
-
+export const draw = genome => {
+ 
     function getXOffsets(genes) {
         return [
           -genes[1],
@@ -33,8 +32,15 @@ export const draw = (genome) => {
     const INIT_X = 150;
     const INIT_Y = 150;
 
+    // create svg for evos
+    // calculate lines
+
     var coords = {x1s: [], x2s : [], y1s : [], y2s :[]}
 
+    // var x1s = [];
+    // var x2s = [];
+    // var y1s = [];
+    // var y2s = [];
 
     function tree(x1, y1, branchings, geneIndex, genome) {
     var x2 = x1 + branchings * getXOffsets(genome)[geneIndex] * 4;
@@ -45,6 +51,10 @@ export const draw = (genome) => {
     coords.y1s.push(y1)
     coords.y2s.push(y2)
 
+    // x1s = [...x1s, x1];
+    // y1s = [...y1s, y1];
+    // x2s = [...x2s, x2];
+    // y2s = [...y2s, y2];
 
     if (branchings > 0) {
         tree(
@@ -62,6 +72,7 @@ export const draw = (genome) => {
     
 
     function adjustSize(ords) {
+        //xAs, yAs, xBs, yBs
 
         let {x1s, x2s, y1s, y2s} = ords
 
@@ -106,60 +117,32 @@ export const draw = (genome) => {
         return adjCoords
     }
 
+    coords = adjustSize(coords, "RUN1")
 
-    coords = adjustSize(coords)
-
-
-    function drawEllipse(xA, yA, xB, yB) {
-        const AB = Math.sqrt((xB - xA)**2 + (yB - yA)**2)
-        const rx = AB/2
-        const scale = Number(`0.${genome[9]}`)
-        const ry = rx * scale
-        const cx = (xA+xB)/2
-        const cy = (yA+yB)/2
-        // get rotation angle
-        var theta
-        if (xB >= xA && yB < yA) { // NE
-            theta = (Math.asin((yB - yA) / AB))*(180/Math.PI)
-        } else if (xB < xA && yB <= yA) { // NW
-            theta = 180-(Math.asin((yB - yA) / AB))*(180/Math.PI)    
-        } else if (xB <= xA && yB > yA) { // SW
-            theta = 180-(Math.asin((yB - yA) / AB))*(180/Math.PI)
-        } else { // SE
-            theta = 180-(Math.asin((yA - yB) / AB))*(180/Math.PI)
-        }
-        const ell = `
-        <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" transform="rotate(${isNaN(theta) ? 0 : theta} ${cx} ${cy})"/>`
-        return ell
+    function drawLine(xA, yA, xB, yB) {
+        const line = `<line x1="${xA}" y1="${yA}" x2="${xB}" y2="${yB}"/>`
+        return line
     }
 
-
-    function drawEllipses(ords) {
+    function drawLines(ords) {
 
         let {x1s, x2s, y1s, y2s} = ords
 
-        const ellipses = []
+        const lines = []
 
         for (let i = 0; i < x1s.length; i++) {
-            ellipses.push(drawEllipse(x1s[i], y1s[i], x2s[i], y2s[i]))
+            lines.push(drawLine(x1s[i], y1s[i], x2s[i], y2s[i]))
         }
 
-        return ellipses
+        return lines
 
+        
     }
 
-    const svgEllipses = drawEllipses(coords)
+    const svgLines = drawLines(coords)
 
-    const svg = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2" fill="none">${svgEllipses.join('')}</g></svg>`
+    const svg = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2">${svgLines.join('')}</g></svg>`
     
     return svg;
 
 }
-
-
-
-
-
-
-
-
