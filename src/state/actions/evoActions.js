@@ -1,11 +1,10 @@
 import * as api from '../api';
 
 
-
-export const getEvos = () => async dispatch => {
+export const getEvos = (lineage) => async dispatch => {
     try {
-        const { data } = await api.getEvos();
-        dispatch({type: "GET_EVOS", payload: data})         
+        const { data:evos } = await api.getEvos(lineage);
+        dispatch({type: "GET_EVOS", payload: {lineage, evos}})         
       } catch (error) {
         console.log(error);
       }
@@ -13,10 +12,10 @@ export const getEvos = () => async dispatch => {
 }
 
 
-export const getMutants = () => async dispatch => {
+export const getMutants = (lineage) => async dispatch => {
     try {
-        const { data } = await api.getMutants();
-        dispatch({type: "GET_MUTANTS", payload: data})         
+        const { data: mutants } = await api.getMutants(lineage);
+        dispatch({type: "GET_MUTANTS", payload: {lineage, mutants}})         
       } catch (error) {
         console.log(error);
       }
@@ -24,22 +23,20 @@ export const getMutants = () => async dispatch => {
 }
 
 
-
-
-export const nextEvo = (current, length) => {
+export const nextEvo = (lineage, current, length) => {
     return (dispatch) => {
         dispatch({
             type: "NEXT_EVO",
-            payload: {current, length}
+            payload: {lineage, current, length}
         })
     }
 }
 
-export const prevEvo = (current, length) => {
+export const prevEvo = (lineage, current, length) => {
     return (dispatch) => {
         dispatch({
             type: "PREV_EVO",
-            payload: {current, length}
+            payload: {lineage, current, length}
         })
     }
 }

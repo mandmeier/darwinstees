@@ -3,8 +3,8 @@ import {getEvos,getMutants, createEvo, getEvo} from '../controllers/evoControlle
 
 const router = express.Router();
 
-router.get('/server/evos', getEvos);
-router.get('/server/mutants', getMutants);
+router.get('/server/evos/:lineage', getEvos);
+router.get('/server/mutants/:lineage', getMutants);
 
 router.post('/evos', createEvo);
 router.get('/evos/:id', getEvo);

@@ -13,17 +13,19 @@ import { getMutants } from '../../state/actions/evoActions';
 //     {id: "biomorph-00008-3", svg: `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2"><line x1="150" y1="108" x2="150" y2="128"></line><line x1="166" y1="160" x2="166" y2="136"></line><line x1="166" y1="136" x2="150" y2="128"></line>`}
 // ]
 
-const Mutants = () => {
+const Mutants = ({lineage}) => {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getMutants());
-    }, [dispatch]);
+        dispatch(getMutants(lineage));
+    }, [dispatch, lineage]);
 
     const evoState = useSelector((state) => state.evoState)
 
-    const {mutantsLoading, mutants} = evoState
+    var {mutants, mutantsLoading} = evoState
+    mutants = mutants[lineage]
+    mutantsLoading = mutantsLoading[lineage]
 
     if (mutantsLoading) {
         <h1>loading</h1>
@@ -36,7 +38,7 @@ const Mutants = () => {
         <MutantRow>
             {
                 mutants.map((mutant, idx) => {
-                    return <div className="mutant-panel">
+                    return <div className="mutant-panel" key={idx}>
                         <div className="mutant-image">
                         <SVG src={mutant.svg} />
                         </div>

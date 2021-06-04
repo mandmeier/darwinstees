@@ -4,7 +4,8 @@ import Evo from '../models/Evo.js'
 
 export const getEvos = async (req, res) => {
     try {
-      const evos = JSON.parse(fs.readFileSync('evos/biomorph/evos.json', 'utf8'))
+      const { lineage } = req.params;
+      const evos = JSON.parse(fs.readFileSync(`evos/${lineage}/evos.json`, 'utf8'))
       res.status(200).json(evos);
     } catch (error) {
       res.status(404).json({ message: error });
@@ -13,7 +14,8 @@ export const getEvos = async (req, res) => {
 
   export const getMutants = async (req, res) => {
     try {
-      const mutants = JSON.parse(fs.readFileSync('evos/biomorph/mutants.json', 'utf8'))
+      const { lineage } = req.params;
+      const mutants = JSON.parse(fs.readFileSync(`evos/${lineage}/mutants.json`, 'utf8'))
       res.status(200).json(mutants);
     } catch (error) {
       res.status(404).json({ message: error });

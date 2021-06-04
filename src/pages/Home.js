@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '../components/Layout'
-import EvoPanel from '../components/EvoPanel'
+import EvoGallery from '../components/EvoGallery'
 const Home = () => {
     return (
         <div>
             <Layout>
-                <EvoPanel/>
+                <EvoGallery/>
             </Layout>
         </div>
     )
