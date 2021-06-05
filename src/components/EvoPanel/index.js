@@ -6,7 +6,9 @@ import { getEvos } from '../../state/actions/evoActions';
 import Mutants from '../Mutants'
 import { ShoppingCart } from '@material-ui/icons'
 
-const EvoPanel = ({lineage}) => {
+const EvoPanel = ({panel}) => {
+
+    const lineage = panel.lineage
 
     const dispatch = useDispatch();
 
@@ -30,13 +32,14 @@ const EvoPanel = ({lineage}) => {
 
 
     return (
-    <Panel>
+    <Panel style={{backgroundColor: panel.color}}>
         <div className="evo-panel-header">
-            <h1>{lineage}</h1>
+            <p>{lineage}</p>
             <span>Add to cart <ShoppingCart/></span>
         </div>
-        <h3>Generation {generation}</h3>
+        <p>Generation {generation}</p>
         <ImageSlider lineage={lineage}/>
+        <p>Select the next generation</p>
         <Mutants lineage={lineage}/>
     </Panel>
     )

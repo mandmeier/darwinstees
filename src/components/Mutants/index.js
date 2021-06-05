@@ -33,8 +33,6 @@ const Mutants = ({lineage}) => {
 
     return (
         <>
-        <br/>
-        <h3>Select the next generation</h3>
         <MutantRow>
             {
                 mutants.map((mutant, idx) => {
