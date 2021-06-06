@@ -49,6 +49,8 @@ const reducer = (state =
             return applyNextEvo(state, action)
         case "PREV_EVO":
             return applyPrevEvo(state, action)
+        case "LIKE_MUTANT":
+            return applyLikeMutant(state, action)
         default:
             return state;
     }
@@ -65,14 +67,21 @@ const reducer = (state =
 
     function applyNextEvo(state, action) {
         const { lineage, current, length} = action.payload
-        return { ...state, current: {...state.current, [lineage]: current === length - 1 ? 0 : current + 1 }}
+        return { ...state, current: {...state.current, [lineage]: current === 0 ? length - 1 : current - 1 }}
     }
 
     function applyPrevEvo(state, action) {
         const { lineage, current, length} = action.payload
-        return { ...state, current: {...state.current, [lineage]: current === 0 ? length - 1 : current - 1 }}
+        return { ...state, current: {...state.current, [lineage]: current === length - 1 ? 0 : current + 1 }}
     }
 
+    function applyLikeMutant(state, action) {
+        const data = action.payload
+        const mutants =  state.mutants[data.lineage]
+        const newMutants = mutants.map(m => m._id === data._id ? {...m, likes : data.likes} : m);
+        return { ...state, mutants: {...state.mutants, [data.lineage]: newMutants}, }
+    }   
+        
 }
             
        

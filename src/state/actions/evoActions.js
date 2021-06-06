@@ -3,7 +3,8 @@ import * as api from '../api';
 
 export const getEvos = (lineage) => async dispatch => {
     try {
-        const { data:evos } = await api.getEvos(lineage);
+        var { data:evos } = await api.getEvos(lineage);
+        evos = evos.reverse()
         dispatch({type: "GET_EVOS", payload: {lineage, evos}})         
       } catch (error) {
         console.log(error);
@@ -40,3 +41,14 @@ export const prevEvo = (lineage, current, length) => {
         })
     }
 }
+
+export const likeMutant = mutant => async dispatch => {
+    try {
+      const { data } = await api.likeMutant(mutant.lineage, mutant._id);
+      dispatch({ type: 'LIKE_MUTANT', payload: data });
+    } catch (error) {
+      console.log(error);
+      console.log(error.response.data);
+    }
+  };
+  

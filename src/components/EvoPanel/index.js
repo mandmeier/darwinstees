@@ -39,6 +39,7 @@ const EvoPanel = ({panel}) => {
         </div>
         <p>Generation {generation}</p>
         <ImageSlider lineage={lineage}/>
+        <br/>
         <p>Select the next generation</p>
         <Mutants lineage={lineage}/>
     </Panel>
