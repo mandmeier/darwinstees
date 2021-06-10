@@ -3,15 +3,20 @@ html {
     font-size: 16px;
 }
 
-
 body {
-    margin: 0;
-    background-color: lightblue;
+    background-color: #e1f6ff;
 }
 
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+
 @media only screen and (min-width: 400px) {
-    body {
-        margin: 0 1rem;
+    .layout {
+      padding: 0 1rem; 
     }
 }
 
@@ -21,3 +26,4 @@ main {
     margin-right: auto;
 
 }
+

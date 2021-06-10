@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { combineReducers } from "redux";
 
 import evoReducer from "./reducers/evoReducer"
+import shopReducer from "./reducers/shopReducer"
 
 
 
@@ -12,7 +13,8 @@ import evoReducer from "./reducers/evoReducer"
 
 
 const reducers = combineReducers({
-    evoState: evoReducer
+    evoState: evoReducer,
+    shopState: shopReducer
 })
 
 

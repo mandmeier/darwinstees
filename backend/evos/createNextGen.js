@@ -56,7 +56,6 @@ export const createNextGen = async (lineage, mutate, draw) => {
 
 
     console.log(`Winner is ${winner.name} with ${winner.likes} likes`)
-
     // add winner to evos.json
     const evodir = path.join(dir, 'evos.json')
     const evos = JSON.parse(fs.readFileSync(evodir))

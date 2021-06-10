@@ -7,10 +7,14 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
+
+
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 
+
 const EvoGallery = () => {
+
 
 
     const panels = [ 
@@ -43,10 +47,16 @@ const EvoGallery = () => {
         slidesPerView={1}
         loop={true}
         navigation
+        
         pagination={pagination}
         breakpoints={{
+            400: {
+                allowTouchMove: false,
+                slidesPerView: 1,
+            },
             900: {
                 slidesPerView: 3,
+                
             },
 
           }}

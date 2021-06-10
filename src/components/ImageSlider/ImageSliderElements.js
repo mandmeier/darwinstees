@@ -13,7 +13,7 @@ export const Slider = styled.section`
          width: 44%;
          display: flex;
          justify-content: space-around;
-
+         
          & img {
             height: 2rem;
          }
@@ -25,8 +25,11 @@ export const Slider = styled.section`
          user-select: none;
          flex-shrink: 0;
       }
-      & .slider-arrow:hover {
+
+      @media (hover: hover) {
+         & .slider-arrow:hover {
          color: #666;
+         }
       }
       
       & .slide {
