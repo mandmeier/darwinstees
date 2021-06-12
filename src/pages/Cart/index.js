@@ -6,25 +6,19 @@ import { Container, Typography, Button, Grid } from '@material-ui/core'
 import useStyles from './CartElements'
 import CartItem from '../../components/CartItem'
 
+
 const Cart = () => {
+
+    // layout idea https://myfihu.com/cart
 
     const classes = useStyles();
     const dispatch = useDispatch();
 
     const shopState = useSelector((state) => state.shopState)
     const cart = shopState.cart
-
-    
     const isEmpty = cart.length > 0 ? false : true
 
-
-
     const subtotal = Object.values(cart).reduce((t, {price}) => t + Number(price), 0).toFixed(2);
-
-
-    console.log("SUBTOTAL")
-    console.log(subtotal)
-
 
     const handleEmptyCart = () => {
         dispatch(emptyCart())
@@ -43,7 +37,7 @@ const Cart = () => {
         <>
          <Grid container spacing={3}>
             {cart.map((item) => (
-                <Grid item xs={12} sm={4} key={item.id}>
+                <Grid item xs={12} sm={4} md={3} key={item.itemId}>
                     <CartItem item={item}/>
                 </Grid>
             ))}
@@ -63,7 +57,7 @@ const Cart = () => {
     return (
         <Container>
             <div className={classes.toolbar}/>
-            <Typography className={classes.title} cariant="h3">Your Shopping Cart</Typography>
+            <Typography className={classes.title} variant="h3">Your Shopping Cart</Typography>
             {isEmpty ? <EmptyCart /> : <FilledCart />}
             
         </Container>

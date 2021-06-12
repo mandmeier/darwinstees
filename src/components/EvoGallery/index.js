@@ -55,6 +55,7 @@ const EvoGallery = () => {
                 slidesPerView: 1,
             },
             900: {
+                allowTouchMove: false,
                 slidesPerView: 3,
                 
             },

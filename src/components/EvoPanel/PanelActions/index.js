@@ -103,16 +103,28 @@ const PanelActions = ({displayedEvos, layout, lineage, generation}) => {
 
     
     const handleAddCart = () => {
-        var itemId = `${lineage}-${generation}-${layout}`
+
+        let productId
+        if (selectedSize === "S") {
+            productId = "60c2c98b802d4da223643aff"
+        } else if (selectedSize === "M") {
+            productId = "60c2c9bf802d4da223643b00"
+        } else if (selectedSize === "L") {
+            productId = "60c2c9de802d4da223643b01"
+        }
+
+        const evoIds = []
+        displayedEvos.forEach(evo => {
+            evoIds.push(evo._id)
+        });
+
+        var itemId = `${lineage}-${generation}-${layout}-${selectedSize}`
         var updatedItem = cart.find(item => item.itemId === itemId)
         if(updatedItem === undefined){
-            // create new item
-            let newItem = {itemId, displayedEvos, layout, qty: {S: 0, M: 0, L: 0}, price: "29.99",}
-            newItem = {...newItem, qty: {...newItem.qty, [selectedSize]: qty}}
-            dispatch(addToCart(newItem))
+            dispatch(addToCart(itemId, productId, lineage, generation, layout, evoIds, qty))
         } else {
             // increase cart item quantity
-            dispatch(increaseQty(itemId, selectedSize, qty))  
+            dispatch(increaseQty(itemId, qty))  
         }        
     }
 

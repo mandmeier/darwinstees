@@ -45,8 +45,7 @@ const EvoPanel = ({panel}) => {
     //     const product = products.find(x => x.name === 'T-shirt');
     // }
 
-    const layout = 3
-
+    const layout = "7"
 
 
     /// get displayed evos
@@ -58,8 +57,11 @@ const EvoPanel = ({panel}) => {
         : arr.slice(start, end)
     }
     const start = (evos.length-1)-generation
-    const end = start+layout
+    const end = start + Number(layout)
     const displayedEvos = wrapslice(evos, start, end)
+
+    
+
 
 
     // const currentEvoIndex = (evos.length-1)-generation

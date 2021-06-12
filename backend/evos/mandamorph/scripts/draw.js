@@ -1,5 +1,5 @@
 
-export const draw = (genome) => {
+export const draw = (genome, component = false, INIT_X = 150, INIT_Y = 150) => {
 
     function getXOffsets(genes) {
         return [
@@ -30,8 +30,6 @@ export const draw = (genome) => {
     const INIT_GENE_INDEX = 2;
     const GENE_MAX_INDEX = 8;
     const CANVAS_WIDTH = 300;
-    const INIT_X = 150;
-    const INIT_Y = 150;
 
     var coords = {x1s: [], x2s : [], y1s : [], y2s :[]}
 
@@ -137,10 +135,10 @@ export const draw = (genome) => {
             var x2srot = []
             var y2srot = []
             for (let i = 0; i < x1s.length; i++) {
-                const { x:xA, y:yA } = rotatePoint(x1s[i], y1s[i], 150 , 150, angle)
+                const { x:xA, y:yA } = rotatePoint(x1s[i], y1s[i], INIT_X , INIT_Y, angle)
                 x1srot.push(xA)
                 y1srot.push(yA)
-                const { x:xB, y:yB } = rotatePoint(x2s[i], y2s[i], 150 , 150, angle)
+                const { x:xB, y:yB } = rotatePoint(x2s[i], y2s[i], INIT_X , INIT_Y, angle)
                 x2srot.push(xB)
                 y2srot.push(yB) 
             }
@@ -220,9 +218,14 @@ export const draw = (genome) => {
 
     const svgEllipses = drawEllipses(allCoords)
 
-    const svg = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2" fill="none">${svgEllipses.join('')}</g></svg>`
-    
-    return svg;
+    const innersvg = `<g stroke="black" stroke-width="2" fill="none">${svgEllipses.join('')}</g>`
+
+    if (component === true) {
+        return innersvg 
+    } else {
+        const svg = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2">${innersvg}</g></svg>`
+        return svg
+    }
 
 }
 
