@@ -33,39 +33,11 @@ const EvoPanel = ({panel}) => {
     if (generation === '') {generation = 0}
 
 
-    // useEffect(() => {
-    //     dispatch(fetchProducts())
-    //     dispatch(fetchCart())
-    // }, [])
-
-    // const shopState = useSelector((state) => state.shopState)
-    // const {products, productsLoading, cart, cartLoading} = shopState
-
-    // if (cartLoading === false) {
-    //     const product = products.find(x => x.name === 'T-shirt');
-    // }
-
     const layout = "7"
-
-
-    /// get displayed evos
-    const wrapslice = (arr, start, en)  => {
-        //start < 0 
-        let end = en > arr.length ? en - arr.length : en
-        return end < start 
-        ? arr.slice(start).concat(arr.slice(0, end))
-        : arr.slice(start, end)
-    }
-    const start = (evos.length-1)-generation
-    const end = start + Number(layout)
-    const displayedEvos = wrapslice(evos, start, end)
-
-    
-
-
-
-    // const currentEvoIndex = (evos.length-1)-generation
-    // const displayedEvos = evos.slice(currentEvoIndex, currentEvoIndex+layout)
+    /// get displayed evos depending on layout
+    const extendedEvos = [...evos, ...evos.slice(0, Number(layout))]
+    const idx = evos.length-generation
+    var displayedEvos = extendedEvos.slice(idx-1 , idx-1 + Number(layout)).reverse()
 
     return (
     <Element>

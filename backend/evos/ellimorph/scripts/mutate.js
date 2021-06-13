@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import {draw} from './draw.js'
 
 
@@ -45,7 +46,8 @@ export const mutate = parent => {
     const mutants = []
 
     mutantGenomes.forEach((genome, idx) => {
-        mutants.push({name: `${nextGenName}-${idx+1}`, lineage: parent.lineage, genome: genome, svg: draw(genome) })
+        let _id = mongoose.Types.ObjectId();
+        mutants.push({_id, name: `${nextGenName}-${idx+1}`, lineage: parent.lineage, genome: genome, svg: draw(genome) })
     })
 
    

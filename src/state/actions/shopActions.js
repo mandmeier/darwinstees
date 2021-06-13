@@ -7,7 +7,6 @@ export const addToCart = (itemId, productId, lineage, generation, layout, evoIds
 
     const { data: design} = await api.createDesign(lineage, generation, layout, evoIds)
 
-
   // evoIds, designName, layout
   // load product and design, add to cartItem
 

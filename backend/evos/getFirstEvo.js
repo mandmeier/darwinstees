@@ -17,9 +17,9 @@ export const getFirstEvo = (lineage, draw) => {
     const firstEvo = {
         name: `${lineage}-000000-1`,
         lineage: lineage,
-        generation: 1,
-        likes: 0,
+        generation: 0,
         genome: start_genome,
+        likes: 0,
         svg: draw(start_genome)
       }
 

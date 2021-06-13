@@ -38,6 +38,7 @@ const SizeButtons = styled.div`
         height: 2rem;
         padding: 0px 0px;
         font-weight: bold;
+        cursor: pointer;
     }
 
     & .selected-btn {
@@ -51,6 +52,7 @@ const Btn = styled.button`
   height: 2rem;
   padding: 0px 0px;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const QtyDisplay = styled.div`

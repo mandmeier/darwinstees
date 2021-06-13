@@ -6,7 +6,14 @@ import {EvoSchema} from '../models/Evo.js';
 export const getEvos = async (req, res) => {
     try {
       const { lineage } = req.params;
-      const evos = JSON.parse(fs.readFileSync(`evos/${lineage}/evos.json`, 'utf8'))
+
+      // get evoIds
+      const evoIds = JSON.parse(fs.readFileSync(`evos/${lineage}/evos.json`, 'utf8'))
+
+      // get evos from ids
+      const Evo = mongoose.model(lineage, EvoSchema);
+      const evos = await Evo.find({'_id': {$in: evoIds}})
+
       res.status(200).json(evos);
     } catch (error) {
       res.status(404).json({ message: error });
@@ -14,12 +21,16 @@ export const getEvos = async (req, res) => {
   };
 
   export const getMutants = async (req, res) => {
-
     try {
       const { lineage } = req.params;
+
+      // get mutantIds
+      const mutantIds = JSON.parse(fs.readFileSync(`evos/${lineage}/mutants.json`, 'utf8'))
+
+      // get mutants from ids
       const Evo = mongoose.model(lineage, EvoSchema);
-      const mutants = await Evo.find().sort({ generation: -1 }).limit(3)
-      //const mutants = JSON.parse(fs.readFileSync(`evos/${lineage}/mutants.json`, 'utf8'))
+      const mutants = await Evo.find({'_id': {$in: mutantIds}})
+
       res.status(200).json(mutants);
     } catch (error) {
       res.status(404).json({ message: error });

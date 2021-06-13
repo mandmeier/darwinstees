@@ -46,67 +46,51 @@ export const createNextGen = async (lineage, mutate, draw) => {
     // get winner genome from MongoDB
     var [winner] = await Evo.find().sort({ generation: -1 }).limit(3).sort({ likes: -1 }).limit(1)
 
+
+    const evodir = path.join(dir, 'evos.json')
+    const mutantdir = path.join(dir, 'mutants.json')
+
     // if starting new lineage
     if (winner === undefined) {
       console.log(`creating new lineage for ${lineage}`)
-      // new evos.json file with empty array
-      fs.writeFileSync(path.join(dir, "evos.json"), JSON.stringify([]))
-      winner = getFirstEvo(lineage, draw)
+
+      // create new evos.json and mutants.json files
+      fs.writeFileSync(evodir, JSON.stringify([]))
+      fs.writeFileSync(mutantdir, JSON.stringify([]))
+    
+      // create first evo
+      var winner = getFirstEvo(lineage, draw)
+
+      // save first evo to mongodb
+      const _id = mongoose.Types.ObjectId();
+      winner = {_id, ...winner}
+      const firstEvo = new Evo(winner);
+      firstEvo.save()
+
     }
 
 
     console.log(`Winner is ${winner.name} with ${winner.likes} likes`)
+
     // add winner to evos.json
-    const evodir = path.join(dir, 'evos.json')
-    const evos = JSON.parse(fs.readFileSync(evodir))
-    evos.push(winner)
-    fs.writeFileSync(evodir, JSON.stringify(evos))
-    console.log(`added next gen ${winner.name} to evos.json`)
+    const evoIds = JSON.parse(fs.readFileSync(evodir))
+    evoIds.push(winner._id)
+    fs.writeFileSync(evodir, JSON.stringify(evoIds))
+
+
 
 
     // make mutants (next gen)
     const mutants = mutate(winner)
-
-    // save to mutants.json file
-    const mutantData = JSON.stringify(mutants)
-    fs.writeFileSync(path.join(dir, 'mutants.json'), mutantData)
-
-
+    let mutantIds = mutants.map(mutant => mutant._id);
+    // save to mutant Ids to mutants.json file
+    fs.writeFileSync(mutantdir, JSON.stringify(mutantIds))
 
     // save mutants to mongodb
-
-
-//     const mutants = [
-//         {
-//             name: `${lineage}-000000-1`,
-//             lineage: lineage,
-//             generation: 1,
-//             likes: 0,
-//             genome: [2,4,3,-2,-4,-2,0,3,3,2],
-//             svg: "drawEvo(start_genome)"
-//         },
-//         {
-//             name: `${lineage}-000000-2`,
-//             lineage: lineage,
-//             generation: 1,
-//             likes: 0,
-//             genome: [2,4,4,-2,-5,-2,0,3,3,2],
-//             svg: "drawEvo(start_genome)"
-//         },
-//         {
-//             name: `${lineage}-000000-3`,
-//             lineage: lineage,
-//             generation: 1,
-//             likes: 10,
-//             genome: [2,4,4,-2,-4,-2,0,2,3,2],
-//             svg: "drawEvo(start_genome)"
-//         }
-//     ]
-
-
     var responses = []; // count responses to track when done
     mutants.forEach(mutant => {
             var newEvo = new Evo({
+            _id: mutant._id,
             name: mutant.name,
             lineage: mutant.lineage,
             generation: Number(mutant.name.split('-')[1]),

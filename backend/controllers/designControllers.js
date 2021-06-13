@@ -14,15 +14,12 @@ export const createDesign = async (req, res) => {
       const Evo = mongoose.model(lineage, EvoSchema);
       const evos = await Evo.find({'_id': {$in: evoIds}})
 
-      const genomes = evos.map(evo => evo.genome);
+
+      // get fetched evos in order
+      const orderedEvos = evoIds.map(id => evos.filter(evo => evo._id.toString() === id)[0])
+      const genomes = orderedEvos.map(evo => evo.genome)
 
       // create design with evos and Ids
-
-      // var draw = require('../evos/biomorph/scripts/draw.js ')
-
-      // console.log(draw)
-
-
       const svg = drawDesign(lineage, genomes, layout)
 
       const design = {
