@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { Button } from '@material-ui/core'
 import {addToCart, increaseQty} from '../../../state/actions/shopActions'
 import { AddShoppingCart } from '@material-ui/icons'
+import { setLayout } from '../../../state/actions/evoActions'
 
 
 
@@ -11,9 +12,10 @@ import { AddShoppingCart } from '@material-ui/icons'
 const Actions = styled.div`
     margin: 1rem 0;
     
-    & .choose-size {
+    & .choose-layout, .choose-size {
         display: flex;
         justify-content: center;
+        margin-bottom: 0.5rem;
     }
 
     & .choose-qty {
@@ -30,8 +32,8 @@ const Actions = styled.div`
     }
 `
 
-const SizeButtons = styled.div`
-    background-color: yellow;
+const SelectionButtons = styled.div`
+    /* background-color: yellow; */
 
     & button {
         width: 2rem;
@@ -65,7 +67,7 @@ const QtyDisplay = styled.div`
 `;
 
 
-const PanelActions = ({displayedEvos, layout, lineage, generation}) => {
+const PanelActions = ({displayedEvos, lineage, generation}) => {
 
     const dispatch = useDispatch();
 
@@ -103,6 +105,9 @@ const PanelActions = ({displayedEvos, layout, lineage, generation}) => {
     const shopState = useSelector((state) => state.shopState)
     const cart = shopState.cart
 
+    const evoState = useSelector((state) => state.evoState)
+    const layout = evoState.layout[lineage]
+   
     
     const handleAddCart = () => {
 
@@ -130,15 +135,28 @@ const PanelActions = ({displayedEvos, layout, lineage, generation}) => {
         }        
     }
 
+    const handleSetLayout = (newLayout) => {
+        console.log(layout)
+        dispatch(setLayout(lineage, newLayout))
+        console.log(layout)
+    }
+
 
     return (
         <Actions>
+            <div className="choose-layout">
+                <SelectionButtons>
+                    <button className={layout === "1" ? "selected-btn" : ""} onClick={() => handleSetLayout("1")}>L1</button>
+                    <button className={layout === "3" ? "selected-btn" : ""} onClick={() => handleSetLayout("3")}>L3</button>
+                    <button className={layout === "7" ? "selected-btn" : ""} onClick={() => handleSetLayout("7")}>L7</button>     
+                </SelectionButtons>
+            </div>
             <div className="choose-size">
-                <SizeButtons>
+                <SelectionButtons>
                     <button className={selected.S ? "selected-btn" : ""} onClick={() => setSize("S")}>S</button>
                     <button className={selected.M ? "selected-btn" : ""} onClick={() => setSize("M")}>M</button>
                     <button className={selected.L ? "selected-btn" : ""} onClick={() => setSize("L")}>L</button>     
-                </SizeButtons>
+                </SelectionButtons>
             </div>
             <div className="choose-qty">
                     <Btn

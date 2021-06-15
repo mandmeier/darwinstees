@@ -51,4 +51,14 @@ export const likeMutant = mutant => async dispatch => {
       console.log(error.response.data);
     }
   };
+
+
+export const setLayout = (lineage, newLayout) => async dispatch => {
+  try {
+    dispatch({ type: 'SET_LAYOUT', payload: {lineage, newLayout} });
+  } catch (error) {
+    console.log(error);
+    console.log(error.response.data);
+  }
+}
   

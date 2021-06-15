@@ -4,12 +4,11 @@ export const Slider = styled.section`
       position: relative;
       /* background-color: lightgreen; */
       width: 100%;
-      display: flex;
-      justify-content: center;
       & .slider-controls {
+         margin: 0.5rem auto 0 auto;
          /* background-color: lightsalmon; */
-         position: absolute;
-         bottom: 0;
+         //position: absolute;
+         //bottom: 0;
          width: 44%;
          display: flex;
          justify-content: space-around;
@@ -30,16 +29,5 @@ export const Slider = styled.section`
          & .slider-arrow:hover {
          color: #666;
          }
-      }
-      
-      & .slide {
-         /* background-color: yellow; */
-         display: none;
-         opacity:0;
-      }
-      & .active {
-         /* background-color: red; */
-         display: inline;
-         opacity:1;
       }
    `

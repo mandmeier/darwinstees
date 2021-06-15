@@ -36,6 +36,12 @@ const reducer = (state =
             biomorph: true,
             ellimorph: true,
             mandamorph: true,
+        },
+    layout:
+        {
+            biomorph: "1",
+            ellimorph: "1",
+            mandamorph: "1",
         }
     }, action) => {
      
@@ -51,6 +57,8 @@ const reducer = (state =
             return applyPrevEvo(state, action)
         case "LIKE_MUTANT":
             return applyLikeMutant(state, action)
+        case "SET_LAYOUT":
+            return applySetLayout(state, action)
         default:
             return state;
     }
@@ -81,6 +89,11 @@ const reducer = (state =
         const newMutants = mutants.map(m => m._id === data._id ? {...m, likes : data.likes} : m);
         return { ...state, mutants: {...state.mutants, [data.lineage]: newMutants}, }
     }   
+
+    function applySetLayout(state, action) {
+        const { lineage, newLayout} = action.payload
+        return { ...state, layout: {...state.layout, [lineage]: newLayout }}
+    }
         
 }
             
