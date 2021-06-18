@@ -18,7 +18,9 @@ const Cart = () => {
     const cart = shopState.cart
     const isEmpty = cart.length > 0 ? false : true
 
-    const subtotal = Object.values(cart).reduce((t, {price}) => t + Number(price), 0).toFixed(2);
+    const subtotal = Object.values(cart).reduce((t, {product, qty}) => t + Number(product.price)*qty, 0).toFixed(2);
+
+    console.log(`Subtotal: ${subtotal}`)
 
     const handleEmptyCart = () => {
         dispatch(emptyCart())

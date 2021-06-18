@@ -6,6 +6,7 @@ import {removeItem} from '../../../state/actions/shopActions'
 import SVG from 'react-inlinesvg';
 import styled from 'styled-components'
 import tee from '../../../assets/Tshirt.png'
+import {updateQty} from '../../../state/actions/shopActions'
     
 
 const Tshirtwrapper = styled.div`
@@ -115,28 +116,25 @@ const CartItem = ({item}) => {
     const classes = useStyles();
     const dispatch = useDispatch()
 
-    const lineTotal = item.price // * qty
+    const lineTotal = (item.product.price  * item.qty).toFixed(2)
 
 
     const handleRemoveItem = (itemId) => {
         dispatch(removeItem(itemId))
     }
 
-    console.log("ITEM")
-    console.log(item)
-
-
-    const [qty, setValue] = useState(1);
+    
+    var qty = item.qty
 
 
     const increase = () => {
-        let newValue = qty + 1;
-        setValue(newValue);
+        let updatedQty = qty + 1;
+       dispatch(updateQty(item.itemId, updatedQty))
     };
 
     const decrease = () => {
-        let newValue = qty - 1;
-        setValue(newValue);
+        let updatedQty = qty - 1;
+        dispatch(updateQty(item.itemId, updatedQty))
     };
 
     return (
@@ -149,7 +147,7 @@ const CartItem = ({item}) => {
                         <div className="print-area-wrapper">
                             <div className="print-area">
                                 <div className="svg-container">
-                                    <SVG src={item.item.design.svg} />
+                                    <SVG src={item.design.svg} />
                                 </div>
                             </div>
                         </div>
@@ -157,6 +155,7 @@ const CartItem = ({item}) => {
                 </div>
             </Tshirtwrapper>
             <ItemActions>
+            <p>size: {item.product.size}</p>
                 <div className="choose-qty">
                         <Btn
                             type="button"
@@ -176,6 +175,8 @@ const CartItem = ({item}) => {
                             +
                         </Btn>
                 </div>
+                <p>LineTotal: ${lineTotal}</p>
+                <Button type="button" variant="contained" color="secondary" onClick={()=>handleRemoveItem(item.itemId)}>Remove</Button>
             </ItemActions>
             {/* <CardContent className={classes.cardContent}>
                 <Typography variant="h5">{lineTotal}</Typography>
