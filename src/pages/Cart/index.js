@@ -1,10 +1,10 @@
 import React, { useEffect }from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import {emptyCart} from '../../state/actions/shopActions'
-
+import Layout from '../../components/Layout'
 import { Container, Typography, Button, Grid } from '@material-ui/core'
 import useStyles from './CartElements'
-import CartItem from '../../components/CartItem'
+import CartItem from './CartItem'
 
 
 const Cart = () => {
@@ -55,12 +55,14 @@ const Cart = () => {
 
 
     return (
-        <Container>
-            <div className={classes.toolbar}/>
-            <Typography className={classes.title} variant="h3">Your Shopping Cart</Typography>
-            {isEmpty ? <EmptyCart /> : <FilledCart />}
-            
-        </Container>
+        <Layout>
+            <Container>
+                <div className={classes.toolbar}/>
+                <Typography className={classes.title} variant="h3">Your Shopping Cart</Typography>
+                {isEmpty ? <EmptyCart /> : <FilledCart />}
+                
+            </Container>
+        </Layout>
     )
 }
 

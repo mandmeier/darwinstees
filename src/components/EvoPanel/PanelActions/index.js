@@ -23,6 +23,13 @@ const Actions = styled.div`
         margin-top: 0.5rem;
         display: flex;
         justify-content: center;
+        & button {
+            width: 2rem;
+            height: 2rem;
+            padding: 0px 0px;
+            font-weight: bold;
+            cursor: pointer;
+        }
     }
 
     & .add-to-cart {
@@ -55,7 +62,16 @@ const Btn = styled.button`
   padding: 0px 0px;
   font-weight: bold;
   cursor: pointer;
-`;
+  color: #333;
+  background-color: rgb(239, 239, 239);
+
+  &:disabled {
+    color: #333 !important;
+    border-color: rgb(133, 133, 133) !important;
+    background-color: rgb(239, 239, 239) !important;
+    cursor: not-allowed;
+  }
+`
 
 const QtyDisplay = styled.div`
   background-color: #fff;
@@ -125,14 +141,17 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
             evoIds.push(evo._id)
         });
 
-        var itemId = `${lineage}-${generation}-${layout}-${selectedSize}`
+        var itemId = `${productId}-${lineage}-${generation}-${layout}`
         var updatedItem = cart.find(item => item.itemId === itemId)
-        if(updatedItem === undefined){
-            dispatch(addToCart(itemId, productId, lineage, generation, layout, evoIds, qty))
-        } else {
-            // increase cart item quantity
-            dispatch(increaseQty(itemId, qty))  
-        }        
+
+        dispatch(addToCart(itemId, lineage, generation, layout, evoIds, qty))
+
+        // if(updatedItem === undefined){
+        //     dispatch(addToCart(itemId, lineage, generation, layout, evoIds, qty))
+        // } else {
+        //     // increase cart item quantity
+        //     dispatch(increaseQty(itemId, qty))  
+        // }        
     }
 
     const handleSetLayout = (newLayout) => {
@@ -163,7 +182,7 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
                         type="button"
                         className="btn btn-secondary"
                         onClick={() => decrease()}
-                        disabled={qty <= 0 && true}
+                        disabled={qty <= 1 && true}
                     >
                         –
                     </Btn>

@@ -69,28 +69,6 @@ const Tshirtwrapper = styled.div`
 
 const Layout1 = ({evos, displayedEvos, current, layout}) => {
 
-    console.log("displayedEvos")
-    console.log(displayedEvos)
-
-    // const activeSlides = Array.from(new Array(Number(layout)), (x, i) => i + current);
-    // console.log(activeSlides)
-
-
-
-    /// get displayed evos depending on layout
-
-    // const Indices = Array.from({length:  Number(layout)}, (x, i) => i);
-    // const extendedIndices =[...Indices, ...Indices]
-
-    // console.log("extendedIndices")
-    // console.log(extendedIndices)
-
-    // const extendedEvos = [...evos, ...evos.slice(0, Number(layout))]
-    // const idx = evos.length-generation
-    // var displayedEvos = extendedEvos.slice(idx-1 , idx-1 + Number(layout)).reverse()
-
-
-
     return (
         <Tshirtwrapper>
             <div className="tshirt">

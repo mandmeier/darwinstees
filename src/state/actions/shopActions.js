@@ -1,25 +1,15 @@
 import * as api from '../api';
 
 
-export const addToCart = (itemId, productId, lineage, generation, layout, evoIds, qty) => async dispatch =>  {
+export const addToCart = (itemId, lineage, generation, layout, evoIds, qty) => async dispatch =>  {
   try {
-    const { data: product } = await api.getProduct(productId);
 
-    const { data: design} = await api.createDesign(lineage, generation, layout, evoIds)
-
-  // evoIds, designName, layout
-  // load product and design, add to cartItem
-
-  //  if design  does not exist create new one
-
-  // build cartItem
-
+    // fetch item or create if does not exist
+    const { data: item } = await api.getOrCreateItem(itemId, lineage, generation, layout, evoIds);
 
     const cartItem = {
-      itemId,
-      product,
-      design,
-      qty,
+      item,
+      qty
     }
 
     dispatch({type: "ADD_TO_CART", payload: cartItem}) 

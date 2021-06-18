@@ -83,38 +83,6 @@ const Tshirtwrapper = styled.div`
         right: 0;
     }
 
-
-
-    /* & .print-area-wrapper {
-        margin: 0 auto 0 auto;
-        width: 50%;
-        padding-bottom: 75%;
-        background-color: red;
-
-
-        box-sizing: border-box;
-        resize: horizontal;
-        border: 1px dashed;
-        overflow: auto;
-        max-width: 100%;
-
-    }
-    & .print-area {
-    margin: 0 auto 0 auto;
-    width: 100%;
-
-    padding-bottom: 50%;
-
-    display: flex;
-    align-items: center;
-    background-color: yellow;
-    }
-   
-    & svg {
-        width: 50%;
-        margin: 25% auto;
-    } */
-
     & .slide {
          /* background-color: yellow; */
          display: none;
@@ -130,28 +98,6 @@ const Tshirtwrapper = styled.div`
 
 
 const Layout3 = ({evos, displayedEvos, current, layout}) => {
-
-    console.log("displayedEvos")
-    console.log(displayedEvos)
-
-    // const activeSlides = Array.from(new Array(Number(layout)), (x, i) => i + current);
-    // console.log(activeSlides)
-
-
-
-    /// get displayed evos depending on layout
-
-    // const Indices = Array.from({length:  Number(layout)}, (x, i) => i);
-    // const extendedIndices =[...Indices, ...Indices]
-
-    // console.log("extendedIndices")
-    // console.log(extendedIndices)
-
-    // const extendedEvos = [...evos, ...evos.slice(0, Number(layout))]
-    // const idx = evos.length-generation
-    // var displayedEvos = extendedEvos.slice(idx-1 , idx-1 + Number(layout)).reverse()
-
-
 
     return (
         <Tshirtwrapper>
@@ -177,21 +123,6 @@ const Layout3 = ({evos, displayedEvos, current, layout}) => {
                     </div>
                 </div>
             </div>
-            {/* <div className="print-area-wrapper">
-                <div className="print-area">
-                {
-                            evos.map((evo, idx) => {
-                                return <div className={displayedEvos.includes(evo) ? 'slide active' : 'slide'} key={idx}>
-
-                                    <div className="svg-container">
-                                        <SVG src={evo.svg} />
-                                    </div>
-
-                                </div>
-                            })
-                        }
-                </div>
-            </div> */}
         </Tshirtwrapper>
     )
 }
