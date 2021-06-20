@@ -5,6 +5,7 @@ import Layout from '../../components/Layout'
 import { Container, Typography, Button, Grid } from '@material-ui/core'
 import useStyles from './CartElements'
 import CartItem from './CartItem'
+import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
@@ -32,7 +33,10 @@ const Cart = () => {
 
 
     const EmptyCart = () => (
-        <Typography variant="subtitle1">You have no items in your shopping cart yet.</Typography>
+        <Typography variant="subtitle1">
+            You have no items in your shopping cart.
+        <Link to="/" className={classes.link}> Go find something cool!</Link>
+        </Typography>
     )
 
     const FilledCart = () => (
@@ -48,7 +52,7 @@ const Cart = () => {
                 <Typography variant="h4">Subtotal: {subtotal}</Typography>
                 <div>
                     <Button className={classes.emptyButton} size="large" type="button" variant="contained" color="secondary" onClick={()=>handleEmptyCart()}>Empty Cart</Button>
-                    <Button className={classes.checkoutButton} size="large" type="button" variant="contained" color="primary" onClick={()=>handleCheckout()}>Checkout</Button>
+                    <Button component={Link} to="/checkout" className={classes.checkoutButton} size="large" type="button" variant="contained" color="primary" onClick={()=>handleCheckout()}>Checkout</Button>
                 </div>
         </div>
         </>
@@ -60,9 +64,8 @@ const Cart = () => {
         <Layout>
             <Container>
                 <div className={classes.toolbar}/>
-                <Typography className={classes.title} variant="h3">Your Shopping Cart</Typography>
+                <Typography className={classes.title} variant="h3" gutterBottom>Your Shopping Cart</Typography>
                 {isEmpty ? <EmptyCart /> : <FilledCart />}
-                
             </Container>
         </Layout>
     )

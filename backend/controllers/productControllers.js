@@ -42,7 +42,7 @@ export const getOrCreateItem = async (req, res) => {
     var item = await Item.findOne({itemId: itemId}).populate('product design')
   
     if (item === null) {
-      console.log(`Creating new item ${itemId}`)
+      //console.log(`Creating new item ${itemId}`)
     // create item 
        
 
@@ -59,7 +59,7 @@ export const getOrCreateItem = async (req, res) => {
      
       if (design === null) {
         // create new design
-        console.log(`Creating new design ${designName}`)
+        //console.log(`Creating new design ${designName}`)
 
         // get evos
         const Evo = mongoose.model(lineage, EvoSchema);
@@ -88,8 +88,7 @@ export const getOrCreateItem = async (req, res) => {
         const newDesign = new Design(constructedDesign);
         
         design = await newDesign.save()
-        console.log("savedDesign")
-        console.log(design.name)
+        console.log(`savedDesign ${design.name}`)
 
       } else {
         console.log(`Design ${designName} fetched.`)
@@ -113,9 +112,6 @@ export const getOrCreateItem = async (req, res) => {
     } else {
       console.log(`Item ${itemId} fetched.`)
     }
-
-    console.log(item)
-
     res.status(200).json(item);
   } catch (error) {
     res.status(404).json({ message: error });
