@@ -58,7 +58,7 @@ const FormFieldInput = ({updateCountry, updateRegion}) => {
                 
             </Grid>
             <Grid item xs={12} sm={6}>
-                <InputLabel id="region">Region/State</InputLabel>
+                <InputLabel id="region">State/Region</InputLabel>
                 <Controller
                 name="region"
                 control={control}
