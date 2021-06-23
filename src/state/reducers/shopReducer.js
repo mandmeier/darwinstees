@@ -1,4 +1,4 @@
-const reducer = (state = {cart: [], cartLoading: true, cartCookies: []}, action) => {
+const reducer = (state = {cart: [], cartLoading: true, cartCookies: [], confirmationNumber: ""}, action) => {
 
     switch (action.type) {
         case "ADD_TO_CART":
@@ -20,13 +20,15 @@ const reducer = (state = {cart: [], cartLoading: true, cartCookies: []}, action)
         //     newCart.splice(idx, 1, updatedItem);
         //     return{...state, cart: newCart}
         case "EMPTY_CART":
-            return {...state, cart: []}
+            return {...state, cart: [], confirmationNumber: ""}
         case "REMOVE_ITEM":
             console.log("removeItem")
             var newCart = state.cart.filter(item => {
                 return item.itemId != action.payload;
               })
             return {...state, cart: newCart}
+        case "CONFIRM_ORDER":
+            return {...state, confirmationNumber: action.payload}
         default:
             return state;
     }

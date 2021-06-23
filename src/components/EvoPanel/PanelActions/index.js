@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import styled from 'styled-components';
 import { useSelector, useDispatch } from "react-redux"
 import { Button } from '@material-ui/core'
-import {addToCart, increaseQty} from '../../../state/actions/shopActions'
+import {addToCart} from '../../../state/actions/shopActions'
 import { AddShoppingCart } from '@material-ui/icons'
 import { setLayout } from '../../../state/actions/evoActions'
 

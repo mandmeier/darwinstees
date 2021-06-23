@@ -2,6 +2,9 @@ import express from 'express';
 import {getEvos,getMutants,likeMutant} from '../controllers/evoControllers.js';
 import {createDesign} from '../controllers/designControllers.js';
 import {getProduct, getOrCreateItem} from '../controllers/productControllers.js';
+import { getClientSecret } from '../controllers/stripeControllers.js'
+import { addOrUpdateCustomer } from '../controllers/customerControllers.js'
+import { createOrder } from '../controllers/orderControllers.js'
 
 const router = express.Router();
 
@@ -9,10 +12,16 @@ router.get('/server/evos/:lineage', getEvos);
 router.get('/server/mutants/:lineage', getMutants);
 router.post('/server/like/:lineage/:_id', likeMutant);
 
-
 router.get('/server/products/:_id', getProduct);
 router.post('/server/designs', createDesign);
 router.post('/server/items', getOrCreateItem);
+router.post('/server/payment', getClientSecret);
+
+router.post('/server/customer', addOrUpdateCustomer)
+router.post('/server/order', createOrder)
+
+
+
 
 
 // router.post('/evos', createEvo);

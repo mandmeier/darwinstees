@@ -22,7 +22,7 @@ const Checkout = () => {
 
     const Form = () => activeStep === 0
         ? <AddressForm next={next}/>
-        : <PaymentForm shippingData={shippingData}/>
+        : <PaymentForm shippingData={shippingData} backStep={backStep} nextStep={nextStep}/>
 
 
     const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -34,7 +34,7 @@ const Checkout = () => {
         <>
         <Layout>
             <div className={classes.toolbar} />
-            <Paper className={classes.paper}>
+            <Paper style={{maxWidth:"600px", margin:"0 auto", width:"auto"}} className={classes.paper}>
                 <Typography variant="h4" align="center">Checkout</Typography>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
                     {steps.map((step) => (
