@@ -4,6 +4,8 @@ import Item from '../models/Item.js';
 import {drawDesign} from '../evos/drawDesign.js'
 import Design from '../models/Design.js';
 import {EvoSchema} from '../models/Evo.js';
+//import {svg2png} from '../scripts/svg2png.js'
+
 
 
 
@@ -72,19 +74,23 @@ export const getOrCreateItem = async (req, res) => {
         // create design with evos and Ids
         const svg = drawDesign(lineage, genomes, layout)
 
+        const designName = `${lineage}-${generation}-${layout}`
+
+        // save new design, add to DB if does not exist already
         const designId = mongoose.Types.ObjectId();
+       
 
         const constructedDesign = {
           _id: designId,
-          name: `${lineage}-${generation}-${layout}`,
+          name: designName,
           lineage,
           generation,
           layout,
           evoIds,
           svg,
+          img_path: `designs/${designName}.png`
         }
 
-        // save design 
         const newDesign = new Design(constructedDesign);
         
         design = await newDesign.save()

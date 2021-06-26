@@ -1,6 +1,5 @@
 import express from 'express';
 import {getEvos,getMutants,likeMutant} from '../controllers/evoControllers.js';
-import {createDesign} from '../controllers/designControllers.js';
 import {getProduct, getOrCreateItem} from '../controllers/productControllers.js';
 import { getClientSecret } from '../controllers/stripeControllers.js'
 import { addOrUpdateCustomer } from '../controllers/customerControllers.js'
@@ -13,7 +12,6 @@ router.get('/server/mutants/:lineage', getMutants);
 router.post('/server/like/:lineage/:_id', likeMutant);
 
 router.get('/server/products/:_id', getProduct);
-router.post('/server/designs', createDesign);
 router.post('/server/items', getOrCreateItem);
 router.post('/server/payment', getClientSecret);
 

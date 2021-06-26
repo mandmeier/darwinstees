@@ -13,6 +13,9 @@ app.use(cors());
 app.use(express.json())
 app.use('/', Routes);
 
+app.use(express.static('public'));  
+app.use('/designs', express.static('designs')); 
+
 const PORT = process.env.PORT || 5000;
 
 const MONGODB_URI = process.env.MONGODB_URI;
