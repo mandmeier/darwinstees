@@ -45,12 +45,12 @@ export const processOrder = (orderData) => async dispatch => {
 
     const customer = orderData.customer
     // create customer if does not exist, get customerId and orderId
-    const {data: customerData} = await api.addOrUpdateCustomer(customer.firstname, customer.lastname, customer.email)
-    const {customerId, orderId} = customerData
+    const {data: customerData} = await api.addOrUpdateCustomer(customer.firstname, customer.lastname, customer.email, orderData.orderId)
+    const {customerId} = customerData
   
     // save order in db
 
-    const { data: confirmationNumber  } = await api.createOrder(orderData, customerId, orderId)
+    const { data: confirmationNumber  } = await api.createOrder(orderData, customerId, orderData.orderId)
 
     dispatch({type: "CONFIRM_ORDER", payload: confirmationNumber})
     

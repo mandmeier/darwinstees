@@ -6,6 +6,7 @@ import { CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import { sendPayment } from '../../state/api'
 import Review from './Review'
 import { emptyCart, processOrder } from '../../state/actions/shopActions'
+import mongoose from 'mongoose'
 
 
 const CARD_OPTIONS = {
@@ -45,10 +46,11 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
     const elements = useElements()
 
 
-    const onPaymentSuccess = (paymentMethod) => {
+    const onPaymentSuccess = (paymentMethod, orderId) => {
 
         const orderData = {
             items: cart,
+            orderId,
             customer: {
                 firstname: shippingData.firstName,
                 lastname: shippingData.lastName,
@@ -106,14 +108,20 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
         if(!error) {
             try {
                 const {id} = paymentMethod
-                const { data } = await sendPayment(total, id)
+                const orderId = mongoose.Types.ObjectId()
+                const customer = {
+                    firstName: shippingData.firstName,
+                    lastName: shippingData.lastName,
+                    email: shippingData.email,
+                }
+                const { data } = await sendPayment(total, id, customer, orderId)
                 console.log("RESPONSE")
                 console.log(data)
 
                 if (data.success) {
                     //console.log("Payment successful!")
                     setSuccess(true)
-                    onPaymentSuccess(paymentMethod)
+                    onPaymentSuccess(paymentMethod, orderId)
                 }
             } catch (error) {
                 console.log("Error", error)

@@ -29,6 +29,7 @@ export const placeOrder = async (orderData) => {
 
 
     const itemOrder = {
+        merchantReference: orderData._id,
         shippingMethod: "Budget",
         recipient: {
             "address": {

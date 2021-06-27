@@ -6,8 +6,7 @@ import Customer from '../models/Customer.js'
 export const addOrUpdateCustomer = async (req, res) => {
     try {
   
-    const { firstName, lastName, email } = req.body;
-    const orderId = mongoose.Types.ObjectId()
+    const { firstName, lastName, email, orderId } = req.body;
     
     // check if customer exists already
     var customer = await Customer.findOne({email: email}, )
