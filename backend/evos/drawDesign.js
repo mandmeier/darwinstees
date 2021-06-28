@@ -1,7 +1,7 @@
 
-import {draw as drawBiomorph} from '../evos/biomorph/scripts/draw.js'
-import {draw as drawEllimorph} from '../evos/ellimorph/scripts/draw.js'
-import {draw as drawMandamorph} from '../evos/mandamorph/scripts/draw.js'
+import {draw as drawLineax} from '../evos/lineax/scripts/draw.js'
+import {draw as drawEllipticus} from '../evos/ellipticus/scripts/draw.js'
+import {draw as drawMandalay} from '../evos/mandalay/scripts/draw.js'
 
 
 export const drawDesign = (lineage, genomes, layout) => {
@@ -9,17 +9,17 @@ export const drawDesign = (lineage, genomes, layout) => {
 // find draw function
     var draw
     switch (lineage) {
-        case "biomorph":
-            draw = drawBiomorph
+        case "lineax":
+            draw = drawLineax
             break
-        case "ellimorph":
-            draw = drawEllimorph
+        case "ellipticus":
+            draw = drawEllipticus
             break
-        case "mandamorph":
-            draw = drawMandamorph
+        case "mandalay":
+            draw = drawMandalay
             break
       default:
-        draw = drawBiomorph
+        draw = drawLineax
   }
 
 
@@ -32,22 +32,26 @@ export const drawDesign = (lineage, genomes, layout) => {
 
   switch (layout) {
     case "7":
-        coordsX = [225, 525, 825, 525, 225, 525, 825]
-        coordsY = [150, 300, 450, 600, 750, 900, 1050]
-        spanX = 1050
-        spanY = 1200
+        coordsX = [1800, 5400, 9000, 5400, 1800, 5400, 9000]
+        coordsY = [1800, 3600, 5400, 7200, 9000, 10800, 12600]
+        spanX = 10800
+        spanY = 14400
         break
     case "3":
-        coordsX = [150, 450, 750]
-        coordsY = [364, 514, 664]
-        spanX = 900
-        spanY = 1028
+        coordsX = [1800, 5400, 9000]
+        coordsY = [5400, 7200, 9000]
+        spanX = 10800
+        spanY = 14400
         break
     default:
-        coordsX = [150]
-        coordsY = [171]
-        spanX = 300
-        spanY = 342
+        // coordsX = [150]
+        // coordsY = [171]
+        // spanX = 300
+        // spanY = 342
+        coordsX = [1800]
+        coordsY = [2400]
+        spanX = 3600
+        spanY = 4800
 }
 
 // draw evos at coordinates

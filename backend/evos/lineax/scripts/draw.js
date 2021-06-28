@@ -1,4 +1,4 @@
-export const draw = (genome, component = false, INIT_X = 150, INIT_Y = 150) => {
+export const draw = (genome, component = false, INIT_X = 1800, INIT_Y = 1800) => {
  
     function getXOffsets(genes) {
         return [
@@ -28,7 +28,7 @@ export const draw = (genome, component = false, INIT_X = 150, INIT_Y = 150) => {
 
     const INIT_GENE_INDEX = 2;
     const GENE_MAX_INDEX = 8;
-    const CANVAS_WIDTH = 300;
+    const CANVAS_WIDTH = 3600;
     
     // create svg for evos
     // calculate lines
@@ -41,8 +41,8 @@ export const draw = (genome, component = false, INIT_X = 150, INIT_Y = 150) => {
     // var y2s = [];
 
     function tree(x1, y1, branchings, geneIndex, genome) {
-    var x2 = x1 + branchings * getXOffsets(genome)[geneIndex] * 4;
-    var y2 = y1 + branchings * getYOffsets(genome)[geneIndex] * 4;
+    var x2 = x1 + branchings * getXOffsets(genome)[geneIndex] * 50; // stretch 50 about right for 3600x3600 canvas
+    var y2 = y1 + branchings * getYOffsets(genome)[geneIndex] * 50;
 
     coords.x1s.push(x1)
     coords.x2s.push(x2)
@@ -89,8 +89,8 @@ export const draw = (genome, component = false, INIT_X = 150, INIT_Y = 150) => {
 
         // scale to fit in frame
         var squeeze_factor;
-        if (maxdim > CANVAS_WIDTH - 30) {
-        squeeze_factor = (CANVAS_WIDTH - 30) / maxdim;
+        if (maxdim > CANVAS_WIDTH*0.9) {
+        squeeze_factor = (CANVAS_WIDTH*0.9) / maxdim;
         } else {
         squeeze_factor = 1;
         }
@@ -139,12 +139,12 @@ export const draw = (genome, component = false, INIT_X = 150, INIT_Y = 150) => {
 
     const svgLines = drawLines(coords)
 
-    const innersvg = `<g stroke="black" stroke-width="2">${svgLines.join('')}</g>`
+    const innersvg = `<g stroke="black" stroke-width="35">${svgLines.join('')}</g>`
 
     if (component === true) {
         return innersvg 
     } else {
-        const svg = `<svg width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid" style="background: none;"><g stroke="black" stroke-width="2">${innersvg}</g></svg>`
+        const svg = `<svg width="100%" height="100%" viewBox="0 0 3600 3600" preserveAspectRatio="xMidYMid" style="background: none;">${innersvg}</svg>`
         return svg
     }
 

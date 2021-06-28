@@ -1,61 +1,51 @@
 import sharp from 'sharp'
 import fs from 'fs'
+import Design from '../models/Design.js'
 
 
+export const svg2png = async (order) => {
 
-function deleteFiles(files, callback){
-    var i = files.length;
-    files.forEach(function(filepath){
-      fs.unlink(filepath, function(err) {
-        i--;
-        if (err) {
-          callback(err);
-          return;
-        } else if (i <= 0) {
-          callback(null);
-        }
-      });
-    });
-  }
+    // get designs
 
-
-export const svg2png = (order) => {
-
-    const todelete = []
-    
+    const designNames = []
     order.items.forEach(item => {
-        const fname_svg = `designs/${item.design.name}.svg`
-        const fname_png = `designs/${item.design.name}.png`
-        // double check if file already exists
-        if(fs.existsSync(fname_png)){
-            console.log(`${fname_png} already exists`)
-        } else {
-            fs.writeFileSync(fname_svg, item.design.svg)
+      designNames.push(item.design_name)
+    })
 
-            sharp(fname_svg)
-                .resize(3600, 4800)
-                //.resize(9318, 11530)
-                .png()
-                .toFile(`${fname_png}`)
-                .catch(function(err) {
-                console.log(err)
-                })
-    
-            console.log(`wrote ${fname_png}`)
-            
-            todelete.push(fname_svg)
-            //fs.unlinkSync(fname_svg)
+    try {
 
-        }
-    });
+      const designs = await Design.find({'name': { $in: designNames }});
 
-    deleteFiles(todelete, function(err) {
-        if (err) {
-          console.log(err);
-        }
+        
+      designs.forEach(design => {
+          const fname_svg = `designs/${design.name}.svg`
+          const fname_png = `designs/${design.name}.png`
+          // double check if file already exists
+          if(fs.existsSync(fname_png)){
+              console.log(`${fname_png} already exists`)
+          } else {
+              fs.writeFileSync(fname_svg, design.svg)
+  
+              sharp(fname_svg)
+                  .resize(3600, 4800)
+                  .png()
+                  .toFile(`${fname_png}`)
+                  .then(function(info) {
+                    fs.unlinkSync(fname_svg) // delete svg
+                  })
+                  .catch(function(err) {
+                  console.log(err)
+                  })
+      
+              console.log(`wrote ${fname_png}`)
+          }
       });
+      
+    } catch (error) {
+      console.log("converting designs to png failed")
+      console.log(error)
+    }
 
 //https://coderrocketfuel.com/article/convert-svg-to-png-using-node-js-and-sharp
-
 
 }

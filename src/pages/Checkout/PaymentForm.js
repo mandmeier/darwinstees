@@ -48,9 +48,22 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
     const onPaymentSuccess = (paymentMethod, orderId) => {
 
+
+
+        const orderItems = []
+        cart.map(item => {
+            orderItems.push({
+            item_id: item._id,
+            itemId: item.itemId,
+            product: item.product,
+            design_name: item.design.name,
+            qty: item.qty
+            })
+        })
+
         const orderData = {
-            items: cart,
-            orderId,
+            _id: orderId,
+            items: orderItems,
             customer: {
                 firstname: shippingData.firstName,
                 lastname: shippingData.lastName,

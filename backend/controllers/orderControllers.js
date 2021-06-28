@@ -8,20 +8,11 @@ import { placeOrder } from './prodigi_api.js';
 export const createOrder = async (req, res) => {
     try {
   
-        const { orderData, customerId, orderId } = req.body;
+        const { orderData } = req.body;
+    
+        const newOrder = new Order(orderData)
 
-        console.log("CREATE ORDER")
-
-        const newOrder = new Order({
-            _id: orderId,
-            customer: customerId,
-            items: orderData.items,
-            shipping: orderData.shipping,
-            payment: orderData.payment,
-        })
-
-        
-        const order = await newOrder.save()
+        const order = await newOrder.save()// populate with design
 
         // draw pngs for this order
         svg2png(order)
@@ -29,10 +20,7 @@ export const createOrder = async (req, res) => {
         // place order with prodigi
         placeOrder(order)
 
-        
         res.status(200).json(order._id);
-
-
 
     } catch (error) {
       res.status(404).json({ message: error });

@@ -2,46 +2,46 @@ const reducer = (state =
     { 
     parent: 
         {
-            biomorph: {name: "biomorph-000000-1", lineage: "biomorph", genome: [2,4,4,-2,-4,-2,0,3,3]},
-            ellimorph: {name: "ellimorph-000000-1", lineage: "ellimorph", genome: [2,4,4,-2,-4,-2,0,3,3,2]},
-            mandamorph: {name: "mandamorph-000000-1", lineage: "mandamorph", genome: [2,4,4,-2,-4,-2,0,3,3,2,0,3]},
+            lineax: {name: "lineax-000000-1", lineage: "lineax", genome: [2,4,4,-2,-4,-2,0,3,3]},
+            ellipticus: {name: "ellipticus-000000-1", lineage: "ellipticus", genome: [2,4,4,-2,-4,-2,0,3,3,2]},
+            mandalay: {name: "mandalay-000000-1", lineage: "mandalay", genome: [2,4,4,-2,-4,-2,0,3,3,2,0,3]},
         },
     evos:
         {
-            biomorph: [],
-            ellimorph: [],
-            mandamorph: [],
+            lineax: [],
+            ellipticus: [],
+            mandalay: [],
         },
     evosLoading:
         {
-            biomorph: true,
-            ellimorph: true,
-            mandamorph: true,
+            lineax: true,
+            ellipticus: true,
+            mandalay: true,
         },
     current:
         {
-            biomorph: 0,
-            ellimorph: 0,
-            mandamorph: 0,
+            lineax: 0,
+            ellipticus: 0,
+            mandalay: 0,
         },
 
     mutants:
         {
-            biomorph: [],
-            ellimorph: [],
-            mandamorph: [],
+            lineax: [],
+            ellipticus: [],
+            mandalay: [],
         },
     mutantsLoading:
         {
-            biomorph: true,
-            ellimorph: true,
-            mandamorph: true,
+            lineax: true,
+            ellipticus: true,
+            mandalay: true,
         },
     layout:
         {
-            biomorph: "1",
-            ellimorph: "1",
-            mandamorph: "1",
+            lineax: "1",
+            ellipticus: "1",
+            mandalay: "1",
         }
     }, action) => {
      

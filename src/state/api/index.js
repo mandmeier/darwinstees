@@ -17,6 +17,6 @@ export const getOrCreateItem = (itemId, lineage, generation, layout, evoIds) => 
 
 export const sendPayment = (price, id, customer, orderId) => axios.post(`${url}/server/payment/`, {amount: (price * 100).toFixed(0), id, customer, orderId})
 
-export const addOrUpdateCustomer = (firstName, lastName, email, orderId) => axios.post(`${url}/server/customer/`, {firstName, lastName, email, orderId})
+export const addOrUpdateCustomer = (customerData, orderId) => axios.post(`${url}/server/customer/`, {customerData, orderId})
 
-export const createOrder = (orderData, customerId, orderId) => axios.post(`${url}/server/order/`, {orderData, customerId, orderId})
+export const createOrder = (orderData) => axios.post(`${url}/server/order/`, {orderData})

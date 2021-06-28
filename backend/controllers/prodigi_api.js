@@ -5,8 +5,6 @@ dotenv.config();
 
 export const placeOrder = async (orderData) => {
 
-    console.log("PROCESSING ORDER")
-
     const prodigi_url = "https://api.sandbox.prodigi.com/v4.0/Orders"
 
     const shippingItems = []
@@ -20,7 +18,7 @@ export const placeOrder = async (orderData) => {
             "assets": [
                 {
                     "printArea": "default",
-                    "url": `${process.env.REACT_APP_URL}/${item.design.img_path}`
+                    "url": `${process.env.REACT_APP_URL}/${item.design_name}.png`
                 }
             ]
         })
@@ -46,7 +44,7 @@ export const placeOrder = async (orderData) => {
     }
 
 
-    console.log(itemOrder)
+    //console.log(itemOrder)
 
     const config = {
         headers: {
@@ -58,8 +56,8 @@ export const placeOrder = async (orderData) => {
     };
 
     try {
-        const { data } = await axios.post(prodigi_url, itemOrder, config)
-        console.log(data)
+        console.log(`order ${orderData._id} sent for printing`)
+        await axios.post(prodigi_url, itemOrder, config)
     } catch (error) {
         console.log(error)
     }

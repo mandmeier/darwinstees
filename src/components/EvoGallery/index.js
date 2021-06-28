@@ -19,15 +19,15 @@ const EvoGallery = () => {
 
     const panels = [ 
         {
-            lineage: 'biomorph',
+            lineage: 'lineax',
             color: "#bed7d6"
         },
         {
-            lineage: 'ellimorph',
+            lineage: 'ellipticus',
             color: "#f2efdb"
         },
         {
-            lineage: 'mandamorph',
+            lineage: 'mandalay',
             color: "#d2debf"
         }
 ]
