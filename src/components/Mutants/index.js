@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getMutants } from '../../state/actions/evoActions';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {likeMutant} from '../../state/actions/evoActions'
+import Countdown from '../Countdown';
 
 
 const Mutants = ({lineage}) => {
@@ -27,6 +28,7 @@ const Mutants = ({lineage}) => {
 
     return (
         <>
+        <Countdown/>
         <MutantRow>
             {
                 mutants.map((mutant, idx) => {
