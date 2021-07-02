@@ -1,12 +1,12 @@
 
-/* @import url('https://fonts.googleapis.com/css2?family=Miss+Fajardose&display=swap'); */
-
-
+@import url('https://fonts.googleapis.com/css2?family=Miss+Fajardose&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400&display=swap');
 
 
 html {
     height: 100%;
     font-size: 16px;
+	font-family: 'IBM Plex Serif', serif;
 }
 
 body {
@@ -20,11 +20,11 @@ body, html {
 }
 
 
-@media only screen and (min-width: 400px) {
+/* @media only screen and (min-width: 400px) {
     .layout {
       padding: 0 1rem; 
     }
-}
+} */
 
 main {
     margin-top: calc(35px + 1rem);

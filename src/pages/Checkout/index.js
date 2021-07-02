@@ -34,9 +34,9 @@ const Checkout = () => {
         <>
         <Layout>
             <div className={classes.toolbar} />
-            <Paper style={{maxWidth:"600px", margin:"0 auto", width:"auto"}} className={classes.paper}>
+            <Paper style={{maxWidth:"600px", margin:"0 auto", width:"auto", background:"rgba(255, 255, 255, 0.8)", padding: "0.5rem", borderRadius: "0.3rem"}} className={classes.paper}>
                 <Typography variant="h4" align="center">Checkout</Typography>
-                <Stepper activeStep={activeStep} className={classes.stepper}>
+                <Stepper activeStep={activeStep} className={classes.stepper} style={{background:"transparent", width: "60%", margin:"0 auto"}}>
                     {steps.map((step) => (
                         <Step key={step}>
                             <StepLabel>{step}</StepLabel>

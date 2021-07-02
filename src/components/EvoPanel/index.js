@@ -5,6 +5,11 @@ import { useSelector, useDispatch } from "react-redux"
 import { getEvos } from '../../state/actions/evoActions';
 import Mutants from '../Mutants'
 import PanelActions from './PanelActions'
+import GenerationButtons from '../GenerationButtons';
+import Countdown from '../Countdown';
+import { Button } from '@material-ui/core'
+import { AddShoppingCart } from '@material-ui/icons'
+import {addToCart} from '../../state/actions/shopActions'
 
 
 
@@ -35,30 +40,62 @@ const EvoPanel = ({panel}) => {
     if (generation === '') {generation = 0}
 
 
+    function capitalize(word) {
+        const lower = word.toLowerCase();
+        return word.charAt(0).toUpperCase() + lower.slice(1);
+    }
     
 
     /// get displayed evos depending on layout
     const extendedEvos = [...evos, ...evos.slice(0, Number(layout))]
     const idx = evos.length-generation
     var displayedEvos = extendedEvos.slice(idx-1 , idx-1 + Number(layout)).reverse()
-
+ 
     return (
+    // <Element style={{backgroundColor: panel.color}}></Element>
     <Element>
-    <h2 className={"outside-panel"}>{lineage}</h2>
-    <Panel style={{backgroundColor: panel.color}}>
+        <div className="info">
+        <div className="panel panel-left">
+            <div className="title-price">
+                <h2>{capitalize(lineage)}</h2>
+                <h3 className="price-tag">$29.99 </h3>
+            </div>
+            <ImageSlider lineage={lineage} layout={layout} displayedEvos={displayedEvos}/>
+            {/* <div className="add-to-cart">
+                <Button variant="contained" color="primary">add to cart &nbsp;<AddShoppingCart/></Button>
+            </div> */}
+            <Mutants lineage={lineage}/>
+        </div>
+        <div className="panel panel-right">
+            <div className="panel-actions  panel-transparent">
+                <PanelActions displayedEvos={displayedEvos} layout={layout} lineage={lineage} generation={generation}/>
+            </div>
+            <div className="panel-nextgen  panel-transparent">
+                <p>Next generation:</p>
+                <Countdown/>
+                <br/>
+                <small><em>Upvote your favorite mutant now!</em></small>
+                <br/>
+                <br/>
+            </div>
+        </div>
+        </div>
+    
+    {/* <Panel>
+
+
     <PanelHeader>
         <div className="stats">
-            <h3>Gen {generation}</h3>
-            <h3>$29.99 </h3>
+            
         </div>
     </PanelHeader>
-    <ImageSlider lineage={lineage} layout={layout} displayedEvos={displayedEvos}/>
+    
     <PanelActions displayedEvos={displayedEvos} layout={layout} lineage={lineage} generation={generation}/>
     </Panel>
     <h3 className={"outside-panel mutant-title"}>Select next generation</h3>
     <Panel style={{backgroundColor: panel.color}}>
         <Mutants lineage={lineage}/>
-    </Panel>
+    </Panel> */}
     </Element>
     )
 }

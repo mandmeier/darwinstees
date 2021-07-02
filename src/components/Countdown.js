@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 export const Time = styled.div`
+    margin: 0 auto;
     background-color: #333;
     color: #f9f9f9;
     font-size: 1.5rem;
@@ -17,7 +18,7 @@ const Countdown = ({mutationDate}) => {
     const [time, setTime] = useState("")
 
     useEffect(() => {
-        let mutationDate = new Date(" Jul 01, 2021 12:00:00 ").getTime();
+        let mutationDate = new Date(" Jul 01, 2022 12:00:00 ").getTime();
         // update every sec
         let x = setInterval(function(){
             // Get todays date and time

@@ -5,16 +5,35 @@ import { Button } from '@material-ui/core'
 import {addToCart} from '../../../state/actions/shopActions'
 import { AddShoppingCart } from '@material-ui/icons'
 import { setLayout } from '../../../state/actions/evoActions'
+import GenerationButtons from '../../GenerationButtons'
 
 
 
 
 const Actions = styled.div`
-    margin: 1rem 0;
+
+    & .generation-display{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 0.5rem;
+        & p {
+            margin: 0;
+        }
+        & .generation{
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 0.2rem;
+        }
+    }
+
+    & p {
+        margin: 1rem 0 1rem 0;
+    }
     
     & .choose-layout, .choose-size {
         display: flex;
-        justify-content: center;
+        justify-content: left;
         margin-bottom: 0.5rem;
     }
 
@@ -22,7 +41,7 @@ const Actions = styled.div`
         width: 100%;
         margin-top: 0.5rem;
         display: flex;
-        justify-content: center;
+        justify-content: left;
         & button {
             width: 2rem;
             height: 2rem;
@@ -33,14 +52,17 @@ const Actions = styled.div`
     }
 
     & .add-to-cart {
-        margin-top: 1rem;
+        margin: 0 0 0.5rem 0 !important;
+        //margin-bottom: 0.5rem;
         display: flex;
-        justify-content: center;
+        justify-content: left;
     }
 `
 
 const SelectionButtons = styled.div`
     /* background-color: yellow; */
+
+    margin: 0 auto;
 
     & button {
         width: 2rem;
@@ -163,6 +185,11 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
 
     return (
         <Actions>
+            <div className="generation-display">
+            <p>Generation:</p> <p className="generation">{generation}</p>
+            </div>
+                <GenerationButtons lineage={lineage}/>
+            <p>Layout:</p>
             <div className="choose-layout">
                 <SelectionButtons>
                     <button className={layout === "1" ? "selected-btn" : ""} onClick={() => handleSetLayout("1")}>L1</button>
@@ -170,6 +197,7 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
                     <button className={layout === "7" ? "selected-btn" : ""} onClick={() => handleSetLayout("7")}>L7</button>     
                 </SelectionButtons>
             </div>
+            <p>Size:</p>
             <div className="choose-size">
                 <SelectionButtons>
                     <button className={selected.S ? "selected-btn" : ""} onClick={() => setSize("S")}>S</button>
@@ -177,6 +205,8 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
                     <button className={selected.L ? "selected-btn" : ""} onClick={() => setSize("L")}>L</button>     
                 </SelectionButtons>
             </div>
+            <br/>
+            {/* <p>Quantity:</p>
             <div className="choose-qty">
                     <Btn
                         type="button"
@@ -195,7 +225,7 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
                     >
                         +
                     </Btn>
-            </div>
+            </div> */}
             <div className={"add-to-cart"}>
                 <Button variant="contained" color="primary" onClick={() => handleAddCart()}>add to cart &nbsp;<AddShoppingCart/></Button>
             </div>

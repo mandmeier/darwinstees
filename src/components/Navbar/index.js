@@ -5,7 +5,6 @@ import { ShoppingCart } from '@material-ui/icons'
 import logo from '../../assets/Darwin.png'
 import useStyles from './NavbarElements'
 import { Link, useLocation } from 'react-router-dom';
-import { IdealBankElement } from '@stripe/react-stripe-js'
 
 const Navbar = () => {
     const classes = useStyles()

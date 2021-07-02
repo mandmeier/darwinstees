@@ -7,6 +7,7 @@ import SVG from 'react-inlinesvg';
 import styled from 'styled-components'
 import tee from '../../../assets/Tshirt.png'
 import {updateQty} from '../../../state/actions/shopActions'
+import CloseIcon from '@material-ui/icons/Close';
     
 
 const Tshirtwrapper = styled.div`
@@ -70,8 +71,11 @@ const Tshirtwrapper = styled.div`
 `
 
 const ItemActions = styled.div`
-  & .choose-qty {
-        width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+
+    & .choose-qty {
         margin-top: 0.5rem;
         display: flex;
         justify-content: center;
@@ -83,6 +87,40 @@ const ItemActions = styled.div`
             cursor: pointer;
         }
     }
+
+    & .item-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        position: relative;
+
+        & button {
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            background-color: red;
+            color: white;
+            border-radius: 2rem;
+            border: none;
+            cursor: pointer;
+            //width: 2rem;
+            & svg {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+        }
+    }
+
+    & .line-total{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        & p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    }
+
 `;
 
 
@@ -126,6 +164,10 @@ const CartItem = ({item}) => {
     
     var qty = item.qty
 
+    function capitalize(word) {
+        const lower = word.toLowerCase();
+        return word.charAt(0).toUpperCase() + lower.slice(1);
+    }
 
     const increase = () => {
         let updatedQty = qty + 1;
@@ -155,7 +197,14 @@ const CartItem = ({item}) => {
                 </div>
             </Tshirtwrapper>
             <ItemActions>
-            <p>size: {item.product.size}</p>
+            <div className="item-title">
+                    <div>{item.product.name}</div>
+                    {/* <Button size="small" type="button" variant="contained" color="secondary" onClick={()=>handleRemoveItem(item.itemId)}><DeleteForeverIcon/></Button> */}
+                    <button type="button" onClick={()=>handleRemoveItem(item.itemId)}><CloseIcon/></button>
+            </div>
+            <div><i>{`${capitalize(item.design.lineage)}`}</i></div>
+            <div>{`Gen ${item.design.generation}`}</div>
+            <div className="line-total">
                 <div className="choose-qty">
                         <Btn
                             type="button"
@@ -175,9 +224,9 @@ const CartItem = ({item}) => {
                             +
                         </Btn>
                 </div>
-                <p>LineTotal: ${lineTotal}</p>
-                <Button type="button" variant="contained" color="secondary" onClick={()=>handleRemoveItem(item.itemId)}>Remove</Button>
-            </ItemActions>
+                <p>${lineTotal}</p>
+            </div>
+                 </ItemActions>
             {/* <CardContent className={classes.cardContent}>
                 <Typography variant="h5">{lineTotal}</Typography>
             </CardContent>

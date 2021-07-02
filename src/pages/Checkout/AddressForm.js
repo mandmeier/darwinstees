@@ -70,7 +70,7 @@ const AddressForm = ({next}) => {
 
     return (
         <div>
-            <Typography variant="h6" gutterBottom >Shipping Address</Typography>
+            <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }} >Shipping Address</Typography>
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                 {/* <form onSubmit={methods.handleSubmit(formSubmitHandler)}> */}

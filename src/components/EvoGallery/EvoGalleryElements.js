@@ -8,8 +8,8 @@ export const StyledSwiper = styled(Swiper)`
 
    & .swiper-pagination {
       margin: 0;
-      //background-color: yellow;
-      height: 50px;
+      background-color: white;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: center;

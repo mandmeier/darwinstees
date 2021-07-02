@@ -1,6 +1,87 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { Typography, Divider, List, ListItem, ListItemText } from '@material-ui/core'
+import SVG from 'react-inlinesvg';
+import styled from 'styled-components'
+import tee from '../../assets/Tshirt.png'
+
+
+
+const Tshirtwrapper = styled.div`
+    width: 4rem;
+    margin-right: 1rem;
+    & .tshirt {
+        background-image: url(${tee});
+        background-repeat:no-repeat;
+        background-position: center top;
+        background-size: contain;
+        position: relative;
+    }
+
+    & img {
+        width: 100%;
+        visibility: hidden;
+    }
+    & .tshirt-content {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    & .print-area-wrapper {
+        margin: 12% auto 0 25%;
+        width: 45%;
+        padding-bottom: calc(45% / 0.875);
+        position: relative;
+        /* background: yellow; */
+    }
+
+    & .print-area {
+        position: absolute;
+        top: 0; bottom: 0; left: 0; right: 0;
+
+        color: white;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    & .svg-container {
+        width: 100%;
+        height: 100%;
+        position: relative
+    }
+
+    & .evo-svg{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        /* background-color: blue; */
+    }
+
+    & .evo0 {
+        top: 6.25%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+    }
+`
+
+const ProductInfo = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    & .qty-price {
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+`
 
 
 const Review = ({cost}) => {
@@ -10,6 +91,10 @@ const Review = ({cost}) => {
     const shopState = useSelector((state) => state.shopState)
     const cart = shopState.cart
 
+    function capitalize(word) {
+        const lower = word.toLowerCase();
+        return word.charAt(0).toUpperCase() + lower.slice(1);
+    }
 
     return (
         <>
@@ -18,8 +103,31 @@ const Review = ({cost}) => {
             <List disablePadding>
                 {cart.map((item) => (
                     <ListItem style={{padding: '10px 0'}} key={item._id}>
-                        <ListItemText primary={item.product.name} secondary={`Quantity: ${item.qty}`}/>
-                        <Typography variant="body2">Line total: ${(item.product.price  * item.qty).toFixed(2)}</Typography>
+                        <Tshirtwrapper>
+                            <div className="tshirt">
+                                <img src={tee}/>
+                                <div className="tshirt-content">
+                                    <div className="print-area-wrapper">
+                                        <div className="print-area">
+                                            <div className="svg-container">
+                                                <SVG src={item.design.svg} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Tshirtwrapper>
+                        <ProductInfo>
+                        <div>
+                            <div>{item.product.name}</div>
+                            <div><i>{`${capitalize(item.design.lineage)}`}</i></div>
+                            <small>{`Gen ${item.design.generation}`}</small>
+                        </div>
+                        <div className="qty-price">
+                            <small variant="body2">{`Qty: ${item.qty}`}</small>
+                            <Typography variant="body2">${(item.product.price  * item.qty).toFixed(2)}</Typography>
+                        </div>
+                        </ProductInfo>
                     </ListItem>
                 ))}
                 <Divider />

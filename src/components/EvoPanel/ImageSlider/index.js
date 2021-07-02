@@ -20,16 +20,6 @@ const ImageSlider = ({lineage, layout, displayedEvos}) => {
     current = current[lineage]
     evos = evos[lineage]
 
-    const dispatch = useDispatch();
-
-    const prevSlide = () => {
-        dispatch(prevEvo(lineage, current, evos.length));
-    }
-
-    const nextSlide = () => {
-        dispatch(nextEvo(lineage, current, evos.length));
-    }
-
 
     if (!Array.isArray(evos) || evos.length <=0) {
         return null
@@ -38,7 +28,6 @@ const ImageSlider = ({lineage, layout, displayedEvos}) => {
 
     return (
             <Slider>
-
             <React.Fragment>
                 {
                     [
@@ -50,12 +39,6 @@ const ImageSlider = ({lineage, layout, displayedEvos}) => {
                 }
             </React.Fragment>
                 
-
-                <div className="slider-controls">
-                    <FaArrowAltCircleLeft className="slider-arrow left-arrow" onClick={prevSlide}/>
-                    <img src={evolution} alt='evolution of man'/>
-                    <FaArrowAltCircleRight className="slider-arrow right-arrow" onClick={nextSlide}/>
-                </div>
                 
             </Slider>
     )
