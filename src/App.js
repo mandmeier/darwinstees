@@ -21,11 +21,11 @@ const App = () => {
     return (
     <Router>
       <div>
-        <Route exact path={["/", "/:urlLineage"]} component={Home}/>
         <Route exact path="/about" component={About}/>
         <Route exact path="/404" component={NotFound}/>
         <Route exact path="/cart" component={Cart}/>
         <Route exact path="/checkout" component={Checkout}/>
+        <Route exact path={["/", "/:urlLineage"]} component={Home}/>
       </div>
     </Router>
     )

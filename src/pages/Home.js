@@ -13,24 +13,23 @@ const Home = ({match}) => {
         {
             lineage: 'lineax',
             color: "#bed7d6",
-            img: `/img/reef.webp`,
-            quote: 'It is not the strongest of the species that survives, not the most intelligent that survives. It is the one that is the most adaptable to change.'
+            img: `/img/desert.webp`,
+            quote: 'It is not the strongest of the species that survives, not the most intelligent that survives. It is the one that is the most adaptable to change.',
+            quote_by: 'Charles Darwin'
         },
         {
             lineage: 'ellipticus',
             color: "#f2efdb",
-            img: `/img/desert.webp`,
-            quote: 'This preservation of favourable individual differences and variations, and the destruction of those which are injurious, I have called Natural Selection, or the Survival of the Fittest.'
-            
-            //img: "/img/desert.webp"
+            img: `/img/reef.webp`,
+            quote: 'This preservation of favourable individual differences and variations, and the destruction of those which are injurious, I have called Natural Selection, or the Survival of the Fittest.',
+            quote_by: 'Charles Darwin'
         },
         {
             lineage: 'mandalay',
             color: "#d2debf",
             img: `/img/rainforest.webp`,
-            quote: "But Natural Selection, as we shall hereafter see, is a power incessantly ready for action, and is immeasurably superior to man's feeble efforts, as the works of Nature are to those of Art."
-
-            //img: "/img/rainforest.webp"
+            quote: "But Natural Selection, as we shall hereafter see, is a power incessantly ready for action, and is immeasurably superior to man's feeble efforts, as the works of Nature are to those of Art.",
+            quote_by: 'Charles Darwin'
         }
     ]
 
