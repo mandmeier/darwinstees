@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "jsonify": "node evos/jsonifyEvos.js",
-    "next": "node evos/biomorph/scripts/nextgen.js && node evos/ellimorph/scripts/nextgen.js && node evos/mandamorph/scripts/nextgen.js && nodemon server.js",
+    "next": "node evos/lineax/scripts/nextgen.js && node evos/ellipticus/scripts/nextgen.js && node evos/mandalay/scripts/nextgen.js && nodemon server.js",
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const Element = styled.div`
     max-width: 800px;
-    margin: 2rem auto;
+    margin: 0.5rem auto;
     padding: 1rem;
     //background: rgba(255, 255, 255, .2);
 
@@ -27,6 +27,7 @@ export const Element = styled.div`
 
     & .panel-right{
         margin-top: 8rem;
+        max-width: 200px;
     }
 
     & .add-to-cart {
@@ -37,10 +38,7 @@ export const Element = styled.div`
     }
 
     & .title-price{
-        //display: flex;
-        //justify-content: space-between;
-        //align-items: flex-end;
-        //margin-bottom: 2rem;
+        
         & h2 {
             margin: 0;
             font-family: 'Miss Fajardose', cursive;
@@ -61,23 +59,13 @@ export const Element = styled.div`
 
     & .panel-nextgen {
         margin-top: 1.5rem;
+        & .next-gen-message {
+            font-size: 0.75rem;
+            margin: 0.5rem auto;
+            text-align: center;
+        }
     }
 
-    & .panel-mutants {
-        margin: 2rem auto;
-        max-width: 400px;
-    }
-
-
-
-    /* & .outside-panel {
-        margin: 0 auto;
-        margin-top: 1rem;
-        max-width: 800px;
-    } */
-    /* & .mutant-title {
-        margin-top: 2rem;
-    } */
 `
 
 export const PanelHeader = styled.div`

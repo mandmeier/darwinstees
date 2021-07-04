@@ -2,6 +2,18 @@
 import fs from 'fs'
 import mongoose from 'mongoose';
 import {EvoSchema} from '../models/Evo.js';
+import Thumb from '../models/Thumb.js'
+
+
+export const getThumbs = async (req, res) => {
+  try {
+    const thumbs = await Thumb.find();
+    res.status(200).json(thumbs);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
 
 export const getEvos = async (req, res) => {
     try {
@@ -39,15 +51,29 @@ export const getEvos = async (req, res) => {
 
 
   export const likeMutant = async (req,res) => {
-    const { lineage, _id } = req.params;
+    const { lineage, _id, ipv4, isLiked } = req.body;
+
+
     const Evo = mongoose.model(lineage, EvoSchema);
     if (!mongoose.Types.ObjectId.isValid(_id))
       return res.status(404).send('No Evo with that id');
-    const updatedMutant = await Evo.findByIdAndUpdate(
+
+    var updatedMutant
+
+    if (isLiked) {
+      updatedMutant = await Evo.findByIdAndUpdate(
         _id,
-        { $inc: { likes : 1 } },
+        { $pull: { likes: ipv4 } },
         { new: true }
       );
+    } else {
+      updatedMutant = await Evo.findByIdAndUpdate(
+        _id,
+        { $addToSet: { likes: ipv4 } },
+        { new: true }
+      );
+    }
+
     res.json(updatedMutant);
 
   }

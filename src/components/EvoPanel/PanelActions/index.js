@@ -56,6 +56,10 @@ const Actions = styled.div`
         //margin-bottom: 0.5rem;
         display: flex;
         justify-content: left;
+
+        & button {
+            margin: 0 auto;
+        }
     }
 `
 

@@ -73,10 +73,8 @@ const EvoPanel = ({panel}) => {
             <div className="panel-nextgen  panel-transparent">
                 <p>Next generation:</p>
                 <Countdown/>
-                <br/>
-                <small><em>Upvote your favorite mutant now!</em></small>
-                <br/>
-                <br/>
+                <p className="next-gen-message"><em>Choose your favorite among the 3 mutants and share this with your friends. May the fittest design survive! </em></p>
+                
             </div>
         </div>
         </div>

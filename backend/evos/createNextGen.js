@@ -6,6 +6,8 @@ import path from 'path'
 import fs from 'fs'
 import {EvoSchema} from '../models/Evo.js';
 import {getFirstEvo} from './getFirstEvo.js'
+import Thumb from '../models/Thumb.js';
+
 
 
 // import {mutateEvo} from './mutateEvo.js';
@@ -67,8 +69,15 @@ export const createNextGen = async (lineage, mutate, draw) => {
       const firstEvo = new Evo(winner);
       firstEvo.save()
 
-    }
+      // save first thumb
+      const firstThumb = new Thumb({
+          lineage: winner.lineage,
+          generation: winner.generation,
+          svg: winner.svg
+      })
+      firstThumb.save()
 
+    }
 
     console.log(`Winner is ${winner.name} with ${winner.likes} likes`)
 
@@ -77,8 +86,8 @@ export const createNextGen = async (lineage, mutate, draw) => {
     evoIds.push(winner._id)
     fs.writeFileSync(evodir, JSON.stringify(evoIds))
 
-
-
+    // add winner to thumbs
+    await Thumb.findOneAndUpdate({lineage: winner.lineage}, {svg: winner.svg,  generation: winner.generation })
 
     // make mutants (next gen)
     const mutants = mutate(winner)

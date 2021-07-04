@@ -1,10 +1,6 @@
 import React from 'react'
-import EvoTee from '../../EvoTee'
-import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 import {Slider} from './ImageSliderElements'
 import { useSelector, useDispatch } from "react-redux"
-import { nextEvo, prevEvo } from '../../../state/actions/evoActions';
-import evolution from '../../../assets/evolution.png'
 import Layout1 from './Layout1'
 import Layout3 from './Layout3'
 import Layout7 from './Layout7'

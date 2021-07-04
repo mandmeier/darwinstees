@@ -13,6 +13,17 @@ export const getEvos = (lineage) => async dispatch => {
 }
 
 
+export const getThumbs = () => async dispatch => {
+  try {
+      const { data: thumbs } = await api.getThumbs();
+      dispatch({type: "GET_THUMBS", payload: thumbs})         
+    } catch (error) {
+      console.log(error);
+    }
+
+}
+
+
 export const getMutants = (lineage) => async dispatch => {
     try {
         const { data: mutants } = await api.getMutants(lineage);
@@ -42,9 +53,10 @@ export const prevEvo = (lineage, current, length) => {
     }
 }
 
-export const likeMutant = mutant => async dispatch => {
+export const likeMutant = (mutant, ipv4, isLiked) => async dispatch => {
+
     try {
-      const { data } = await api.likeMutant(mutant.lineage, mutant._id);
+      const { data } = await api.likeMutant(mutant.lineage, mutant._id, ipv4, );
       dispatch({ type: 'LIKE_MUTANT', payload: data });
     } catch (error) {
       console.log(error);

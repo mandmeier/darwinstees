@@ -4,6 +4,7 @@ import { combineReducers } from "redux";
 
 import evoReducer from "./reducers/evoReducer"
 import shopReducer from "./reducers/shopReducer"
+import sessionReducer from "./reducers/sessionReducer"
 
 
 
@@ -14,7 +15,8 @@ import shopReducer from "./reducers/shopReducer"
 
 const reducers = combineReducers({
     evoState: evoReducer,
-    shopState: shopReducer
+    shopState: shopReducer,
+    sessionState: sessionReducer
 })
 
 

@@ -42,7 +42,8 @@ const reducer = (state =
             lineax: "1",
             ellipticus: "1",
             mandalay: "1",
-        }
+        },
+    thumbs: []
     }, action) => {
      
     
@@ -59,13 +60,15 @@ const reducer = (state =
             return applyLikeMutant(state, action)
         case "SET_LAYOUT":
             return applySetLayout(state, action)
+        case "GET_THUMBS":
+            return {...state, thumbs: action.payload}
         default:
             return state;
     }
 
     function applyGetEvos(state, action) {
         const { lineage, evos} = action.payload
-        return { ...state, evos: {...state.evos, [lineage]: evos}, evosLoading: {...state.evosLoading, [lineage]: false}}
+        return { ...state, evos: {...state.evos, [lineage]: evos}, evosLoading: {...state.evosLoading, [lineage]: false}, thumbs: {...state.thumbs, [lineage]: evos[0].svg}}
     }
 
     function applyGetMutants(state, action) {
