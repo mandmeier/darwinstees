@@ -71,7 +71,7 @@ const Tshirtwrapper = styled.div`
 `
 
 const ItemActions = styled.div`
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(250, 250, 255, 0.8);
     padding: 0.5rem;
     border-radius: 0.3rem;
 

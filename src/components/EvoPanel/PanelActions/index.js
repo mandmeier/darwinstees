@@ -6,6 +6,13 @@ import {addToCart} from '../../../state/actions/shopActions'
 import { AddShoppingCart } from '@material-ui/icons'
 import { setLayout } from '../../../state/actions/evoActions'
 import GenerationButtons from '../../GenerationButtons'
+import SVG from 'react-inlinesvg';
+import L1b from '../../../assets/L1b.svg'
+import L3b from '../../../assets/L3b.svg'
+import L7b from '../../../assets/L7b.svg'
+import L1w from '../../../assets/L1w.svg'
+import L3w from '../../../assets/L3w.svg'
+import L7w from '../../../assets/L7w.svg'
 
 
 
@@ -186,9 +193,13 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
         console.log(layout)
     }
 
+    const L1 = layout === "1" ? <img src={L1w} height="24px"/> : <img src={L1b} height="24px"/>
+    const L3 = layout === "3" ? <img src={L3w} height="24px"/> : <img src={L3b} height="24px"/>
+    const L7 = layout === "7" ? <img src={L7w} height="24px"/> : <img src={L7b} height="24px"/>
 
     return (
         <Actions>
+           
             <div className="generation-display">
             <p>Generation:</p> <p className="generation">{generation}</p>
             </div>
@@ -196,9 +207,9 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
             <p>Layout:</p>
             <div className="choose-layout">
                 <SelectionButtons>
-                    <button className={layout === "1" ? "selected-btn" : ""} onClick={() => handleSetLayout("1")}>L1</button>
-                    <button className={layout === "3" ? "selected-btn" : ""} onClick={() => handleSetLayout("3")}>L3</button>
-                    <button className={layout === "7" ? "selected-btn" : ""} onClick={() => handleSetLayout("7")}>L7</button>     
+                    <button className={layout === "1" ? "selected-btn" : ""} onClick={() => handleSetLayout("1")}>{L1}</button>
+                    <button className={layout === "3" ? "selected-btn" : ""} onClick={() => handleSetLayout("3")}>{L3}</button>
+                    <button className={layout === "7" ? "selected-btn" : ""} onClick={() => handleSetLayout("7")}>{L7}</button>     
                 </SelectionButtons>
             </div>
             <p>Size:</p>

@@ -20,11 +20,11 @@ import {getThumbs} from '../../state/actions/evoActions'
 
 
 const Quote = styled.div`
-        position: absolute;
-        margin: 0 auto;
-        left: 0;
+        //position: absolute;
+        margin: 0 auto 6rem auto;
+        /* left: 0;
         right: 0;
-        bottom: -9rem;
+        bottom: 0rem; */
         max-width: 600px;
         color: #fafaff;
         padding: 0.5rem;
@@ -43,23 +43,27 @@ const Quote = styled.div`
 
 
 const SwiperWrapper = styled.div`
-
+    position: relative;
 
     & .swiper-main {
-
-        overflow: visible;
-
         & .swiper-slide {
-            padding-bottom: 2rem;
-            position: relative;
+            padding-top: 5rem;
+            //padding-bottom: 2rem;
+            //position: relative;
         }
      
     }
 
     & .swiper-thumbs {
-        margin-top: -3rem;
+        position: absolute;
+        top: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        //margin-top: 4rem;
         padding: 0.5rem;
-        background-color: #fafaff;
+        //background-color: #fafaff;
         //background: rgba(255, 255, 255, 0.8);
 
         & .swiper-wrapper{
