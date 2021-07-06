@@ -4,6 +4,8 @@ import styled from 'styled-components'
 export const MutantRow = styled.div`
     display: flex;
     justify-content: space-between;
+    padding: 0 0.25rem;
+    //margin-top: -0.25rem;
 
     & .mutant-panel {
         //margin: 0.3rem;

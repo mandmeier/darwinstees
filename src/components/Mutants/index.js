@@ -35,6 +35,7 @@ const Mutants = ({lineage}) => {
         return mut.likes.length + mut.shares.length*10
     }
 
+
     const isLiked = (mut) => {
         return mut.likes.includes(ipv4) ? true : false
     }
@@ -46,7 +47,7 @@ const Mutants = ({lineage}) => {
             {
                 mutants.map((mutant, idx) => {
                     return <div className="mutant-panel" key={idx}>
-                                <button className="like-button" style={isLiked(mutant) ? {backgroundColor: "#ffd700"} : {}} onClick={() => dispatch(likeMutant(mutant, ipv4, isLiked(mutant)))}>
+                                <button className="like-button" style={mutant.likes.includes(ipv4) ? {backgroundColor: "#ffd700"} : {}} onClick={() => dispatch(likeMutant(mutant, ipv4, isLiked(mutant)))}>
                                     <SVG src={mutant.svg} />
                                     <div className="like-button-content">
                                         <ThumbUpAltIcon/>
@@ -57,7 +58,7 @@ const Mutants = ({lineage}) => {
                 })
             } 
         </MutantRow>
-        <Social page={`http://localhost:3000/${lineage}`}/>
+        <Social page={`http://localhost:3000/shop/${lineage}`}/>
         </>
     )
 }

@@ -5,6 +5,18 @@ import Layout from '../../components/Layout'
 import AddressForm from './AddressForm'
 import PaymentForm from './PaymentForm'
 import Confirmation from './Confirmation'
+import styled from 'styled-components'
+
+const StyledStepper = styled(Paper)`
+    //margin: 1rem !important;
+    background-color: rgba(250, 250, 255, 0.8);
+    max-width: 600px;
+    margin:0 auto;
+    width:auto;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+
+`
 
 const steps = ['Shipping address', 'Payment details']
 
@@ -34,9 +46,10 @@ const Checkout = () => {
         <>
         <Layout>
             <div className={classes.toolbar} />
-            <Paper style={{maxWidth:"600px", margin:"0 auto", width:"auto", background:"rgba(255, 255, 255, 0.8)", padding: "0.5rem", borderRadius: "0.3rem"}} className={classes.paper}>
+            <div style={{padding: "0 1rem"}}>
+            <StyledStepper className={classes.paper} >
                 <Typography variant="h4" align="center">Checkout</Typography>
-                <Stepper activeStep={activeStep} className={classes.stepper} style={{background:"transparent", width: "60%", margin:"0 auto"}}>
+                <Stepper activeStep={activeStep} className={classes.stepper} style={{background:"transparent", margin:"0 auto"}}>
                     {steps.map((step) => (
                         <Step key={step}>
                             <StepLabel>{step}</StepLabel>
@@ -44,7 +57,8 @@ const Checkout = () => {
                     ))}
                 </Stepper>
                 {activeStep === steps.length ? <Confirmation/> : <Form/>}
-            </Paper>
+            </StyledStepper>
+            </div>
         </Layout>
         </>
     )

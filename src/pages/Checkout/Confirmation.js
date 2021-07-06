@@ -19,8 +19,8 @@ const Confirmation = () => {
 
 
     return (
-        <ConfMessage>
-            <h3>Thank you for your purchase</h3>
+        <ConfMessage style={{wordWrap: "break-word"}}>
+            <h2>Thank you for your purchase</h2>
 
             <p>Please keep the confirmation number for this order on file</p>
 

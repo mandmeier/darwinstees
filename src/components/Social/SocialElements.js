@@ -8,6 +8,7 @@ export const SocialSection = styled.div`
 `
 
 export const SocialButtons = styled.div`
+    padding: 0 0.5rem;
     display: flex;
     justify-content: space-between;
 `

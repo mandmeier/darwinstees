@@ -16,16 +16,18 @@ const Navbar = () => {
 
     const cart = shopState.cart
 
+    const ImOnHome = location.pathname === '/' || location.pathname.includes("/shop/") ? true : false
+
     return (
         <>
             <AppBar position="fixed" className={classes.appBar} color="inherit">
                 <Toolbar>
                     <Typography component={Link} to="/"variant="h6" className={classes.title} color="inherit">
-                        <img src={logo} alt="Darwin's Tees" height="60px" className={classes.image}/>
+                        <img src={logo} alt="Darwin's Tees" height="30px" className={classes.image}/>
                     </Typography>
                     <div className={classes.grow}/>
                     <div className={classes.button}>
-                    {location.pathname === '/' && (
+                    { ImOnHome && (
                         <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
                             <Badge badgeContent={cart.length} color="secondary">
                                 <ShoppingCart/>

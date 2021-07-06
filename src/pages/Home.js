@@ -33,10 +33,8 @@ const Home = ({match}) => {
         }
     ]
 
-
-    const urlLineage= match.params.urlLineage
-    const index = urlLineage !== undefined ? panels.findIndex(panel => panel.lineage === urlLineage) : 0
-    panels = [...panels.slice(index), ...panels.slice(0, index)]
+    // const index = urlLineage !== undefined ? panels.findIndex(panel => panel.lineage === urlLineage) : 0
+    // panels = [...panels.slice(index), ...panels.slice(0, index)]
 
     
     // var {thumbs} = evoState
@@ -61,7 +59,7 @@ const Home = ({match}) => {
     return (
         <div>
             <Layout>
-                <EvoGallery panels={panels}/>
+                <EvoGallery match={match} panels={panels}/>
             </Layout>
         </div>
     )

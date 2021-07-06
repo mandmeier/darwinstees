@@ -40,7 +40,7 @@ const CartContainer = styled.div`
 
     & .cart-empty {
         margin: 6rem auto;
-        width: 50%;
+        max-width: 400px;
         text-align: center;
     }
 
@@ -48,6 +48,27 @@ const CartContainer = styled.div`
         padding: 1rem;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        @media (max-width: 599px) {
+            flex-direction: column;
+        }
+
+        & .subtotal {
+            text-align: center;
+            @media (max-width: 599px) {
+                margin: 1rem 0;
+            }
+        }
+/* 
+        & .checkout-button{
+            display: flex;
+            justify-content: flex-end;
+            @media (max-width: 599px) {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+        } */
     }
 
 `
@@ -84,7 +105,7 @@ const Cart = () => {
             <p></p>
         </div>
     )
-
+ 
     const FilledCart = () => (
         <>
         <div className="cart-items">
@@ -97,11 +118,9 @@ const Cart = () => {
             </Grid>
         </div>
         <div className="summary panel-transparent">
-                <Typography variant="h4">Subtotal: ${subtotal}</Typography>
-                <div>
-                    <Button className={classes.emptyButton} size="large" type="button" variant="contained" color="secondary" onClick={()=>handleEmptyCart()}>Empty Cart</Button>
-                    <Button component={Link} to="/checkout" className={classes.checkoutButton} size="large" type="button" variant="contained" color="primary" onClick={()=>handleCheckout()}>Checkout</Button>
-                </div>
+            <Button className={"empty-button"} size="small" type="button" variant="outlined" color="secondary" onClick={()=>handleEmptyCart()}>Empty Cart</Button>
+                <Typography className={"subtotal"} variant="h5">Subtotal: ${subtotal}</Typography>           
+            <Button component={Link} to="/checkout" className={"checkout-button"} size="large" type="button" variant="contained" color="primary" onClick={()=>handleCheckout()}>Checkout</Button>
         </div>
         </>
         

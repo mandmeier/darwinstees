@@ -51,20 +51,30 @@ const SwiperWrapper = styled.div`
             //padding-bottom: 2rem;
             //position: relative;
         }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: rgba(255, 255, 255, 0.8);
+            @media (max-width: 599px) {
+                top: 31%;
+            }
+           
+        }
      
     }
 
+    
+
     & .swiper-thumbs {
         position: absolute;
-        top: 2rem;
         width: 100%;
         display: flex;
         justify-content: center;
+        top: 1.5rem;
 
-        //margin-top: 4rem;
-        padding: 0.5rem;
-        //background-color: #fafaff;
-        //background: rgba(255, 255, 255, 0.8);
+        @media (max-width: 599px) {
+            top: 1rem;
+        }
 
         & .swiper-wrapper{
             display: flex;
@@ -99,7 +109,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Thumbs]);
 
 
 
-const EvoGallery = ({panels}) => {
+const EvoGallery = ({match, panels}) => {
 
     const dispatch = useDispatch();
 
@@ -107,8 +117,17 @@ const EvoGallery = ({panels}) => {
 
     useEffect(() => {
         dispatch(getThumbs());
-        console.log(thumbs)
     }, [evos]);
+
+
+    // useEffect(() => {
+    //     const urlLineage= match.params.urlLineage
+    //     if(urlLineage !== undefined) {
+    //         const slideIndex = panels.findIndex(p => p.lineage === urlLineage) + 1
+    //         const swiper = document.querySelector('.swiper-container').swiper;
+    //         swiper.slideTo(slideIndex)
+    //     }
+    // }, [])
 
     // add thumbs to panels
     panels = panels.map(panel => ({...panel, thumb: thumbs[panel.lineage]}))
@@ -135,7 +154,7 @@ const EvoGallery = ({panels}) => {
         
         //pagination={pagination}
         breakpoints={{
-            400: {
+            599: {
                 allowTouchMove: false,
             }
 

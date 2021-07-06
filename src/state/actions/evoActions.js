@@ -56,7 +56,7 @@ export const prevEvo = (lineage, current, length) => {
 export const likeMutant = (mutant, ipv4, isLiked) => async dispatch => {
 
     try {
-      const { data } = await api.likeMutant(mutant.lineage, mutant._id, ipv4, );
+      const { data } = await api.likeMutant(mutant.lineage, mutant._id, ipv4, isLiked);
       dispatch({ type: 'LIKE_MUTANT', payload: data });
     } catch (error) {
       console.log(error);

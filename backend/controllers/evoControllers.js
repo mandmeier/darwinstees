@@ -53,6 +53,10 @@ export const getEvos = async (req, res) => {
   export const likeMutant = async (req,res) => {
     const { lineage, _id, ipv4, isLiked } = req.body;
 
+    console.log("LIKE")
+    console.log(isLiked)
+    console.log(ipv4)
+
 
     const Evo = mongoose.model(lineage, EvoSchema);
     if (!mongoose.Types.ObjectId.isValid(_id))

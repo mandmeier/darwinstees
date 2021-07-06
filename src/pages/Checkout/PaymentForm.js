@@ -162,12 +162,12 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
         <>
             <Review cost={{subtotal, shipping, taxes, total}}/>
             <Divider />
-            <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>Payment method</Typography>
+            <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>Payment</Typography>
                 <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
                     <CardElement options={CARD_OPTIONS} />
                     <br/> <br/>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Button variant="outlined" onClick={backStep}>Back</Button>
+                        <Button variant="outlined" disabled={!stripe || processing} onClick={backStep}>Back</Button>
                         <Button type="submit" variant="contained" disabled={!stripe || processing} color="primary">{processing ? 'Paying...' : `Pay $${total}`}</Button>
 
                     </div>

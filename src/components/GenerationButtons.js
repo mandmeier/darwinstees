@@ -6,10 +6,10 @@ import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 import styled from 'styled-components'
 
 export const Slider = styled.section` 
-         margin: 0 auto;
-         width: 50%;
+         //margin: 0 auto;
+         width: 100%;
          display: flex;
-         justify-content: center;
+         justify-content: left;
          align-items: center;
        
 

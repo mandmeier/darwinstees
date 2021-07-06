@@ -13,6 +13,7 @@ import L7b from '../../../assets/L7b.svg'
 import L1w from '../../../assets/L1w.svg'
 import L3w from '../../../assets/L3w.svg'
 import L7w from '../../../assets/L7w.svg'
+import { Grid } from '@material-ui/core'
 
 
 
@@ -22,7 +23,7 @@ const Actions = styled.div`
     & .generation-display{
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items: center;
         margin-bottom: 0.5rem;
         & p {
             margin: 0;
@@ -35,27 +36,33 @@ const Actions = styled.div`
     }
 
     & p {
-        margin: 1rem 0 1rem 0;
-    }
-    
-    & .choose-layout, .choose-size {
-        display: flex;
-        justify-content: left;
-        margin-bottom: 0.5rem;
-    }
-
-    & .choose-qty {
-        width: 100%;
-        margin-top: 0.5rem;
-        display: flex;
-        justify-content: left;
-        & button {
-            width: 2rem;
-            height: 2rem;
-            padding: 0px 0px;
-            font-weight: bold;
-            cursor: pointer;
+            font-size: 0.7rem;
+            margin: 0.25rem 0;
         }
+
+    & .selections {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+
+        & .choose-layout {
+            margin-right: 0.5rem
+        }
+        & .choose-qty {
+            width: 100%;
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: left;
+            & button {
+                width: 2rem;
+                height: 2rem;
+                padding: 0px 0px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+
     }
 
     & .add-to-cart {
@@ -200,25 +207,29 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
     return (
         <Actions>
            
-            <div className="generation-display">
-            <p>Generation:</p> <p className="generation">{generation}</p>
+            <div className="choose-generation">
+                <p className="generation">Generation</p>
+                <div className="generation-display">
+                    <GenerationButtons lineage={lineage}/> <p className="generation">{generation}</p>
+                </div>
             </div>
-                <GenerationButtons lineage={lineage}/>
-            <p>Layout:</p>
-            <div className="choose-layout">
-                <SelectionButtons>
-                    <button className={layout === "1" ? "selected-btn" : ""} onClick={() => handleSetLayout("1")}>{L1}</button>
-                    <button className={layout === "3" ? "selected-btn" : ""} onClick={() => handleSetLayout("3")}>{L3}</button>
-                    <button className={layout === "7" ? "selected-btn" : ""} onClick={() => handleSetLayout("7")}>{L7}</button>     
-                </SelectionButtons>
-            </div>
-            <p>Size:</p>
-            <div className="choose-size">
-                <SelectionButtons>
-                    <button className={selected.S ? "selected-btn" : ""} onClick={() => setSize("S")}>S</button>
-                    <button className={selected.M ? "selected-btn" : ""} onClick={() => setSize("M")}>M</button>
-                    <button className={selected.L ? "selected-btn" : ""} onClick={() => setSize("L")}>L</button>     
-                </SelectionButtons>
+            <div className="selections">
+                <div className="choose-layout">
+                    <p>Layout</p>
+                    <SelectionButtons>
+                        <button className={layout === "1" ? "selected-btn" : ""} onClick={() => handleSetLayout("1")}>{L1}</button>
+                        <button className={layout === "3" ? "selected-btn" : ""} onClick={() => handleSetLayout("3")}>{L3}</button>
+                        <button className={layout === "7" ? "selected-btn" : ""} onClick={() => handleSetLayout("7")}>{L7}</button>     
+                    </SelectionButtons>
+                </div>
+                <div className="choose-size">
+                    <p>Size</p>
+                    <SelectionButtons>
+                        <button className={selected.S ? "selected-btn" : ""} onClick={() => setSize("S")}>S</button>
+                        <button className={selected.M ? "selected-btn" : ""} onClick={() => setSize("M")}>M</button>
+                        <button className={selected.L ? "selected-btn" : ""} onClick={() => setSize("L")}>L</button>     
+                    </SelectionButtons>
+                </div>
             </div>
             <br/>
             {/* <p>Quantity:</p>
