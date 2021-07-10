@@ -3,6 +3,8 @@ import React from 'react'
 import SVG from 'react-inlinesvg';
 import styled from 'styled-components'
 import tee from '../../../assets/Tshirt.png';
+import teeLogo from '../../../assets/tee_logo_3600x4800.svg'
+
 
 
 const Tshirtwrapper = styled.div`
@@ -22,7 +24,7 @@ const Tshirtwrapper = styled.div`
         position: relative;
     }
 
-    & img {
+    & .dummy-image {
         width: 100%;
         visibility: hidden;
     }
@@ -38,7 +40,7 @@ const Tshirtwrapper = styled.div`
     & .print-area-wrapper {
         margin: 12% auto 0 25%;
         width: 45%;
-        padding-bottom: calc(45% / 0.875); /* 16:9 */
+        padding-bottom: calc(45% / 0.75); /* 4:3 */
         position: relative;
         /* background: yellow; */
     }
@@ -60,18 +62,18 @@ const Tshirtwrapper = styled.div`
 
     & .evo-svg{
         position: absolute;
-        width: 33%;
-        height: 33%;
+        width: calc(100%/3);
+        height: calc((100%/3)*0.75); // 0.75 * width
         /* background-color: blue; */
     }
 
     & .evo0 {
-        top: 20.81712062%;
+        top: 25%;
         left: 0;
     }
 
     & .evo1 {
-        top: 35.40856031%;
+        top: 37.5%;
         margin-left: auto;
         margin-right: auto;
         left: 0;
@@ -79,8 +81,23 @@ const Tshirtwrapper = styled.div`
     }
 
     & .evo2 {
-        top: 49.7081721%;
+        top: 50%;
         right: 0;
+    }
+
+    & .tee-logo {
+        position: relative;
+        & img{
+            width: 100%;
+        }
+        & .tee-logo-text{
+            position: absolute;
+            color: black;
+            font-size: 8%;
+            bottom: 3.2%;
+            left: 53.2%;
+            font-family: Arial, sans-serif;
+        }
     }
 
     & .slide {
@@ -95,14 +112,17 @@ const Tshirtwrapper = styled.div`
     }
 `
 
-
+function capitalize(word) {
+    const lower = word.toLowerCase();
+    return word.charAt(0).toUpperCase() + lower.slice(1);
+}
 
 const Layout3 = ({evos, displayedEvos, current, layout}) => {
 
     return (
         <Tshirtwrapper>
             <div className="tshirt">
-                <img src={tee}/>
+                <img className="dummy-image" src={tee}/>
                 <div className="tshirt-content">
                     <div className="print-area-wrapper">
                         <div className="print-area">
@@ -116,9 +136,11 @@ const Layout3 = ({evos, displayedEvos, current, layout}) => {
                                 <div className="evo-svg evo2">
                                             <SVG src={displayedEvos[2].svg} />
                                 </div>
-                                           
+                                <div className="tee-logo">
+                                    <img src={teeLogo} alt="Darwin's Tees Logo"/>
+                                    <div class="tee-logo-text">{`${capitalize(displayedEvos[0].lineage)} # ${displayedEvos[0].generation}`}</div>
+                                </div>             
                             </div>
-
                         </div>
                     </div>
                 </div>

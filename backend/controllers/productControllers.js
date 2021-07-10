@@ -47,7 +47,6 @@ export const getOrCreateItem = async (req, res) => {
       //console.log(`Creating new item ${itemId}`)
     // create item 
        
-
       // get product
       const productId = itemId.split("-")[0]
       //const product = await Product.findById(productId);
@@ -61,8 +60,7 @@ export const getOrCreateItem = async (req, res) => {
      
       if (design === null) {
         // create new design
-        //console.log(`Creating new design ${designName}`)
-
+        
         // get evos
         const Evo = mongoose.model(lineage, EvoSchema);
         const evos = await Evo.find({'_id': {$in: evoIds}})
@@ -72,8 +70,9 @@ export const getOrCreateItem = async (req, res) => {
         const genomes = orderedEvos.map(evo => evo.genome)
 
         // create design with evos and Ids
-        const svg = drawDesign(lineage, genomes, layout)
+        const svg = drawDesign(lineage, genomes, layout, generation)
 
+        
         const designName = `${lineage}-${generation}-${layout}`
 
         // save new design, add to DB if does not exist already
@@ -109,6 +108,7 @@ export const getOrCreateItem = async (req, res) => {
         design: design._id,
         qty: 1,
       }
+
 
       // save item
       const newItem = new Item(constructedItem)

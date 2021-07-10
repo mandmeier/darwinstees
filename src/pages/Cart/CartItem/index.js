@@ -34,7 +34,7 @@ const Tshirtwrapper = styled.div`
     & .print-area-wrapper {
         margin: 12% auto 0 25%;
         width: 45%;
-        padding-bottom: calc(45% / 0.875);
+        padding-bottom: calc(45% / 0.75); /* 4:3 */
         position: relative;
         /* background: yellow; */
     }
