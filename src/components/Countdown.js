@@ -1,24 +1,45 @@
 import { MuiThemeProvider } from '@material-ui/core';
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from "react-redux"
 import styled from 'styled-components'
+import {Button} from '@material-ui/core'
+import { Link } from 'react-router-dom';
+import {getEvos} from '../state/actions/evoActions'
 
-export const Time = styled.div`
-    margin: 0 auto;
-    background-color: #333;
-    color: #f9f9f9;
-    font-size: 1.5rem;
-    border-radius: 0.3rem;
-    max-width: 8rem;
-    text-align: center;
+export const Display = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    & .time {
+        background-color: #333;
+        color: #f9f9f9;
+        font-size: 1.5rem;
+        border-radius: 0.3rem;
+        max-width: 8rem;
+        text-align: center;
+    }
+    
+    
 `
     
 
-const Countdown = ({mutationDate}) => {
+const Countdown = ({mutationTime, lineage}) => {
 
     const [time, setTime] = useState("")
+    const [timeup, setTimeup] = useState(false)
+    const [disabled, setDisabled] = useState(false)
+    //const evoState = useState((state) => state.evoState)
+    
+
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
+
 
     useEffect(() => {
-        let mutationDate = new Date(" Jul 01, 2022 12:00:00 ").getTime();
+        let mutationDate = new Date(` Jul 01, 2022 ${mutationTime} `).getTime();
         // update every sec
         let x = setInterval(function(){
             // Get todays date and time
@@ -35,19 +56,40 @@ const Countdown = ({mutationDate}) => {
 
             //setTime(hours + "h " + minutes + "m " + seconds + "s ")
             setTime(`${hours} : ${minutes} : ${seconds}`)
-            if (distance < 0){
-                clearInterval(x)
-                setTime("Mutating...")
-                // play mutating animation? Winner starts jumping?
-                // get new evos and update component
-            }
 
         }, 1000)
-        
+
     }, [])
 
+    //if(lineage == 'lineax'){console.log(time)}
+    if (time === '00 : 00 : 00'){
+        setTimeout(() => {
+            setTimeup(true)
+            setDisabled(true)
+            setTimeout(() => {
+                setDisabled(false)
+            }, 10000)
+        }, 1000)
+        // play mutating animation? Winner starts jumping?
+    }
+
+
+
+    //const dispatch = useDispatch();
+
+    const handleClick = () => {
+        window.location.reload();
+    }
+
     return (
-        <Time>{time}</Time>
+            <Display>
+                {
+                timeup
+                ? <Button style={{margin: "0 auto"}} variant="contained" color="primary" disabled={disabled} onClick={() => handleClick()}>{disabled ? 'Mutating...' : 'Show Next Gen'}</Button>
+                : <div className="time">{time}</div>
+                }
+            </Display>
+
     )
 }
 

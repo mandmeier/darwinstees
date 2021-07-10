@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import Routes from './routes/routes.js';
+import {schedule} from './scripts/schedule.js'
 
 const app = express();
 dotenv.config();
@@ -40,3 +41,10 @@ mongoose
   .catch(error => console.log(error.message));
 
 mongoose.set('useFindAndModify', false);
+
+
+// schedule mutations
+schedule('0 0 12 * * *', 'lineax')
+schedule('0 0 15 * * *', 'ellipticus')
+schedule('0 0 18 * * *', 'mandalay')
+

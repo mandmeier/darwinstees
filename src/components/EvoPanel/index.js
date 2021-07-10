@@ -154,7 +154,7 @@ const EvoPanel = ({panel}) => {
         </Grid>
         <Grid className="clock-panel panel-transparent"  item xs={12} sm={5}>
                 <p>Next generation:</p>
-                <Countdown/>
+                <Countdown mutationTime={panel.mutationTime} lineage={panel.lineage}/>
                 <p className="next-gen-message"><em>Choose your favorite among the 3 mutants and share this with your friends. May the fittest design survive! </em></p>
         </Grid>
         </Grid>
