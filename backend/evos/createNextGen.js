@@ -106,6 +106,8 @@ export const createNextGen = async (lineage, mutate, draw) => {
             genome: mutant.genome,
             svg: mutant.svg,
             });
+            console.log("NEW MUTANT")
+            console.log(newEvo)
             newEvo.save(function(err, evo) {
                     if (err) throw err;
                     if (evo) {

@@ -26,6 +26,7 @@ const Quote = styled.div`
         right: 0;
         bottom: 0rem; */
         max-width: 600px;
+        height: 1rem;
         color: #fafaff;
         padding: 0.5rem;
         text-align: center;

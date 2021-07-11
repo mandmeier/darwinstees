@@ -2,10 +2,11 @@ import styled from 'styled-components'
 
 
 export const Info = styled.div`
-    position:absolute;
+    background-color: #fafaff;
+    /* position:absolute;
     left:0;
     bottom:0;
-    right:0;
+    right:0; */
     & p.footer-text {
         font-size: 0.9rem;
         text-align: center;

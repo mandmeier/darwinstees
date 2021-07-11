@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../Navbar/'
-//import Footer from '../Footer/'
+import Footer from '../Footer/'
 import { Main } from './LayoutElements'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
@@ -17,7 +17,7 @@ const Layout = ({children}) => {
                         {children}
                     </Elements>
                 </Main>
-            {/* <Footer/>  */}
+            <Footer/> 
         </div>
     )
 }

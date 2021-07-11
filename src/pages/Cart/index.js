@@ -76,8 +76,6 @@ const CartContainer = styled.div`
 
 const Cart = () => {
 
-    // layout idea https://myfihu.com/cart
-
     const classes = useStyles();
     const dispatch = useDispatch();
 

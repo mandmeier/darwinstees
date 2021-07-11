@@ -131,18 +131,12 @@ const EvoPanel = ({panel}) => {
     // <Element style={{backgroundColor: panel.color}}></Element>
     <Element>
     <Grid className="row-top" container justify="center" spacing={3}>
-        {/* <div className="info"> */}
-        {/* <div className="panel panel-left"> */}
         <Grid className="tee-panel" item xs={12} sm={7}>
             <div className="title-price">
                 <h2>{capitalize(lineage)}</h2>
                 <h3 className="price-tag">$29.99 </h3>
             </div>
             <ImageSlider lineage={lineage} layout={layout} displayedEvos={displayedEvos}/>
-            {/* <div className="add-to-cart">
-                <Button variant="contained" color="primary">add to cart &nbsp;<AddShoppingCart/></Button>
-            </div> */}
-        {/* </div> */}
         </Grid>
         <Grid className="action-panel panel-transparent"  item xs={12} sm={5}>
                 <PanelActions displayedEvos={displayedEvos} layout={layout} lineage={lineage} generation={generation}/>
