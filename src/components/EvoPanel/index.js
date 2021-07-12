@@ -26,9 +26,6 @@ const Element = styled(Grid)`
 
     @media (max-width: 599px) {
             max-width: 400px;
-            & .panel-transparent {
-            //max-width: 400px;
-            }
             & .action-panel, .clock-panel {
                 margin: -0.7rem 0.5rem 0 0.5rem;
                 padding: 0.5rem 1.5rem;
@@ -74,6 +71,19 @@ const Element = styled(Grid)`
         & .clock-panel {
             //background-color: #00ffff;
             margin-top: 0.5rem;
+            padding: 0.15rem 0.5rem;
+
+            & .next-gen {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            
+                & .next-gen-title {  
+                    font-size: 1rem;
+                    margin: 0.25rem 0;
+                }
+
+            }
 
             & .next-gen-message {
                 font-size: 0.75rem;
@@ -147,8 +157,10 @@ const EvoPanel = ({panel}) => {
             <Mutants lineage={lineage}/>
         </Grid>
         <Grid className="clock-panel panel-transparent"  item xs={12} sm={5}>
-                <p>Next generation:</p>
-                <Countdown mutationTime={panel.mutationTime} lineage={panel.lineage}/>
+                <div className="next-gen">
+                    <p className="next-gen-title">Next generation</p>
+                    <Countdown mutationTime={panel.mutationTime} lineage={panel.lineage}/>
+                </div>
                 <p className="next-gen-message"><em>Choose your favorite among the 3 mutants and share this with your friends. May the fittest design survive! </em></p>
         </Grid>
         </Grid>

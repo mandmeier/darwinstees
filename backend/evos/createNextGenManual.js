@@ -10,7 +10,31 @@ import Thumb from '../models/Thumb.js';
 
 
 
+// import {mutateEvo} from './mutateEvo.js';
+// import {drawEvo} from './drawEvo.js';
+
+
+
 export const createNextGen = async (lineage, mutate, draw) => {
+
+   
+    // connect to MongoDB
+
+    dotenv.config();
+    const MONGODB_URI = process.env.MONGODB_URI;
+
+    mongoose
+    .connect(MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    })
+
+    const connection = mongoose.connection;
+
+    connection.once("open", function() {
+    console.log("MongoDB database connection established successfully");
+    });
 
 
     // select lineage (cmd line argument?)
@@ -90,8 +114,9 @@ export const createNextGen = async (lineage, mutate, draw) => {
                             console.log(`Evo ${evo.name} added to MongoDB`)
                             responses.push(evo)
                             if(responses.length  === mutants.length) {
-                              console.log("All done!")
-                              
+                              console.log("All done, disconnecting MongoDB")
+                              mongoose.connection.close()
+
                       }
                     }
             })

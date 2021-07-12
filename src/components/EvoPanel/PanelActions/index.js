@@ -36,9 +36,9 @@ const Actions = styled.div`
     }
 
     & p {
-            font-size: 0.7rem;
-            margin: 0.25rem 0;
-        }
+        font-size: 1rem;
+        margin: 0.25rem 0;
+    }
 
     & .selections {
         width: 100%;
@@ -144,19 +144,7 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
         setSelectedSize(size)
     }
 
-
     const [qty, setValue] = useState(1);
-
-    const increase = () => {
-        let newValue = qty + 1;
-        setValue(newValue);
-    };
-
-    const decrease = () => {
-        let newValue = qty - 1;
-        setValue(newValue);
-    };
-
 
     const shopState = useSelector((state) => state.shopState)
     const cart = shopState.cart
@@ -232,26 +220,6 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
                 </div>
             </div>
             <br/>
-            {/* <p>Quantity:</p>
-            <div className="choose-qty">
-                    <Btn
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={() => decrease()}
-                        disabled={qty <= 1 && true}
-                    >
-                        –
-                    </Btn>
-                    <QtyDisplay>{qty}</QtyDisplay>
-                    <Btn
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={() => increase()}
-                        disabled={qty >= 100 && true}
-                    >
-                        +
-                    </Btn>
-            </div> */}
             <div className={"add-to-cart"}>
                 <Button variant="contained" color="primary" onClick={() => handleAddCart()}>add to cart &nbsp;<AddShoppingCart/></Button>
             </div>

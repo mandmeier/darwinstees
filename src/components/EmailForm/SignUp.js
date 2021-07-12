@@ -7,8 +7,7 @@ import {Button} from '@material-ui/core'
 const EmailForm = styled.form`
 
     border: 2px solid #666;
-    width: 100%;
-    max-width: 200px;
+    max-width: 80%;
     margin: 0 auto;
     padding: 0.5rem;
     border-radius: 0.5rem;

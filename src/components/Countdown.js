@@ -7,16 +7,15 @@ import { Link } from 'react-router-dom';
 import {getEvos} from '../state/actions/evoActions'
 
 export const Display = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    margin: 0 auto;
+
 
     & .time {
         background-color: #333;
         color: #f9f9f9;
         font-size: 1.5rem;
         border-radius: 0.3rem;
-        max-width: 8rem;
+        width: 9rem;
         text-align: center;
     }
     

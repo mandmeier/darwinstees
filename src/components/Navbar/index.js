@@ -1,14 +1,31 @@
 import React from 'react'
 import { useSelector } from "react-redux"
-import { AppBar, Toolbar, IconButton, Badge, Typography } from '@material-ui/core'
+import { IconButton, Badge, Typography } from '@material-ui/core'
 import { ShoppingCart } from '@material-ui/icons'
 import logo from '../../assets/header_logo_2400x400.svg'
-//import logo from '../../assets/Darwin.png'
-import useStyles from './NavbarElements'
 import { Link, useLocation } from 'react-router-dom';
+import styled from 'styled-components'
+
+const Nav = styled.header`
+    display: flex;
+    justify-content: space-between;
+    background-color: #fafaff;
+    padding: 0.5rem 1rem 0 1rem;
+
+    @media (max-width: 599px) {
+        padding: 0 0.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 9;
+    }
+   
+    & .logo {
+        display: flex;
+        align-items: center;
+    }
+`
 
 const Navbar = () => {
-    const classes = useStyles()
 
     const location = useLocation()
 
@@ -19,14 +36,11 @@ const Navbar = () => {
     const ImOnHome = location.pathname === '/' || location.pathname.includes("/shop/") ? true : false
 
     return (
-        <>
-            <AppBar position="fixed" className={classes.appBar} color="inherit">
-                <Toolbar>
-                    <Typography component={Link} to="/"variant="h6" className={classes.title} color="inherit">
-                        <img src={logo} alt="Darwin's Tees" height="30px" className={classes.image}/>
+            <Nav>
+                    <Typography className="logo" component={Link} to="/"variant="h6" color="inherit">
+                        <img src={logo} alt="Darwin's Tees" height="30px"/>
                     </Typography>
-                    <div className={classes.grow}/>
-                    <div className={classes.button}>
+                    <div className="cart-btn">
                     { ImOnHome && (
                         <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
                             <Badge badgeContent={cart.length} color="secondary">
@@ -35,9 +49,8 @@ const Navbar = () => {
                         </IconButton>
                     )}
                     </div>
-                </Toolbar>
-            </AppBar>
-        </>
+
+            </Nav>
     )
 }
 

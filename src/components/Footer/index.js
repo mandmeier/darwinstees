@@ -1,14 +1,11 @@
 import React, {useState} from 'react'
-//import { Info, Contact } from './FooterElements'
 import bird from '../../assets/bird_logo_500x500.svg'
 import {Grid, Typography} from '@material-ui/core'
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faFacebook,
-    faTwitter,
-    faInstagram
-  } from "@fortawesome/free-brands-svg-icons";
+    faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 import styled from 'styled-components'
 import SignUp from '../EmailForm/SignUp'
@@ -20,6 +17,7 @@ const Info = styled.div`
     color: #666;
    
     & .footer-top {
+        margin: 0;
         width: 100%;
         text-align: center;
 
@@ -115,9 +113,9 @@ const Footer = () => {
                 </Grid>
                 <Grid className="footer-terms" item xs={12} sm={6} md={3}>
                     <h3 className="footer-title">Terms &amp; Policies</h3>
-                    <div className="footer-link"><Link>Privacy Policy </Link></div>
                     <div className="footer-link"><Link>Terms of Service </Link></div>
-                    <div className="footer-link"><Link>Return Policy</Link></div>
+                    <div className="footer-link"><Link>Privacy Policy </Link></div>
+                    <div className="footer-link"><Link>Refund Policy</Link></div>
                 </Grid>
                 <Grid className="footer-newsletter" item xs={12} sm={6} md={3}>
                     <h3 className="footer-title">Newsletter</h3>
