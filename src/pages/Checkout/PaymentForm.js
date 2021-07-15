@@ -65,8 +65,8 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
             _id: orderId,
             items: orderItems,
             customer: {
-                firstname: shippingData.firstName,
-                lastname: shippingData.lastName,
+                firstName: shippingData.firstName,
+                lastName: shippingData.lastName,
                 email: shippingData.email,
             },
             shipping: {
@@ -151,7 +151,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
     const subtotal = Object.values(cart).reduce((t, {product, qty}) => t + Number(product.price)*qty, 0).toFixed(2);
 
-    const shipping = subtotal >= 100 ? 0 : 6.99
+    const shipping = subtotal >= 50 ? 0 : 5.99
 
     const taxes =  ((Number(subtotal) + Number(shipping)) * 0.0725).toFixed(2)
 

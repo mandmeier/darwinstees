@@ -112,10 +112,12 @@ const Footer = () => {
                     <div>support@darwinstees.com</div>
                 </Grid>
                 <Grid className="footer-terms" item xs={12} sm={6} md={3}>
-                    <h3 className="footer-title">Terms &amp; Policies</h3>
-                    <div className="footer-link"><Link>Terms of Service </Link></div>
-                    <div className="footer-link"><Link>Privacy Policy </Link></div>
-                    <div className="footer-link"><Link>Refund Policy</Link></div>
+                    <h3 className="footer-title">Quick Links</h3>
+                    <div className="footer-link"><Link to="/about">About Darwin's Tees</Link></div>
+                    <div className="footer-link"><Link to="/terms-of-service">Terms of Service </Link></div>
+                    <div className="footer-link"><Link to="/privacy-policy">Privacy Policy </Link></div>
+                    <div className="footer-link"><Link to="/refund-policy">Refund Policy</Link></div>
+                    <div className="footer-link"><Link to="/size-chart" target="_blank">Size Chart</Link></div>
                 </Grid>
                 <Grid className="footer-newsletter" item xs={12} sm={6} md={3}>
                     <h3 className="footer-title">Newsletter</h3>

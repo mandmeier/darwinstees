@@ -1,5 +1,7 @@
 import * as api from '../api';
 import store from '../../state/store';
+import publicIp from 'react-public-ip'
+
 
 export const addToCart = (itemId, lineage, generation, layout, evoIds, qty) => async dispatch =>  {
   // add cart cookie as well
@@ -40,12 +42,13 @@ export const removeItem = (itemId) => async dispatch => {
 
 
 export const processOrder = (orderData) => async dispatch => {
-
   try {
+
+    const ipv4 = await publicIp.v4() || ""
 
     const customer = orderData.customer
     // create customer if does not exist, get customerId and orderId
-    const {data: customerData} = await api.addOrUpdateCustomer(customer, orderData._id)
+    const {data: customerData} = await api.addOrUpdateCustomer(customer, orderData._id, ipv4)
     const {customerId} = customerData
   
     // save order in db
@@ -54,7 +57,6 @@ export const processOrder = (orderData) => async dispatch => {
     dispatch({type: "CONFIRM_ORDER", payload: confirmationNumber})
     
   } catch (error) {
-    console.log("THIS ERROR HERE")
     console.log(error)
   }
 

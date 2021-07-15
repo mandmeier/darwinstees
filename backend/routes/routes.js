@@ -5,6 +5,7 @@ import { getClientSecret } from '../controllers/stripeControllers.js'
 import { addOrUpdateCustomer } from '../controllers/customerControllers.js'
 import { createOrder } from '../controllers/orderControllers.js'
 
+
 const router = express.Router();
 
 router.get('/server/evos/:lineage', getEvos);
@@ -18,6 +19,8 @@ router.post('/server/payment', getClientSecret);
 
 router.post('/server/customer', addOrUpdateCustomer)
 router.post('/server/order', createOrder)
+
+//router.post('/server/subscribe', addUserData)
 
 
 

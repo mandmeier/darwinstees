@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useLayoutEffect} from 'react'
 import Layout from '../components/Layout'
 import EvoGallery from '../components/EvoGallery'
+import Introduction from '../components/Introduction'
+import HowTo from '../components/HowTo'
 import {useSelector} from 'react-redux'
 
 const Home = ({match}) => {
 
-
-
-
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
 
     var panels = [ 
         {
@@ -62,7 +64,9 @@ const Home = ({match}) => {
     return (
         <div>
             <Layout>
+                <Introduction/>
                 <EvoGallery match={match} panels={panels}/>
+                <HowTo/>
             </Layout>
         </div>
     )

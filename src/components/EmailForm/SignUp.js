@@ -3,6 +3,9 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import {Button} from '@material-ui/core'
+import {addUserData} from '../../state/actions/sessionActions'
+import { useDispatch } from "react-redux"
+
 
 const EmailForm = styled.form`
 
@@ -33,10 +36,12 @@ const Warning = styled.p`
 
 const SignUp = ({onSubmit}) => {
 
+    const dispatch = useDispatch();
+
     const {register, handleSubmit, formState: { errors }} = useForm();
 
     const onFormSubmit = data => {
-        console.log(data)
+        dispatch(addUserData(data.email))
         onSubmit()
     }
 

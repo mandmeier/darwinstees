@@ -20,7 +20,7 @@ export const createNextGen = async (lineage, mutate, draw) => {
    
     // connect to MongoDB
 
-    dotenv.config();
+    dotenv.config()
     const MONGODB_URI = process.env.MONGODB_URI;
 
     mongoose
