@@ -17,7 +17,7 @@ const ThankYou = () => {
             {newUser !== "loading"
             &&
             <>
-                {newUser == true
+                {newUser === true
                 ?
                     <p>Thanks for signing up!</p> 
                 :

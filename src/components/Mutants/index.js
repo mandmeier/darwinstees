@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react'
-import SVG from 'react-inlinesvg';
-import {MutantRow, MutantActions, LikeButton} from './MutantElements'
+import SVG from 'react-inlinesvg'
+import { MutantRow } from './MutantElements'
 import { useSelector, useDispatch } from "react-redux"
-import { getMutants } from '../../state/actions/evoActions';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import FlashOnIcon from '@material-ui/icons/FlashOn';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ShareIcon from '@material-ui/icons/Share';
+import { getMutants } from '../../state/actions/evoActions'
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
 import {likeMutant} from '../../state/actions/evoActions'
 import Social from '../../components/Social'
 

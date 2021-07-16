@@ -1,10 +1,6 @@
-import { MuiThemeProvider } from '@material-ui/core';
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from "react-redux"
 import styled from 'styled-components'
 import {Button} from '@material-ui/core'
-import { Link } from 'react-router-dom';
-import {getEvos} from '../state/actions/evoActions'
 
 export const Display = styled.div`
     margin: 0 auto;
@@ -40,7 +36,7 @@ const Countdown = ({mutationTime, lineage}) => {
     useEffect(() => {
         let mutationDate = new Date(` Jul 01, 2022 ${mutationTime} `).getTime();
         // update every sec
-        let x = setInterval(function(){
+        setInterval(function(){
             // Get todays date and time
             let now = new Date().getTime()
             // find distance between now and count down date
@@ -58,7 +54,7 @@ const Countdown = ({mutationTime, lineage}) => {
 
         }, 1000)
 
-    }, [])
+    }, [mutationTime])
 
     //if(lineage == 'lineax'){console.log(time)}
     if (time === '00 : 00 : 00'){

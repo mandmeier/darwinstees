@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { Typography, Divider, List, ListItem, ListItemText } from '@material-ui/core'
 import SVG from 'react-inlinesvg';
 import styled from 'styled-components'
@@ -105,7 +105,7 @@ const Review = ({cost}) => {
                     <ListItem style={{padding: '10px 0'}} key={item._id}>
                         <Tshirtwrapper>
                             <div className="tshirt">
-                                <img src={tee}/>
+                                <img src={tee} alt="tshirt"/>
                                 <div className="tshirt-content">
                                     <div className="print-area-wrapper">
                                         <div className="print-area">

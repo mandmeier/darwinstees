@@ -139,7 +139,7 @@ const Layout7 = ({evos, displayedEvos, current, layout}) => {
     return (
         <Tshirtwrapper>
             <div className="tshirt">
-                <img className="dummy-image" src={tee}/>
+                <img className="dummy-image" src={tee} alt="tshirt dummy"/>
                 <div className="tshirt-content">
                     <div className="print-area-wrapper">
                         <div className="print-area">

@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react'
 import ImageSlider from './ImageSlider'
-import {MUiStyles} from './EvoPanelElements'
 import { useSelector, useDispatch } from "react-redux"
 import { getEvos } from '../../state/actions/evoActions';
 import Mutants from '../Mutants'
 import PanelActions from './PanelActions'
-import GenerationButtons from '../GenerationButtons';
 import Countdown from '../Countdown';
 import { Grid } from '@material-ui/core'
-import { AddShoppingCart } from '@material-ui/icons'
-import {addToCart} from '../../state/actions/shopActions'
 import styled from 'styled-components'
 
 const Element = styled(Grid)`
@@ -98,8 +94,6 @@ const Element = styled(Grid)`
 
 
 const EvoPanel = ({panel}) => {
-
-    const classes = MUiStyles();
 
     const lineage = panel.lineage
 

@@ -1,7 +1,5 @@
-import React, {useState} from 'react'
-import {Typography, Button, Card, CardActions, CardContent, CardMedia} from '@material-ui/core'
-import useStyles from './CartItemElements'
-import { useSelector, useDispatch } from "react-redux"
+import React from 'react'
+import { useDispatch } from "react-redux"
 import {removeItem} from '../../../state/actions/shopActions'
 import SVG from 'react-inlinesvg';
 import styled from 'styled-components'
@@ -151,7 +149,6 @@ const QtyDisplay = styled.div`
 `;
 
 const CartItem = ({item}) => {
-    const classes = useStyles();
     const dispatch = useDispatch()
 
     const lineTotal = (item.product.price  * item.qty).toFixed(2)
@@ -184,7 +181,7 @@ const CartItem = ({item}) => {
         <div>
             <Tshirtwrapper>
                 <div className="tshirt">
-                    <img src={tee}/>
+                    <img src={tee} alt="tshirt"/>
                     <div className="tshirt-content">
                         <div className="print-area-wrapper">
                             <div className="print-area">

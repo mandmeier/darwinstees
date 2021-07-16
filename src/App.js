@@ -20,7 +20,7 @@ const App = () => {
 
     useEffect(() => {
       dispatch(getIP())
-    }, [])
+    }, [dispatch])
 
     return (
     <Router>

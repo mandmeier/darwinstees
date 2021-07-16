@@ -3,7 +3,6 @@ import Layout from '../components/Layout'
 import EvoGallery from '../components/EvoGallery'
 import Introduction from '../components/Introduction'
 import HowTo from '../components/HowTo'
-import {useSelector} from 'react-redux'
 
 const Home = ({match}) => {
 

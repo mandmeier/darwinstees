@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import EvoPanel from '../EvoPanel'
-import {StyledSwiper} from './EvoGalleryElements'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Thumbs } from 'swiper';
 import { SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
@@ -118,28 +117,11 @@ const EvoGallery = ({match, panels}) => {
 
     useEffect(() => {
         dispatch(getThumbs());
-    }, [evos]);
+    }, [evos, dispatch]);
 
-
-    // useEffect(() => {
-    //     const urlLineage= match.params.urlLineage
-    //     if(urlLineage !== undefined) {
-    //         const slideIndex = panels.findIndex(p => p.lineage === urlLineage) + 1
-    //         const swiper = document.querySelector('.swiper-container').swiper;
-    //         swiper.slideTo(slideIndex)
-    //     }
-    // }, [])
 
     // add thumbs to panels
     panels = panels.map(panel => ({...panel, thumb: thumbs[panel.lineage]}))
-
-    const pagination = {
-        "clickable": true,
-        "renderBullet": function (index, className) {
-                return '<span class=' + className + '>' + (index + 1) + '</span>';
-              }
-
-    }
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 

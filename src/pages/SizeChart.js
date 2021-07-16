@@ -1,8 +1,6 @@
 import React, {useLayoutEffect} from 'react'
 import Layout from '../components/Layout'
 import styled from 'styled-components'
-import {Button} from '@material-ui/core'
-import { Link } from 'react-router-dom'
 import size_chart from '../assets/size_chart.webp'
 
 

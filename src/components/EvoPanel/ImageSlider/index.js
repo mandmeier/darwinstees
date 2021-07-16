@@ -1,6 +1,6 @@
 import React from 'react'
 import {Slider} from './ImageSliderElements'
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import Layout1 from './Layout1'
 import Layout3 from './Layout3'
 import Layout7 from './Layout7'

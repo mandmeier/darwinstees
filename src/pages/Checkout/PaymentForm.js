@@ -40,7 +40,6 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
     const cart = shopState.cart
 
     const [processing, setProcessing] = useState(false)
-    const [success, setSuccess] = useState(false)
 
     const stripe = useStripe()
     const elements = useElements()
@@ -51,7 +50,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
 
         const orderItems = []
-        cart.map(item => {
+        cart.forEach(item => {
             orderItems.push({
             item_id: item._id,
             itemId: item.itemId,
@@ -133,7 +132,6 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
                 if (data.success) {
                     //console.log("Payment successful!")
-                    setSuccess(true)
                     onPaymentSuccess(paymentMethod, orderId)
                 }
             } catch (error) {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import bird from '../../assets/bird_logo_500x500.svg'
-import {Grid, Typography} from '@material-ui/core'
-import { Link, useLocation } from 'react-router-dom';
+import { Grid } from '@material-ui/core'
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faFacebook,
@@ -97,11 +97,11 @@ const Footer = () => {
                 <Grid className="footer-social" item xs={12} sm={6} md={3}>
                     <h3 className="footer-title">Follow Us</h3>
                     <div className="social-icons">
-                        <a target="_blank" href="https://www.facebook.com/Darwins-Tees-101803552183741"
+                        <a target="_blank" rel="noreferrer" href="https://www.facebook.com/Darwins-Tees-101803552183741"
                             className="social-icon">
                                 <FontAwesomeIcon icon={faFacebook} size="2x" />
                         </a>
-                        <a target="_blank" href="https://twitter.com/darwinstees"
+                        <a target="_blank" rel="noreferrer" href="https://twitter.com/darwinstees"
                             className="social-icon">
                                 <FontAwesomeIcon icon={faTwitter} size="2x" />
                         </a>
