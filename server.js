@@ -7,6 +7,9 @@ import path from 'path';
 import Routes from './routes/routes.js';
 import {schedule} from './scripts/schedule.js'
 
+
+const __dirname = path.resolve();
+
 const app = express();
 dotenv.config();
 
