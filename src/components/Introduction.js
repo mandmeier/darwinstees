@@ -4,10 +4,17 @@ import styled from 'styled-components'
 
 const Intro = styled.div`
 max-width: 800px;
-margin: 0 auto;
+margin: 0 auto 2rem auto;
+color: #111;
+background: rgba(250, 250, 255, 0.8);
 padding: 1rem;
-color: #fafaff;
-//font-size: 1.5rem;
+border-radius: 0.3rem;
+line-height: 2rem;
+
+@media (max-width: 850px) {
+    margin: 0 1rem 2rem 1rem !important;
+}
+
 `
 
 const Introduction = () => {

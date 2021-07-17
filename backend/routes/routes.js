@@ -20,15 +20,4 @@ router.post('/server/payment', getClientSecret);
 router.post('/server/customer', addOrUpdateCustomer)
 router.post('/server/order', createOrder)
 
-//router.post('/server/subscribe', addUserData)
-
-
-
-
-
-// router.post('/evos', createEvo);
-// router.get('/evos/:id', getEvo);
-
-
-
 export default router;

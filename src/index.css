@@ -32,6 +32,8 @@ main {
     width: 100%;
     margin-left: auto !important;
     margin-right: auto !important;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 
 }
 

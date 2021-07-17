@@ -47,7 +47,7 @@ const SignUp = ({onSubmit}) => {
     return (
         <>
         <EmailForm noValidate onSubmit={handleSubmit(onFormSubmit)}>
-            <p className="form-text">Sign up for occasional e-mail updates</p>
+            <p className="form-text">Sign up for occasional email updates</p>
             <input
             className="email-input"
             {...register('email', { 

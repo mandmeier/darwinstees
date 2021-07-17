@@ -1,7 +1,11 @@
 import axios from 'axios'
+// Component.js
+import { config } from '../../Constants'
 
-//const url = 'https://darwinstees.herokuapp.com';
-const url = 'http://localhost:5000'
+var url = config.url.BACKEND_URL
+
+console.log("MYURL")
+console.log(url)
 
 export const getEvos = (lineage) => axios.get(`${url}/server/evos/${lineage}`)
 

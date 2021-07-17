@@ -37,28 +37,6 @@ const Home = ({match}) => {
         }
     ]
 
-    // const index = urlLineage !== undefined ? panels.findIndex(panel => panel.lineage === urlLineage) : 0
-    // panels = [...panels.slice(index), ...panels.slice(0, index)]
-
-    
-    // var {thumbs} = evoState
-
-    // useEffect(() => {
-    //     const evosLoaded =  Object.values(evosLoading).every(v => v === false)
-    //     console.log("evosLoaded")
-    //     console.log(evosLoading)
-    //     console.log(Object.values(evosLoading))
-    //     if (evosLoaded) { 
-    //         panels = panels.map(panel => ({...panel, thumb: thumbs[panel.lineage]}))
-    //         console.log("ORDERED")
-    //         setThumbsLoaded(true)
-    //     }
-    // }, [evosLoading, thumbs])
-
-    // console.log("thumbsLoaded")
-    // console.log(thumbsLoaded)
-
-    
 
     return (
         <div>
