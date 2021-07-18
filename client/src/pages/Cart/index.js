@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useLayoutEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import {emptyCart} from '../../state/actions/shopActions'
 import Layout from '../../components/Layout'
@@ -75,6 +75,10 @@ const CartContainer = styled.div`
 
 
 const Cart = () => {
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
 
     const classes = useStyles();
     const dispatch = useDispatch();

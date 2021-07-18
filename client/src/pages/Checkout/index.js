@@ -1,6 +1,5 @@
-import React, { useState }from 'react'
+import React, { useState, useLayoutEffect }from 'react'
 import { Paper, Stepper, Step, StepLabel, Typography } from '@material-ui/core'
-import useStyles from './CheckoutElements'
 import Layout from '../../components/Layout'
 import AddressForm from './AddressForm'
 import PaymentForm from './PaymentForm'
@@ -8,12 +7,38 @@ import Confirmation from './Confirmation'
 import styled from 'styled-components'
 
 const StyledStepper = styled(Paper)`
-    background-color: rgba(250, 250, 255, 0.8);
+    /* background-color: rgba(250, 250, 255, 0.8);
     max-width: 600px;
     margin:0 auto;
     width:auto;
     padding: 0.5rem;
     border-radius: 0.5rem;
+
+    @media (max-width: 599px) {
+            background-color: red;
+    } */
+
+
+    max-width: 800px;
+    margin: 0 auto;
+    color: #111;
+    margin-top: 2rem !important;
+    background: rgba(250, 250, 255, 0.8);
+    padding: 1rem;
+    border-radius: 0.3rem;
+    line-height: 2rem;
+
+    @media (max-width: 850px) {
+        margin: 0 1rem;
+    }
+
+    & .stepper {
+
+        padding: 1rem 0 0 0;
+
+    }
+
+
 
 `
 
@@ -21,7 +46,10 @@ const steps = ['Shipping address', 'Payment details']
 
 
 const Checkout = () => {
-    const classes = useStyles()
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
 
     const [activeStep, setActiveStep] = useState(0)
     const [shippingData, setShippingData] = useState({})
@@ -44,11 +72,9 @@ const Checkout = () => {
     return (
         <>
         <Layout>
-            <div className={classes.toolbar} />
-            <div style={{padding: "0 1rem"}}>
-            <StyledStepper className={classes.paper} >
+            <StyledStepper >
                 <Typography variant="h4" align="center">Checkout</Typography>
-                <Stepper activeStep={activeStep} className={classes.stepper} style={{background:"transparent", margin:"0 auto"}}>
+                <Stepper activeStep={activeStep} className={"stepper"} style={{background:"transparent", margin:"0 auto"}}>
                     {steps.map((step) => (
                         <Step key={step}>
                             <StepLabel>{step}</StepLabel>
@@ -57,7 +83,6 @@ const Checkout = () => {
                 </Stepper>
                 {activeStep === steps.length ? <Confirmation/> : <Form/>}
             </StyledStepper>
-            </div>
         </Layout>
         </>
     )
