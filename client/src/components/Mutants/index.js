@@ -21,7 +21,7 @@ const Mutants = ({lineage}) => {
     mutants = mutants[lineage]
     mutantsLoading = mutantsLoading[lineage]
 
-    const {ipv4} = useSelector((state) => state.sessionState)
+    const {visitorId} = useSelector((state) => state.sessionState)
 
     if (mutantsLoading) {
         <h1>loading</h1>
@@ -33,7 +33,7 @@ const Mutants = ({lineage}) => {
 
 
     const isLiked = (mut) => {
-        return mut.likes.includes(ipv4) ? true : false
+        return mut.likes.includes(visitorId) ? true : false
     }
 
 
@@ -43,7 +43,7 @@ const Mutants = ({lineage}) => {
             {
                 mutants.map((mutant, idx) => {
                     return <div className="mutant-panel" key={idx}>
-                                <button className="like-button" style={mutant.likes.includes(ipv4) ? {backgroundColor: "#ffd700"} : {}} onClick={() => dispatch(likeMutant(mutant, ipv4, isLiked(mutant)))}>
+                                <button className="like-button" style={mutant.likes.includes(visitorId) ? {backgroundColor: "#ffd700"} : {}} onClick={() => dispatch(likeMutant(mutant, visitorId, isLiked(mutant)))}>
                                     <SVG src={mutant.svg} />
                                     <div className="like-button-content">
                                         <ThumbUpAltIcon/>

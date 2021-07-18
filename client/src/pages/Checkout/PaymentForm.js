@@ -39,6 +39,8 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
     const shopState = useSelector((state) => state.shopState)
     const cart = shopState.cart
 
+    const {visitorId} = useSelector((state) => state.sessionState) 
+
     const [processing, setProcessing] = useState(false)
 
     const stripe = useStripe()
@@ -91,7 +93,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
         }
 
-        dispatch(processOrder(orderData))
+        dispatch(processOrder(orderData, visitorId))
 
         // refresh cart
         dispatch(emptyCart())

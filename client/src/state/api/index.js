@@ -10,7 +10,7 @@ export const getMutants = (lineage) => axios.get(`${url}/server/mutants/${lineag
 
 export const getThumbs = () => axios.get(`${url}/server/thumbs`)
 
-export const likeMutant = (lineage, _id, ipv4, isLiked) => axios.post(`${url}/server/like`, {lineage, _id, ipv4, isLiked})
+export const likeMutant = (lineage, _id, visitorId, isLiked) => axios.post(`${url}/server/like`, {lineage, _id, visitorId, isLiked})
 
 export const getProduct = (_id) => axios.get(`${url}/server/products/${_id}`)
 
@@ -20,7 +20,7 @@ export const getOrCreateItem = (itemId, lineage, generation, layout, evoIds) => 
 
 export const sendPayment = (price, id, customer, orderId) => axios.post(`${url}/server/payment/`, {amount: (price * 100).toFixed(0), id, customer, orderId})
 
-export const addOrUpdateCustomer = (customerData, orderId, ipv4) => axios.post(`${url}/server/customer/`, {customerData, orderId, ipv4})
+export const addOrUpdateCustomer = (customerData, orderId, visitorId) => axios.post(`${url}/server/customer/`, {customerData, orderId, visitorId})
 
 export const createOrder = (orderData) => axios.post(`${url}/server/order/`, {orderData})
 

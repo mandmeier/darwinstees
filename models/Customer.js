@@ -4,7 +4,7 @@ const CustomerSchema = new mongoose.Schema({
     firstName: { type: String, default: "" },
     lastName: { type: String, default: "" },
     email: { type: String, required: true, default: "" },
-    ipAddresses: [String],
+    visitorIds: [String],
     orders: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Order',

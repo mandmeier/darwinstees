@@ -1,6 +1,5 @@
 import * as api from '../api';
 import store from '../../state/store';
-import publicIp from 'react-public-ip'
 
 
 export const addToCart = (itemId, lineage, generation, layout, evoIds, qty) => async dispatch =>  {
@@ -39,14 +38,12 @@ export const removeItem = (itemId) => async dispatch => {
 }
 
 
-export const processOrder = (orderData) => async dispatch => {
+export const processOrder = (orderData, visitorId) => async dispatch => {
   try {
-
-    const ipv4 = await publicIp.v4() || ""
 
     const customer = orderData.customer
     // create customer if does not exist, get customerId and orderId
-    const {data: customerData} = await api.addOrUpdateCustomer(customer, orderData._id, ipv4)
+    const {data: customerData} = await api.addOrUpdateCustomer(customer, orderData._id, visitorId)
     const {customerId} = customerData
   
     // save order in db

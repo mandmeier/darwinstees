@@ -1,4 +1,5 @@
-import * as api from '../api';
+import * as api from '../api'
+
 
 
 export const getEvos = (lineage) => async dispatch => {
@@ -53,10 +54,9 @@ export const prevEvo = (lineage, current, length) => {
     }
 }
 
-export const likeMutant = (mutant, ipv4, isLiked) => async dispatch => {
-
+export const likeMutant = (mutant, visitorId, isLiked) => async dispatch => {
     try {
-      const { data } = await api.likeMutant(mutant.lineage, mutant._id, ipv4, isLiked);
+      const { data } = await api.likeMutant(mutant.lineage, mutant._id, visitorId, isLiked);
       dispatch({ type: 'LIKE_MUTANT', payload: data });
     } catch (error) {
       console.log(error);

@@ -1,20 +1,30 @@
 //import * as api from '../api';
-import publicIp from 'react-public-ip'
 import * as api from '../api';
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
 
+export const getVisitorId = () => async dispatch => {
 
-export const getIP = (lineage) => async dispatch => {
-    const ipv4 = await publicIp.v4() || ""
-    dispatch({type: "GET_IP", payload: ipv4})         
-     
+     // Initialize an agent at application startup.
+     const fpPromise = FingerprintJS.load()
+
+     ;(async () => {
+     // Get the visitor identifier when you need it.
+     const fp = await fpPromise
+     const result = await fp.get()
+
+     // This is the visitor identifier:
+     const visitorId = result.visitorId
+     dispatch({type: "GET_VISITOR_ID", payload: visitorId})         
+     })()
+
+    //const ipv4 = await publicIp.v4() || ""
+   
 }
 
 
-export const addUserData = (email) => async dispatch => {
+export const addUserData = (email, visitorId) => async dispatch => {
     try {
-
-    const ipv4 = await publicIp.v4() || ""
 
     const customer = {
         firstName: '',
@@ -22,7 +32,7 @@ export const addUserData = (email) => async dispatch => {
         email
     }
 
-    const {data: customerData} = await api.addOrUpdateCustomer(customer, '', ipv4)
+    const {data: customerData} = await api.addOrUpdateCustomer(customer, '', visitorId)
 
     const { newUser } = customerData
 

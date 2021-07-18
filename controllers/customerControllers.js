@@ -4,7 +4,7 @@ import Customer from '../models/Customer.js'
 export const addOrUpdateCustomer = async (req, res) => {
     try {
   
-    const { customerData, orderId, ipv4} = req.body;
+    const { customerData, orderId, visitorId} = req.body;
     const { firstName, lastName, email } = customerData
     
     var newUser
@@ -43,16 +43,16 @@ export const addOrUpdateCustomer = async (req, res) => {
         console.log(`Updating customer ${email}`)
 
         const existingCustomer = await Customer.findOne({email: email})
-        const uniqueIPs = [...new Set([...existingCustomer.ipAddresses, ipv4])];
+        const uniqueVisitorIds = [...new Set([...existingCustomer.visitorIds, visitorId])];
 
         // only update IP if names are empty (e.g. when signing up for newsletter with email only)
         if(firstName === '' &&  lastName === '') {
-            let set = {ipAddresses: uniqueIPs}
+            let set = {visitorIds: uniqueVisitorIds}
             customer = await Customer.findOneAndUpdate({email: email}, {$set: set}, {new: true} );
             res.status(200).json({newUser});
         } else {
             const newOrders = [...customer.orders, orderId]
-            let set = {orders: newOrders, firstName, lastName, ipAddresses: uniqueIPs }
+            let set = {orders: newOrders, firstName, lastName, visitorIds: uniqueVisitorIds }
             customer = await Customer.findOneAndUpdate({email: email}, {$set: set}, {new: true} );
             res.status(200).json({customerId: customer._id, orderId, newUser});
         }

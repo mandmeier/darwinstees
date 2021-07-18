@@ -6,7 +6,7 @@ import About from './pages/About';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
-import {getIP} from './state/actions/sessionActions'
+import {getVisitorId} from './state/actions/sessionActions'
 import {useDispatch} from 'react-redux'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
@@ -14,12 +14,15 @@ import RefundPolicy from './pages/RefundPolicy'
 import SizeChart from './pages/SizeChart'
 
 
+
 const App = () => {
+
+    // get fingerprint of app user
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(getIP())
+        dispatch(getVisitorId())
     }, [dispatch])
 
     return (

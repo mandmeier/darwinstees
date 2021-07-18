@@ -51,7 +51,7 @@ export const getEvos = async (req, res) => {
 
 
   export const likeMutant = async (req,res) => {
-    const { lineage, _id, ipv4, isLiked } = req.body;
+    const { lineage, _id, visitorId, isLiked } = req.body;
 
     const Evo = mongoose.model(lineage, EvoSchema);
     if (!mongoose.Types.ObjectId.isValid(_id))
@@ -62,13 +62,13 @@ export const getEvos = async (req, res) => {
     if (isLiked) {
       updatedMutant = await Evo.findByIdAndUpdate(
         _id,
-        { $pull: { likes: ipv4 } },
+        { $pull: { likes: visitorId } },
         { new: true }
       );
     } else {
       updatedMutant = await Evo.findByIdAndUpdate(
         _id,
-        { $addToSet: { likes: ipv4 } },
+        { $addToSet: { likes: visitorId } },
         { new: true }
       );
     }
