@@ -146,9 +146,7 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
     }
 
     const handleSetLayout = (newLayout) => {
-        console.log(layout)
         dispatch(setLayout(lineage, newLayout))
-        console.log(layout)
     }
 
     const L1 = layout === "1" ? <img src={L1w} height="24px" alt="layout 1"/> : <img src={L1b} height="24px" alt="layout 1"/>

@@ -53,11 +53,6 @@ export const getEvos = async (req, res) => {
   export const likeMutant = async (req,res) => {
     const { lineage, _id, ipv4, isLiked } = req.body;
 
-    console.log("LIKE")
-    console.log(isLiked)
-    console.log(ipv4)
-
-
     const Evo = mongoose.model(lineage, EvoSchema);
     if (!mongoose.Types.ObjectId.isValid(_id))
       return res.status(404).send('No Evo with that id');
@@ -81,53 +76,3 @@ export const getEvos = async (req, res) => {
     res.json(updatedMutant);
 
   }
-
-//   Problem.findByIdAndUpdate(found_post[0].id,  
-//     { $inc: { upvotes : 1 }, 
-//       $push: { upvoters:  req.user.href }
-//     }, function (err, post) {
-//         if (err) return next(err);
-//         res.json(post);
-// })
-
-
-  // export const likeMutant = async (req, res) => {
-  //   const { id: _id } = req.params;
-  //   if (!mongoose.Types.ObjectId.isValid(_id))
-  //     return res.status(404).send('No Evo with that id');
-  
-  //   const mutant = await Evo.findById(_id);
-  //   const updatedMutant = await Evo.findByIdAndUpdate(
-  //     _id,
-  //     { karma: mutant.karma + 1 },
-  //     { new: true }
-  //   );
-  //   res.json(updatedMutant);
-  // };
-
-
-  // export const createEvo = async (req, res) => {
-  //   Make model for correct collection
-  //   const Evo = mongoose.model(lineage, EvoSchema);
-  //   const evo = req.body;
-  //   const newEvo = new Evo(evo);
-  //   try {
-  //     await newEvo.save();
-  //     res.status(201).json(newEvo);
-  //   } catch (error) {
-  //     res.status(409).json({ message: error });
-  //   }
-  // };
-
-
-  // export const getEvo = async (req, res) => {
-  //   try {
-  //     const { id: _id } = req.params;
-  //     const evo = await Evo.findById(_id);
-  //     if (!mongoose.Types.ObjectId.isValid(_id))
-  //       return res.status(404).send('No Evo with that id');
-  //     res.status(200).json(evo);
-  //   } catch (error) {
-  //     res.status(404).json({ message: error });
-  //   }
-  // };

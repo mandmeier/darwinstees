@@ -127,11 +127,8 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
                     email: shippingData.email,
                 }
                 const { data } = await sendPayment(total, id, customer, orderId)
-                console.log("RESPONSE")
-                console.log(data)
 
                 if (data.success) {
-                    //console.log("Payment successful!")
                     onPaymentSuccess(paymentMethod, orderId)
                 }
             } catch (error) {

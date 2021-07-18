@@ -22,7 +22,6 @@ const reducer = (state = {cart: [], cartLoading: true, cartCookies: [], confirma
         case "EMPTY_CART":
             return {...state, cart: [], confirmationNumber: ""}
         case "REMOVE_ITEM":
-            console.log("removeItem")
             var newCartRm = state.cart.filter(item => {
                 return item.itemId !== action.payload;
               })

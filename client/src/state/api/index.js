@@ -4,9 +4,6 @@ import { config } from '../../Constants'
 
 var url = config.url.BACKEND_URL
 
-console.log("MYURL")
-console.log(url)
-
 export const getEvos = (lineage) => axios.get(`${url}/server/evos/${lineage}`)
 
 export const getMutants = (lineage) => axios.get(`${url}/server/mutants/${lineage}`)

@@ -44,8 +44,6 @@ export const placeOrder = async (orderData) => {
     }
 
 
-    //console.log(itemOrder)
-
     const config = {
         headers: {
         "Content-Type": "application/json",

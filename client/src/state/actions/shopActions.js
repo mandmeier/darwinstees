@@ -35,8 +35,6 @@ export const emptyCart = () => async dispatch =>  {
 
 export const removeItem = (itemId) => async dispatch => {
   // remove cart cookie as well
-  console.log("removeItem")
-  console.log(itemId)
   dispatch({type: "REMOVE_ITEM", payload: itemId})
 }
 

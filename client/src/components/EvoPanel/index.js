@@ -100,7 +100,6 @@ const EvoPanel = ({panel}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(lineage)
         dispatch(getEvos(lineage));
     }, [dispatch, lineage]);
 

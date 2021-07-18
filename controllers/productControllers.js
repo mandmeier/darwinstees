@@ -44,7 +44,6 @@ export const getOrCreateItem = async (req, res) => {
     var item = await Item.findOne({itemId: itemId}).populate('product design')
   
     if (item === null) {
-      //console.log(`Creating new item ${itemId}`)
     // create item 
        
       // get product

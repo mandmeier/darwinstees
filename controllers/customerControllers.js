@@ -6,11 +6,6 @@ export const addOrUpdateCustomer = async (req, res) => {
   
     const { customerData, orderId, ipv4} = req.body;
     const { firstName, lastName, email } = customerData
-
-    console.log("RECEIVED DATA")
-    console.log(customerData)
-    console.log(orderId)
-    console.log(ipv4)
     
     var newUser
     // check if customer exists already
@@ -56,9 +51,6 @@ export const addOrUpdateCustomer = async (req, res) => {
             customer = await Customer.findOneAndUpdate({email: email}, {$set: set}, {new: true} );
             res.status(200).json({newUser});
         } else {
-            console.log("ADD NAMES")
-            console.log(firstName)
-            console.log(lastName)
             const newOrders = [...customer.orders, orderId]
             let set = {orders: newOrders, firstName, lastName, ipAddresses: uniqueIPs }
             customer = await Customer.findOneAndUpdate({email: email}, {$set: set}, {new: true} );

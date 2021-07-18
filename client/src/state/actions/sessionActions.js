@@ -5,11 +5,7 @@ import * as api from '../api';
 
 
 export const getIP = (lineage) => async dispatch => {
-
-    console.log("public IP")
     const ipv4 = await publicIp.v4() || ""
-    console.log(ipv4)
-   
     dispatch({type: "GET_IP", payload: ipv4})         
      
 }
@@ -29,9 +25,6 @@ export const addUserData = (email) => async dispatch => {
     const {data: customerData} = await api.addOrUpdateCustomer(customer, '', ipv4)
 
     const { newUser } = customerData
-
-    console.log("newUser ?")
-    console.log(newUser)
 
     dispatch({type: "SET_NEW_USER", payload: newUser}) 
 

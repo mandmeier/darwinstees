@@ -85,16 +85,9 @@ const Cart = () => {
 
     const subtotal = Object.values(cart).reduce((t, {product, qty}) => t + Number(product.price)*qty, 0).toFixed(2);
 
-    console.log(`Subtotal: ${subtotal}`)
-
     const handleEmptyCart = () => {
         dispatch(emptyCart())
     }
-
-    const handleCheckout = () => {
-        console.log("Checking out, creating order")
-    }
-
 
     const EmptyCart = () => (
         <div className="cart-empty panel-transparent">
@@ -118,7 +111,7 @@ const Cart = () => {
         <div className="summary panel-transparent">
             <Button className={"empty-button"} size="small" type="button" variant="outlined" color="secondary" onClick={()=>handleEmptyCart()}>Empty Cart</Button>
                 <Typography className={"subtotal"} variant="h5">Subtotal: ${subtotal}</Typography>           
-            <Button component={Link} to="/checkout" className={"checkout-button"} size="large" type="button" variant="contained" color="primary" onClick={()=>handleCheckout()}>Checkout</Button>
+            <Button component={Link} to="/checkout" className={"checkout-button"} size="large" type="button" variant="contained" color="primary">Checkout</Button>
         </div>
         </>
         

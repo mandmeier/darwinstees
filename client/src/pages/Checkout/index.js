@@ -8,7 +8,6 @@ import Confirmation from './Confirmation'
 import styled from 'styled-components'
 
 const StyledStepper = styled(Paper)`
-    //margin: 1rem !important;
     background-color: rgba(250, 250, 255, 0.8);
     max-width: 600px;
     margin:0 auto;

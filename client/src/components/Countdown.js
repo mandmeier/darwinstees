@@ -41,22 +41,15 @@ const Countdown = ({mutationTime, lineage}) => {
             let now = new Date().getTime()
             // find distance between now and count down date
             let distance = mutationDate - now
-
-            //String(n).padStart(4, '0');
-
-            //let days = Math.floor(distance / (1000 * 60 * 60 * 24))
             let hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0')
             let minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0')
             let seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0')
-
-            //setTime(hours + "h " + minutes + "m " + seconds + "s ")
             setTime(`${hours} : ${minutes} : ${seconds}`)
 
         }, 1000)
 
     }, [mutationTime])
 
-    //if(lineage == 'lineax'){console.log(time)}
     if (time === '00 : 00 : 00'){
         setTimeout(() => {
             setTimeup(true)
@@ -67,10 +60,6 @@ const Countdown = ({mutationTime, lineage}) => {
         }, 1000)
         // play mutating animation? Winner starts jumping?
     }
-
-
-
-    //const dispatch = useDispatch();
 
     const handleClick = () => {
         window.location.reload();

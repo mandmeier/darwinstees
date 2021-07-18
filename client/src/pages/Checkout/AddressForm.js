@@ -23,19 +23,16 @@ const AddressForm = ({next}) => {
     const methods = useForm({ resolver: yupResolver(schema) })
 
     const updateCountry = (country) => {
-        //console.log('country', country)
         methods.setValue('country', country);
     }
 
     const updateRegion = (region) => {
-        //console.log('region', region)
         methods.setValue('region', region);
     }
 
 
     const onSubmit = (data, e) => {
         next(data)
-        //console.log('form data is', data)
     };
 
     return (
