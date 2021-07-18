@@ -11,12 +11,14 @@ import styled from 'styled-components'
 
 
 const CartContainer = styled.div`
-    padding: 1rem;
+    padding: 0 1rem;
+    max-width: 800px !important;
+    margin: 0 auto;
 
-    & .cart-item-container {
+    /* & .cart-item-container {
         margin: 0 auto;
         max-width: 800px;
-    }
+    } */
 
     & .cart-items {
         margin: 3rem auto;
@@ -125,13 +127,10 @@ const Cart = () => {
     return (
         <Layout>
             <CartContainer>
-                <div className="cart-item-container ">
-                    <div className={classes.toolbar}/>
                     <div className="cart-title panel-transparent" >
                         <h1>Cart</h1> <img src={shopping_icon} alt="shopping evolution" height="45px"/>
                     </div>
                     {isEmpty ? <EmptyCart /> : <FilledCart />}
-                </div>
             </CartContainer>
         </Layout>
     )

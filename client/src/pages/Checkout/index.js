@@ -7,24 +7,13 @@ import Confirmation from './Confirmation'
 import styled from 'styled-components'
 
 const StyledStepper = styled(Paper)`
-    /* background-color: rgba(250, 250, 255, 0.8);
-    max-width: 600px;
-    margin:0 auto;
-    width:auto;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-
-    @media (max-width: 599px) {
-            background-color: red;
-    } */
-
-
+    
     max-width: 800px;
     margin: 0 auto;
     color: #111;
-    margin-top: 2rem !important;
-    background: rgba(250, 250, 255, 0.8);
+    background: rgba(250, 250, 255, 0.8) !important;
     padding: 1rem;
+    box-sizing: border-box;
     border-radius: 0.3rem;
     line-height: 2rem;
 
