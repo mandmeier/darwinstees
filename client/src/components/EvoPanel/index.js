@@ -137,7 +137,7 @@ const EvoPanel = ({panel}) => {
         <Grid className="tee-panel" item xs={12} sm={7}>
             <div className="title-price">
                 <h2>{capitalize(lineage)}</h2>
-                <h3 className="price-tag">$25.99 </h3>
+                <h3 className="price-tag">$24.99 </h3>
             </div>
             <ImageSlider lineage={lineage} layout={layout} displayedEvos={displayedEvos}/>
         </Grid>
