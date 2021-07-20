@@ -27,10 +27,6 @@ export const EvoSchema = new mongoose.Schema({
       type: Array,
       default: [],
     },
-    shares: {
-      type: Array,
-      default: [],
-    },
     svg: {
         type: String,
         default: '<svg></svg>',

@@ -86,7 +86,7 @@ export const getOrCreateItem = async (req, res) => {
           layout,
           evoIds,
           svg,
-          img_path: `designs/${designName}.png`
+          img_path: `https://darwinstees.s3.amazonaws.com/designs/${designName}.png`
         }
 
         const newDesign = new Design(constructedDesign);

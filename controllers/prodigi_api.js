@@ -18,7 +18,7 @@ export const placeOrder = async (orderData) => {
             "assets": [
                 {
                     "printArea": "default",
-                    "url": `${process.env.REACT_APP_URL}/${item.design_name}.png`
+                    "url": `https://darwinstees.s3.amazonaws.com/designs/${item.design_name}.png`
                 }
             ]
         })
@@ -28,7 +28,7 @@ export const placeOrder = async (orderData) => {
 
     const itemOrder = {
         merchantReference: orderData._id,
-        shippingMethod: "Budget",
+        shippingMethod: "Standard",
         recipient: {
             "address": {
                 "line1": orderData.shipping.street,

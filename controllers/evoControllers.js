@@ -24,9 +24,17 @@ export const getEvos = async (req, res) => {
 
       // get evos from ids
       const Evo = mongoose.model(lineage, EvoSchema);
-      const evos = await Evo.find({'_id': {$in: evoIds}})
+      //const evos = await Evo.find({'_id': {$in: evoIds}})
 
-      res.status(200).json(evos);
+
+      const evos = await Evo.find({})
+        console.log("ALL EVOS")
+        console.log(lineage)
+        console.log(evos)
+
+
+
+      //res.status(200).json(evos);
     } catch (error) {
       res.status(404).json({ message: error });
     }
