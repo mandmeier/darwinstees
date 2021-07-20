@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SVG from 'react-inlinesvg'
 import { MutantRow } from './MutantElements'
 import { useSelector, useDispatch } from "react-redux"
-import { getMutants } from '../../state/actions/evoActions'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
 import {likeMutant} from '../../state/actions/evoActions'
 import Social from '../../components/Social'
@@ -11,25 +10,12 @@ const Mutants = ({lineage}) => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getMutants(lineage));
-    }, [dispatch, lineage]);
-
     const evoState = useSelector((state) => state.evoState)
 
-    var {mutants, mutantsLoading} = evoState
+    var {mutants} = evoState
     mutants = mutants[lineage]
-    mutantsLoading = mutantsLoading[lineage]
 
     const {visitorId} = useSelector((state) => state.sessionState)
-
-    if (mutantsLoading) {
-        <h1>loading</h1>
-    }
-
-    const getfitness = (mut) => {
-        return mut.likes.length + mut.shares.length*10
-    }
 
 
     const isLiked = (mut) => {
@@ -47,7 +33,7 @@ const Mutants = ({lineage}) => {
                                     <SVG src={mutant.svg} />
                                     <div className="like-button-content">
                                         <ThumbUpAltIcon/>
-                                        <p>{`${getfitness(mutant)}`}</p>
+                                        <p>{`${mutant.likes.length}`}</p>
                                     </div>
                                 </button>
                             </div>

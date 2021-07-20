@@ -160,7 +160,7 @@ const EvoGallery = ({match, panels}) => {
                         
                     )
                 })
-            }   
+            } 
         </Swiper>
         <Swiper className="swiper-thumbs" onSwiper={setThumbsSwiper} spaceBetween={10} slidesPerView={4} freeMode={true} watchSlidesVisibility={true} watchSlidesProgress={true}>
             {

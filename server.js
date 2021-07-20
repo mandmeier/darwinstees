@@ -51,7 +51,8 @@ mongoose.set('useFindAndModify', false);
 
 
 // schedule mutations
-schedule('0 0 12 * * *', 'lineax')
-schedule('0 0 15 * * *', 'ellipticus')
-schedule('0 0 18 * * *', 'mandalay')
-
+if (process.env.NODE_ENV === 'production') {
+    schedule('0 0 12 * * *', 'lineax')
+    schedule('0 0 15 * * *', 'ellipticus')
+    schedule('0 0 18 * * *', 'mandalay')
+}

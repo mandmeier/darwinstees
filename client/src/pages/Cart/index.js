@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import {emptyCart} from '../../state/actions/shopActions'
 import Layout from '../../components/Layout'
 import { Typography, Button, Grid } from '@material-ui/core'
-import useStyles from './CartElements'
 import CartItem from './CartItem'
 import { Link } from 'react-router-dom';
 import shopping_icon from '../../assets/evo_shopping.png'
@@ -61,16 +60,7 @@ const CartContainer = styled.div`
                 margin: 1rem 0;
             }
         }
-/* 
-        & .checkout-button{
-            display: flex;
-            justify-content: flex-end;
-            @media (max-width: 599px) {
-                margin-top: 1rem;
-                justify-content: center;
-            }
 
-        } */
     }
 
 `
@@ -82,7 +72,6 @@ const Cart = () => {
         window.scrollTo(0, 0)
     });
 
-    const classes = useStyles();
     const dispatch = useDispatch();
 
     const shopState = useSelector((state) => state.shopState)

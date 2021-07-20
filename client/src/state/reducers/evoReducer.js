@@ -31,12 +31,12 @@ const reducer = (state =
             ellipticus: [],
             mandalay: [],
         },
-    mutantsLoading:
-        {
-            lineax: true,
-            ellipticus: true,
-            mandalay: true,
-        },
+    // mutantsLoading:
+    //     {
+    //         lineax: true,
+    //         ellipticus: true,
+    //         mandalay: true,
+    //     },
     layout:
         {
             lineax: "1",
@@ -66,8 +66,8 @@ const reducer = (state =
     switch (action.type) {
         case "GET_EVOS":
             return applyGetEvos(state, action)
-        case "GET_MUTANTS":
-            return applyGetMutants(state, action)
+        // case "GET_MUTANTS":
+        //     return applyGetMutants(state, action)
         case "NEXT_EVO":
             return applyNextEvo(state, action)
         case "PREV_EVO":
@@ -83,14 +83,14 @@ const reducer = (state =
     }
 
     function applyGetEvos(state, action) {
-        const { lineage, evos} = action.payload
-        return { ...state, evos: {...state.evos, [lineage]: evos}, evosLoading: {...state.evosLoading, [lineage]: false}, thumbs: {...state.thumbs, [lineage]: evos[0].svg}}
+        const { lineage, evos, mutants} = action.payload
+        return { ...state, evos: {...state.evos, [lineage]: evos}, mutants: {...state.mutants, [lineage]: mutants}, evosLoading: {...state.evosLoading, [lineage]: false}, thumbs: {...state.thumbs, [lineage]: evos[0].svg}}
     }
 
-    function applyGetMutants(state, action) {
-        const { lineage, mutants} = action.payload        
-        return { ...state, mutants: {...state.mutants, [lineage]: mutants}, mutantsLoading: {...state.mutantsLoading, [lineage]: false}}
-    }
+    // function applyGetMutants(state, action) {
+    //     const { lineage, mutants} = action.payload        
+    //     return { ...state, mutants: {...state.mutants, [lineage]: mutants}, mutantsLoading: {...state.mutantsLoading, [lineage]: false}}
+    // }
 
     function applyNextEvo(state, action) {
         const { lineage, current, length} = action.payload

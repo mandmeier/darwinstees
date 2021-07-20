@@ -20,21 +20,32 @@ export const getEvos = async (req, res) => {
       const { lineage } = req.params;
 
       // get evoIds
-      const evoIds = JSON.parse(fs.readFileSync(`evos/${lineage}/evos.json`, 'utf8'))
+      //const evoIds = JSON.parse(fs.readFileSync(`evos/${lineage}/evos.json`, 'utf8'))
 
       // get evos from ids
       const Evo = mongoose.model(lineage, EvoSchema);
       //const evos = await Evo.find({'_id': {$in: evoIds}})
 
 
-      const evos = await Evo.find({})
-        console.log("ALL EVOS")
-        console.log(lineage)
-        console.log(evos)
+      const allEvos = await Evo.find({})
+        //console.log("ALL EVOS")
+        //console.log(lineage)
+        //console.log(evos)
+
+        const latestGen = Math.max.apply(Math, allEvos.map(function(evo) { return evo.generation; }))
+        const evos = allEvos.filter(evo => evo.generation < latestGen);
+        const mutants = allEvos.filter(evo => evo.generation === latestGen);
+
+        // console.log("LATEST GEN")
+        // console.log(latestGen)
+
+        // console.log("EVOS")
+        // console.log(evos)
+        // console.log("MUTANTS")
+        // console.log(mutants)
 
 
-
-      //res.status(200).json(evos);
+      res.status(200).json({evos, mutants});
     } catch (error) {
       res.status(404).json({ message: error });
     }

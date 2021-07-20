@@ -4,9 +4,10 @@ import * as api from '../api'
 
 export const getEvos = (lineage) => async dispatch => {
     try {
-        var { data:evos } = await api.getEvos(lineage);
+        const { data } = await api.getEvos(lineage);
+        var { evos, mutants } = data
         evos = evos.reverse()
-        dispatch({type: "GET_EVOS", payload: {lineage, evos}})         
+        dispatch({type: "GET_EVOS", payload: {lineage, evos, mutants}})         
       } catch (error) {
         console.log(error);
       }
@@ -21,17 +22,6 @@ export const getThumbs = () => async dispatch => {
     } catch (error) {
       console.log(error);
     }
-
-}
-
-
-export const getMutants = (lineage) => async dispatch => {
-    try {
-        const { data: mutants } = await api.getMutants(lineage);
-        dispatch({type: "GET_MUTANTS", payload: {lineage, mutants}})         
-      } catch (error) {
-        console.log(error);
-      }
 
 }
 
