@@ -11,19 +11,19 @@ const Social = ({page}) => {
         <SocialSection>
             <SocialButtons>
                 <FacebookShareButton url={page} quote="This T-shirt needs your help to evolve! Cast your vote and select the next generation over at Darwin's Tees." hashtag="#DarwinsTees">
-                    <FacebookIcon size={48} logoFillColor="white" round={true}></FacebookIcon>
+                    <FacebookIcon size={48} round={true}></FacebookIcon>
                 </FacebookShareButton>
                 <TwitterShareButton url={page} title="This T-shirt needs your help to evolve! Cast your vote and select the next generation over at Darwin's Tees." hashtags={["DarwinsTees", "Evolution", "ScienceWorks"]}>
-                    <TwitterIcon size={48} logoFillColor="white" round={true}></TwitterIcon>
+                    <TwitterIcon size={48} round={true}></TwitterIcon>
                 </TwitterShareButton>
                 <WhatsappShareButton url={page} title="This T-shirt needs your help to evolve! Cast your vote and select the next generation over at Darwin's Tees.">
-                    <WhatsappIcon size={48} logoFillColor="white" round={true}></WhatsappIcon>
+                    <WhatsappIcon size={48} round={true}></WhatsappIcon>
                 </WhatsappShareButton>
                 <RedditShareButton url={page} title="Help me evolve this T-shirt! Cast your vote and select the next generation over at Darwin's Tees.">
-                    <RedditIcon size={48} logoFillColor="white" round={true}></RedditIcon>
+                    <RedditIcon size={48} round={true}></RedditIcon>
                 </RedditShareButton>
                 <EmailShareButton url={page} subject="Help me evolve this T-shirt!" body="Cast your vote and select the next generation over at Darwin's Tees.">
-                    <EmailIcon size={48} logoFillColor="white" round={true}></EmailIcon>
+                    <EmailIcon size={48} round={true}></EmailIcon>
                 </EmailShareButton>
             </SocialButtons>
         </SocialSection>

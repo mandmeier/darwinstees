@@ -4,7 +4,7 @@ import Item from '../models/Item.js';
 import {drawDesign} from '../evos/drawDesign.js'
 import Design from '../models/Design.js';
 import {EvoSchema} from '../models/Evo.js';
-//import {svg2png} from '../scripts/svg2png.js'
+import {svg2png} from '../scripts/svg2png.js'
 
 
 
@@ -76,6 +76,10 @@ export const getOrCreateItem = async (req, res) => {
 
         // save new design, add to DB if does not exist already
         const designId = mongoose.Types.ObjectId();
+
+        // save design to amazon S3
+
+        svg2png(svg, designName)
        
 
         const constructedDesign = {

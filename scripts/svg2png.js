@@ -1,26 +1,16 @@
 import sharp from 'sharp'
 import fs from 'fs'
-import Design from '../models/Design.js'
 import { uploadFile } from '../s3.js'
 
 
-export const svg2png = async (order) => {
-
-    // get designs
-    const designNames = []
-    order.items.forEach(item => {
-      designNames.push(item.design_name)
-    })
+export const svg2png = async (svg, designName) => {
 
     try {
 
-      const designs = await Design.find({'name': { $in: designNames }});
-
-      for (const design of designs) {
-        const fname_svg = `designs/${design.name}.svg`
-        const fname_png = `designs/${design.name}.png`
+        const fname_svg = `designs/${designName}.svg`
+        const fname_png = `designs/${designName}.png`
     
-        fs.writeFileSync(fname_svg, design.svg)
+        fs.writeFileSync(fname_svg, svg)
 
         sharp(fname_svg)
             .resize(3600, 4800)
@@ -37,11 +27,9 @@ export const svg2png = async (order) => {
             .catch(function(err) {
             console.log(err)
             })
-    
-      }
 
     } catch (error) {
-      console.log("converting designs to png failed")
+      console.log(`converting design ${designName} to png failed`)
       console.log(error)
     }
 

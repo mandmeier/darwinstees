@@ -1,4 +1,4 @@
-const reducer = (state = {cart: [], cartLoading: true, cartCookies: [], confirmationNumber: ""}, action) => {
+const reducer = (state = {cart: [], cartLoading: true, cartCookies: [], confirmationNumber: "", success: false, message: ""}, action) => {
 
     switch (action.type) {
         case "ADD_TO_CART":
@@ -27,7 +27,7 @@ const reducer = (state = {cart: [], cartLoading: true, cartCookies: [], confirma
               })
             return {...state, cart: newCartRm}
         case "CONFIRM_ORDER":
-            return {...state, confirmationNumber: action.payload}
+            return {...state, confirmationNumber: action.payload.confirmationNumber, success: action.payload.success, message: action.payload.message }
         default:
             return state;
     }

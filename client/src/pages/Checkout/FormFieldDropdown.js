@@ -55,7 +55,7 @@ const FormFieldInput = ({updateCountry, updateRegion}) => {
                 value={country}
                 onChange={(e) => handleChangeCountry(e)}
                 fullWidth
-                error={!!errors.country} helperText={errors.country ? errors.country?.message : ''}
+                error={!!errors.country} helpertext={errors.country ? errors.country?.message : ''}
                 //{...methods.register('country')}
                 >
                 {countryList.map((country) => (
@@ -85,7 +85,7 @@ const FormFieldInput = ({updateCountry, updateRegion}) => {
                 onChange={(e) => handleChangeRegion(e)}
                 disabled={!country}
                 fullWidth
-                error={!!errors.region} helperText={errors.region ? errors.region?.message : ''}
+                error={!!errors.region} helpertext={errors.region ? errors.region?.message : ''}
 
                 //{...methods.register('country')}
                 >
@@ -93,7 +93,7 @@ const FormFieldInput = ({updateCountry, updateRegion}) => {
                     ? countryList
                         .find(({ countryShortCode }) => countryShortCode === country)
                         .regions.map((region) => (
-                        <MenuItem value={region.name} key={region.shortCode}>
+                        <MenuItem value={region.shortCode} key={region.name}>
                             {region.name}
                         </MenuItem>
                         ))

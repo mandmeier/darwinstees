@@ -39,21 +39,34 @@ export const removeItem = (itemId) => async dispatch => {
 
 
 export const processOrder = (orderData, visitorId) => async dispatch => {
-  try {
+
+    var customerId
+    try {
 
     const customer = orderData.customer
     // create customer if does not exist, get customerId and orderId
     const {data: customerData} = await api.addOrUpdateCustomer(customer, orderData._id, visitorId)
-    const {customerId} = customerData
-  
-    // save order in db
-    const { data: confirmationNumber  } = await api.createOrder({...orderData, customer: {...orderData.customer, _id: customerId}})
+    customerId = customerData.customerId
 
-    dispatch({type: "CONFIRM_ORDER", payload: confirmationNumber})
+    } catch (error) {
+        console.log(error)
+    }
+
+  
+    try {
+    // save order in db
+    const { data  } = await api.createOrder({...orderData, customer: {...orderData.customer, _id: customerId}})
+    const { success } = data
+
+    if (success) {
+        console.log("SUCCESS")
+        console.log(data)
+        dispatch({type: "CONFIRM_ORDER", payload: data})
+    } 
     
-  } catch (error) {
-    console.log(error)
-  }
+    } catch (error) {
+        dispatch({type: "CONFIRM_ORDER", payload: error.response.data})
+    }
 
 
         // save order in db

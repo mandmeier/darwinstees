@@ -5,7 +5,7 @@ import { CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 //import { Elements, CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { sendPayment } from '../../state/api'
 import Review from './Review'
-import { emptyCart, processOrder } from '../../state/actions/shopActions'
+import { processOrder } from '../../state/actions/shopActions'
 import mongoose from 'mongoose'
 
 
@@ -37,7 +37,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
     const dispatch = useDispatch();
     const shopState = useSelector((state) => state.shopState)
-    const cart = shopState.cart
+    const { cart } = shopState
 
     const {visitorId} = useSelector((state) => state.sessionState) 
 
@@ -95,8 +95,6 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
         dispatch(processOrder(orderData, visitorId))
 
-        // refresh cart
-        dispatch(emptyCart())
         // next step go to confirmation
         nextStep()
         
@@ -157,7 +155,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
     return (
         <>
-            <Review cost={{subtotal, shipping, taxes, total}}/>
+            <Review cost={{subtotal, shipping, taxes, total}} shippingData={shippingData}/>
             <Divider />
             <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>Payment</Typography>
                 <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
@@ -165,7 +163,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
                     <br/> <br/>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Button variant="outlined" disabled={!stripe || processing} onClick={backStep}>Back</Button>
-                        <Button type="submit" variant="contained" disabled={!stripe || processing} color="primary">{processing ? 'Paying...' : `Pay $${total}`}</Button>
+                        <Button type="submit" variant="contained" disabled={!stripe || processing} color="primary">{processing ? 'Processing...' : `Pay $${total}`}</Button>
 
                     </div>
                 </form>

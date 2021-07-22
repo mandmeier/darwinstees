@@ -103,7 +103,7 @@ const Layout1 = ({evos, displayedEvos, current, layout}) => {
                             </div>
                             <div className="tee-logo">
                                 <img src={teeLogo} alt="Darwin's Tees Logo"/>
-                                <div class="tee-logo-text">{`${capitalize(displayedEvos[0].lineage)} # ${displayedEvos[0].generation}`}</div>
+                                <div className="tee-logo-text">{`${capitalize(displayedEvos[0].lineage)} # ${displayedEvos[0].generation}`}</div>
                             </div>  
                         </div>
                     </div>

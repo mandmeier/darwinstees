@@ -134,7 +134,7 @@ function capitalize(word) {
     return word.charAt(0).toUpperCase() + lower.slice(1);
 }
 
-const Layout7 = ({evos, displayedEvos, current, layout}) => {
+const Layout7 = ({displayedEvos}) => {
 
     return (
         <Tshirtwrapper>
@@ -167,7 +167,7 @@ const Layout7 = ({evos, displayedEvos, current, layout}) => {
                                 </div>  
                                 <div className="tee-logo">
                                     <img src={teeLogo} alt="Darwin's Tees Logo"/>
-                                    <div class="tee-logo-text">{`${capitalize(displayedEvos[0].lineage)} # ${displayedEvos[0].generation}`}</div>
+                                    <div className="tee-logo-text">{`${capitalize(displayedEvos[6].lineage)} # ${displayedEvos[6].generation}`}</div>
                                 </div>
                                   
                             </div>

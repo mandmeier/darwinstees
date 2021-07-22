@@ -12,8 +12,7 @@ import Layout7 from './Layout7'
 const ImageSlider = ({lineage, layout, displayedEvos}) => {
 
     const evoState = useSelector((state) => state.evoState)
-    var {current, evos} = evoState
-    current = current[lineage]
+    var { evos } = evoState
     evos = evos[lineage]
 
 
@@ -27,9 +26,9 @@ const ImageSlider = ({lineage, layout, displayedEvos}) => {
             <React.Fragment>
                 {
                     [
-                    layout === "1" ? <Layout1 evos={evos} current={current} layout={layout} displayedEvos={displayedEvos}/>: null,
-                    layout === "3" ? <Layout3 evos={evos} current={current} layout={layout} displayedEvos={displayedEvos}/>: null,
-                    layout === "7" ? <Layout7 evos={evos} current={current} layout={layout} displayedEvos={displayedEvos}/>: null
+                    layout === "1" ? <Layout1 displayedEvos={displayedEvos} key="layout_1"/>: null,
+                    layout === "3" ? <Layout3 displayedEvos={displayedEvos} key="layout_3"/>: null,
+                    layout === "7" ? <Layout7 displayedEvos={displayedEvos} key="layout_7"/>: null
                     ]
 
                 }

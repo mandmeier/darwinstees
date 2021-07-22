@@ -34,6 +34,9 @@ const Countdown = ({mutationTime, lineage}) => {
 
 
     useEffect(() => {
+        let mounted = true;
+
+        if (mounted) {
         let mutationDate = new Date(` Jul 01, 2022 ${mutationTime} `).getTime();
         // update every sec
         setInterval(function(){
@@ -47,6 +50,8 @@ const Countdown = ({mutationTime, lineage}) => {
             setTime(`${hours} : ${minutes} : ${seconds}`)
 
         }, 1000)
+        }
+        return () => mounted = false
 
     }, [mutationTime])
 

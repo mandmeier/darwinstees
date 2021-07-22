@@ -84,7 +84,7 @@ const ProductInfo = styled.div`
 `
 
 
-const Review = ({cost}) => {
+const Review = ({cost, shippingData}) => {
 
     const {subtotal, shipping, taxes, total} = cost
 
@@ -96,8 +96,23 @@ const Review = ({cost}) => {
         return word.charAt(0).toUpperCase() + lower.slice(1);
     }
 
+
+    // firstName: shippingData.firstName,
+    //             lastName: shippingData.lastName,
+    //             email: shippingData.email,
+    //             street: shippingData.address1,
+    //             city: shippingData.city,
+    //             postal_zip_code: shippingData.zip,
+    //             country: shippingData.country,
+    //             region_state:  shippingData.region,
+
     return (
         <>
+            <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }} >Delivery To</Typography>
+            <div>{`${shippingData.firstName} ${shippingData.lastName}`}</div>
+            <div>{shippingData.address1}</div>
+            <div>{`${shippingData.city}, ${shippingData.region}`}</div>
+            <div>{`${shippingData.country} ${shippingData.zip}`}</div>
             <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }} >Order Summary</Typography>
             <Divider />
             <List disablePadding>
