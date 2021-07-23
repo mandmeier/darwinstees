@@ -1,4 +1,4 @@
-const reducer = (state = {cart: [], cartLoading: true, cartCookies: [], confirmationNumber: "", success: false, message: ""}, action) => {
+const reducer = (state = {cart: [], cartLoading: true, cartCookies: [], orderSuccess: false,  errorMessage: "", orderId: ""}, action) => {
 
     switch (action.type) {
         case "ADD_TO_CART":
@@ -10,24 +10,20 @@ const reducer = (state = {cart: [], cartLoading: true, cartCookies: [], confirma
             updatedItem = {...updatedItem, qty: qty}
             var newCart = [...state.cart];
             newCart.splice(idx, 1, updatedItem);
-            return{...state, cart: newCart}
-        // case "INCREASE_QTY":
-        //     const {itemId, qty} = action.payload
-        //     let updatedItem = state.cart.find(item => item.itemId === itemId)
-        //     let idx = state.cart.findIndex(item => item.itemId === itemId)
-        //     updatedItem = {...updatedItem, qty: updatedItem.qty + qty}
-        //     var newCart = [...state.cart];
-        //     newCart.splice(idx, 1, updatedItem);
-        //     return{...state, cart: newCart}
+            return {...state, cart: newCart}
+        case "RESET_SHOP":
+            return {...state, orderSuccess: false, errorMessage: "", orderId: ""}
+        case "ORDER_ERROR":
+            return {...state, orderSuccess: false, errorMessage: action.payload, orderId: ""}
+        case "ORDER_SUCCESS":
+            return {...state, orderSuccess: true, errorMessage: "", orderId: action.payload}
         case "EMPTY_CART":
-            return {...state, cart: [], confirmationNumber: ""}
+            return {...state, cart: [], cartLoading: true, orderSuccess: false, errorMessage: ""}
         case "REMOVE_ITEM":
             var newCartRm = state.cart.filter(item => {
                 return item.itemId !== action.payload;
               })
             return {...state, cart: newCartRm}
-        case "CONFIRM_ORDER":
-            return {...state, confirmationNumber: action.payload.confirmationNumber, success: action.payload.success, message: action.payload.message }
         default:
             return state;
     }

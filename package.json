@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "next": "node evos/lineax/scripts/nextgen.js && node evos/ellipticus/scripts/nextgen.js && node evos/mandalay/scripts/nextgen.js && node server.js",
-    "dev": "node server.js",
+    "dev": "nodemon server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],

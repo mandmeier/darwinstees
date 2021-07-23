@@ -36,40 +36,6 @@ export const placeOrder = async (orderData) => {
         items: shippingItems,
     }
 
-
-    // orderData.items.forEach( item => {
-    //     shippingItems.push({
-    //         "sku": item.product.sku,
-    //         "copies": item.qty,
-    //         "sizing": "fillPrintArea",
-    //         "attributes": item.product.attributes,
-    //         "assets": [
-    //             {
-    //                 "printArea": "default",
-    //                 "url": `https://darwinstees.s3.amazonaws.com/designs/${item.design_name}.png`
-    //             }
-    //         ]
-    //     })
-    // })
-
-    // const itemOrder = {
-    //     merchantReference: orderData._id,
-    //     shippingMethod: "Standard",
-    //     recipient: {
-    //         "address": {
-    //             "line1": orderData.shipping.street,
-    //             "postalOrZipCode": orderData.shipping.postal_zip_code,
-    //             "countryCode": orderData.shipping.country,
-    //             "townOrCity": orderData.shipping.city,
-    //             "stateOrCounty": orderData.shipping.region_state
-    //         },
-    //         "name": `${orderData.shipping.firstName} ${orderData.shipping.lastName}`,
-    //         "email": orderData.shipping.email
-    //     },
-    //     "items": shippingItems
-    // }
-
-
     const config = {
         headers: {
         "Content-Type": "application/json",
@@ -79,15 +45,12 @@ export const placeOrder = async (orderData) => {
         "Authorization": "Basic MHNjY2N4enItMW5pby1qdWd0OmxteDQtZXJwcW5rMDkwMWhy",
     };
 
-    var response 
-
     try {
-        console.log(`order ${orderData._id} sent for printing`)
         const data = await axios.post(printful_url, itemOrder, config)
-        response = { data }
+        console.log(`order ${orderData._id} sent for printing`)
+        
+        
     } catch (error) {
-        //console.log("ERROR")
-        //console.log(error)
         response = { error }
     }
 

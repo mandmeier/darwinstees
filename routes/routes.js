@@ -3,7 +3,7 @@ import {getEvos, getMutants, likeMutant, getThumbs} from '../controllers/evoCont
 import {getProduct, getOrCreateItem} from '../controllers/productControllers.js';
 import { getClientSecret } from '../controllers/stripeControllers.js'
 import { addOrUpdateCustomer } from '../controllers/customerControllers.js'
-import { createOrder } from '../controllers/orderControllers.js'
+import { createPrintOrder } from '../controllers/orderControllers.js'
 
 
 const router = express.Router();
@@ -18,6 +18,6 @@ router.post('/server/items', getOrCreateItem);
 router.post('/server/payment', getClientSecret);
 
 router.post('/server/customer', addOrUpdateCustomer)
-router.post('/server/order', createOrder)
+router.post('/server/order', createPrintOrder)
 
 export default router;

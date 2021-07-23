@@ -1,42 +1,85 @@
-//import mongoose from 'mongoose';
-import Order from '../models/Order.js'
-//import { svg2png } from '../scripts/svg2png.js';
-import { placeOrder } from './printful_api.js';
+import axios from 'axios'
+import dotenv from 'dotenv'
+dotenv.config();
 
 
 
-export const createOrder = async (req, res) => {
-    try {
-  
-        const { orderData } = req.body;
-    
-        const newOrder = new Order(orderData)
-
-        const order = await newOrder.save()// populate with design
-
-        // draw pngs for this order
-        //await svg2png(order)
-
-        // place order with printful
-        const response = await placeOrder(order)
-
-        if ('error' in response){
-            //console.log("THERE WAS AN ERROR")
-            //console.log(response.error.response.data.error.message)
-            res.status(400).json({ confirmationNumber: "", success: false, message: response.error.response.data.error.message });
+export const createPrintOrder = async (req, res) => {
+    const { orderData } = req.body;
 
 
-            //order._id
-            // delete order from Mongo
+    console.log("CREATING ORDER")
+    console.log(orderData)
 
-            // undo Stripe payment
 
-        } else {
-            res.status(200).json({confirmationNumber: order._id, success: true, message: "success"});
-        }
+    const shippingItems = []
 
-    } catch (error) {
-      res.status(404).json({ message: error });
+    orderData.items.forEach( item => {
+        shippingItems.push({
+            variant_id: item.product.sku,
+            quantity: item.qty,
+            files: [
+                {
+                    type: "front",
+                    url: `https://darwinstees.s3.amazonaws.com/designs/${item.design_name}.png`
+                }
+            ]
+        })
+    })
+
+    const itemOrder = {
+        recipient: {
+            name: `${orderData.shipping.firstName} ${orderData.shipping.lastName}`,
+            address1: orderData.shipping.street,
+            city: orderData.shipping.city,
+            state_code: orderData.shipping.region_state,
+            //state_code: "Nebraska",
+            country_code: orderData.shipping.country,
+            zip: orderData.shipping.postal_zip_code,
+        },
+        items: shippingItems,
     }
-  };
+
+    const config = {
+        headers: {
+        "Content-Type": "application/json",
+        },
+    };
+    axios.defaults.headers.common = {
+        "Authorization": "Basic MHNjY2N4enItMW5pby1qdWd0OmxteDQtZXJwcW5rMDkwMWhy",
+    };
+
+    try {
+        const printful_url = "https://api.printful.com/orders"
+        const { data } = await axios.post(printful_url, itemOrder, config)
+        const orderId = data.result.id
+
+        console.log(`order PF${orderId} sent for printing`)
+
+        res.status(200).json(orderId)
+    } catch (error) {
+      res.status(error.response.data.code).json({ message: error.response.data.result })
+    }
+
+}
+
+
+export const cancelPrintOrder = async (orderId) => {
+
+    axios.defaults.headers.common = {
+        "Authorization": "Basic MHNjY2N4enItMW5pby1qdWd0OmxteDQtZXJwcW5rMDkwMWhy",
+    }
+
+    try {
+        const printful_url = `https://api.printful.com/orders/${orderId}`
+        await axios.delete(printful_url)
+        console.log(`order PF${orderId} cancelled`)
+    } catch (error) {
+        console.log(`order PF${orderId} could not be automatically cancelled!`)
+        console.log(error)
+        // send urgent email to me?
+    }
+
+}
+
 

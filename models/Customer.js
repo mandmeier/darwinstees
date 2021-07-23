@@ -5,11 +5,6 @@ const CustomerSchema = new mongoose.Schema({
     lastName: { type: String, default: "" },
     email: { type: String, required: true, default: "" },
     visitorIds: [String],
-    orders: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order',
-        required: true,
-    }],
 });
 
 const Customer = mongoose.model('Customer', CustomerSchema);

@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { Typography, Button, Divider } from '@material-ui/core'
 import { CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
-//import { Elements, CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { sendPayment } from '../../state/api'
 import Review from './Review'
-import { processOrder } from '../../state/actions/shopActions'
-import mongoose from 'mongoose'
+import { resetShop, processOrder, emptyCart} from '../../state/actions/shopActions'
 
 
 const CARD_OPTIONS = {
@@ -37,20 +34,68 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
 
     const dispatch = useDispatch();
     const shopState = useSelector((state) => state.shopState)
-    const { cart } = shopState
+    var { cart, orderSuccess, errorMessage } = shopState
 
-    const {visitorId} = useSelector((state) => state.sessionState) 
 
     const [processing, setProcessing] = useState(false)
+
+
+    const [backDisabled, setBackDisabled] = useState(false)
+    const [nextDisabled, setNextDisabled] = useState(false)
+    const [nextText, setNextText] = useState("Place Order")
 
     const stripe = useStripe()
     const elements = useElements()
 
+    useEffect(() => {
+        if (errorMessage !== '') {
+            dispatch(resetShop())
+        }
+    }, [dispatch])
 
-    const onPaymentSuccess = (paymentMethod, orderId) => {
+    useEffect(() => {
+        if (errorMessage !== '') {
+            setBackDisabled(false)
+            setNextDisabled(true)
+            setNextText("Order Halted")
+        } else {
+            setBackDisabled(false)
+            setNextDisabled(false)
+            setNextText("Place Order")
+        }
+        if(processing & errorMessage === ''){
+            setBackDisabled(true)
+            setNextDisabled(true)
+            setNextText("Processing...")
+            console.log("Processing...")
+            console.log(processing)
+        } 
+    }, [processing, errorMessage, shippingData, cart])
+
+    useEffect(() => {
+        console.log(orderSuccess)
+        if (orderSuccess) {
+            console.log("go to confirmation page")
+            dispatch(emptyCart())
+            nextStep()
+        } 
+    }, [orderSuccess])
 
 
 
+    const handleSubmit = async (event, elements, stripe) => {
+        event.preventDefault()
+
+        console.log("SUBMIT ORDER")
+
+        if(!stripe || !elements) return
+
+        setProcessing(true)
+
+
+        // create order with printful
+
+        // create order data
         const orderItems = []
         cart.forEach(item => {
             orderItems.push({
@@ -63,13 +108,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
         })
 
         const orderData = {
-            _id: orderId,
             items: orderItems,
-            customer: {
-                firstName: shippingData.firstName,
-                lastName: shippingData.lastName,
-                email: shippingData.email,
-            },
             shipping: {
                 firstName: shippingData.firstName,
                 lastName: shippingData.lastName,
@@ -80,77 +119,30 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
                 country: shippingData.country,
                 region_state:  shippingData.region,
             },
-            payment: {
-                subtotal: Number(subtotal),
-                shipping: Number(shipping),
-                taxes: Number(taxes),
-                total: Number(total),
-                gateway: 'stripe',
-                stripe: {
-                    payment_method: paymentMethod
-                }
-            }
+            
 
         }
 
-        dispatch(processOrder(orderData, visitorId))
+        dispatch(processOrder(orderData, stripe, elements))
 
-        // next step go to confirmation
-        nextStep()
-        
     }
 
 
-    const handleSubmit = async (event, elements, stripe) => {
-        event.preventDefault()
-
-        if(!stripe || !elements) return
-
-        setProcessing(true)
-
-        // submit order to stripe
-
-        // create payment intent on server, get client secret
-
-        const {error, paymentMethod} = await stripe.createPaymentMethod({
-            type: 'card',
-            card: elements.getElement(CardElement),
-        })
-
-        if(!error) {
-            try {
-                const {id} = paymentMethod
-                const orderId = mongoose.Types.ObjectId()
-                const customer = {
-                    firstName: shippingData.firstName,
-                    lastName: shippingData.lastName,
-                    email: shippingData.email,
-                }
-                const { data } = await sendPayment(total, id, customer, orderId)
-
-                if (data.success) {
-                    onPaymentSuccess(paymentMethod, orderId)
-                }
-            } catch (error) {
-                console.log("Error", error)
-                
-            }
-        } else {
-            console.log(error.message)
-        }
-
-        setProcessing(false)
-        
-    }
-
+    // const reviewData = {
+    //     subtotal: Object.values(cart).reduce((t, {product, qty}) => t + Number(product.price)*qty, 0).toFixed(2),
+    //     shippingCost: subtotal >= 50 ? 0 : 5.99,
+    //     taxes: ((Number(subtotal) + Number(shipping)) * 0.0725).toFixed(2),
+    //     total: (Number(subtotal) + Number(shipping) + Number(taxes)).toFixed(2),
+    //     shippingData,
+    // }
 
     const subtotal = Object.values(cart).reduce((t, {product, qty}) => t + Number(product.price)*qty, 0).toFixed(2);
-
     const shipping = subtotal >= 50 ? 0 : 5.99
-
     const taxes =  ((Number(subtotal) + Number(shipping)) * 0.0725).toFixed(2)
-
     const total = (Number(subtotal) + Number(shipping) + Number(taxes)).toFixed(2)
+
+
+
 
 
     return (
@@ -160,11 +152,21 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
             <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>Payment</Typography>
                 <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
                     <CardElement options={CARD_OPTIONS} />
-                    <br/> <br/>
+                    <br/>
+                    {errorMessage != "" && 
+                    <>
+                        <small>The order could not be submitted due to an error:</small>
+                        <br/>
+                        <small style={{color:"#c00001"}}>{errorMessage}</small>
+                        <br/>
+                        <small>If problems persist please contact us at <b>support@darwinstees.com</b></small>
+                        <br/>
+                    </>}
+                    
+                    <br/>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Button variant="outlined" disabled={!stripe || processing} onClick={backStep}>Back</Button>
-                        <Button type="submit" variant="contained" disabled={!stripe || processing} color="primary">{processing ? 'Processing...' : `Pay $${total}`}</Button>
-
+                        <Button variant="outlined" disabled={backDisabled} onClick={backStep}>Back</Button>
+                        <Button type="submit" variant="contained" disabled={nextDisabled} color="primary">{nextText}</Button>
                     </div>
                 </form>
         </>
