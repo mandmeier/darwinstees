@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import React from 'react'
+import { useSelector } from "react-redux"
 import styled from 'styled-components'
 import { Button } from '@material-ui/core'
 import { Link } from 'react-router-dom';
-import { emptyCart } from '../../state/actions/shopActions'
 
 
 const ConfMessage = styled.div`
@@ -15,18 +14,10 @@ const ConfMessage = styled.div`
 
 const Confirmation = () => {
 
-    const dispatch = useDispatch();
 
     const shopState = useSelector((state) => state.shopState)
-    const {orderId, orderSuccess, paymantSuccess} = shopState
+    const { orderId } = shopState
 
-    // useEffect(() => {
-    //     if (orderSuccess) {
-    //         // reset cart
-    //         dispatch(emptyCart())
-    //     }  
-    // }, [dispatch, orderSuccess])
-    
 
     return (
         <ConfMessage style={{wordWrap: "break-word"}}>

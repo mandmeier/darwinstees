@@ -1,6 +1,6 @@
 import * as api from '../api';
 import store from '../../state/store';
-import { CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
+import { CardElement } from '@stripe/react-stripe-js'
 
 
 
@@ -25,33 +25,24 @@ export const processOrder = (orderData, stripe, elements) => async dispatch => {
         if(!error) {
             try {
                 const {id} = paymentMethod
-                const {data} = await api.sendPayment(id, orderId, orderData)
-                console.log("Payment response")
-                console.log(data)
+                await api.sendPayment(id, orderId, orderData)
+                //await api.sendPayment(orderId, orderData)
                 //dispatch({type: "PAYMENT_SUCCESS"}) 
 
             } catch (error) {
                 const message = error.response.data.message
-                console.log("Payment error")
-                console.log(message)
+                //throw new Error(message);
                 throw {message}
                 //dispatch({type: "PAYMENT_ERROR", payload: message}) 
                 
             }
         } else {
-            console.log("Payment Method error")
-            console.log(error.message)
             throw error.message
         }
 
-        console.log("SUCCESS AT LAST!")
         dispatch({type: "ORDER_SUCCESS", payload: orderId}) 
         
     } catch (error) {
-        console.log("ORDER ERROR !!!")
-
-        console.log("BAD REQUEST")
-        console.log(error)
 
         var message = "an unknown error occurred"
         if(error.message !== undefined) {
@@ -60,11 +51,6 @@ export const processOrder = (orderData, stripe, elements) => async dispatch => {
         if(error.response.data.message !== undefined){
             message = error.response.data.message
         } 
-
-        if (orderId !== undefined) {
-            console.log(orderId)
-        }
-
 
         //const message = error.response.data.message
         dispatch({type: "ORDER_ERROR", payload: message}) 

@@ -51,7 +51,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
         if (errorMessage !== '') {
             dispatch(resetShop())
         }
-    }, [dispatch])
+    }, [dispatch, errorMessage])
 
     useEffect(() => {
         if (errorMessage !== '') {
@@ -67,26 +67,21 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
             setBackDisabled(true)
             setNextDisabled(true)
             setNextText("Processing...")
-            console.log("Processing...")
-            console.log(processing)
         } 
     }, [processing, errorMessage, shippingData, cart])
 
     useEffect(() => {
-        console.log(orderSuccess)
         if (orderSuccess) {
-            console.log("go to confirmation page")
             dispatch(emptyCart())
             nextStep()
         } 
-    }, [orderSuccess])
+    }, [orderSuccess, dispatch, nextStep])
 
 
 
     const handleSubmit = async (event, elements, stripe) => {
         event.preventDefault()
 
-        console.log("SUBMIT ORDER")
 
         if(!stripe || !elements) return
 
@@ -117,7 +112,9 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
                 city: shippingData.city,
                 postal_zip_code: shippingData.zip,
                 country: shippingData.country,
-                region_state:  shippingData.region,
+                countryCode: shippingData.countryCode,
+                region:  shippingData.region,
+                regionCode: shippingData.regionCode,
             },
             
 
@@ -153,7 +150,7 @@ const PaymentForm = ({shippingData, backStep, nextStep}) => {
                 <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
                     <CardElement options={CARD_OPTIONS} />
                     <br/>
-                    {errorMessage != "" && 
+                    {errorMessage !== "" && 
                     <>
                         <small>The order could not be submitted due to an error:</small>
                         <br/>

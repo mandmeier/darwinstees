@@ -22,12 +22,14 @@ const AddressForm = ({next}) => {
     
     const methods = useForm({ resolver: yupResolver(schema) })
 
-    const updateCountry = (country) => {
+    const updateCountry = (country, countryCode) => {
         methods.setValue('country', country);
+        methods.setValue('countryCode', countryCode);
     }
 
-    const updateRegion = (region) => {
+    const updateRegion = (region, regionCode) => {
         methods.setValue('region', region);
+        methods.setValue('regionCode', regionCode);
     }
 
 

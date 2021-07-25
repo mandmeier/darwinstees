@@ -2,15 +2,8 @@ import axios from 'axios'
 import dotenv from 'dotenv'
 dotenv.config();
 
-
-
 export const createPrintOrder = async (req, res) => {
     const { orderData } = req.body;
-
-
-    console.log("CREATING ORDER")
-    console.log(orderData)
-
 
     const shippingItems = []
 
@@ -32,10 +25,12 @@ export const createPrintOrder = async (req, res) => {
             name: `${orderData.shipping.firstName} ${orderData.shipping.lastName}`,
             address1: orderData.shipping.street,
             city: orderData.shipping.city,
-            state_code: orderData.shipping.region_state,
-            //state_code: "Nebraska",
-            country_code: orderData.shipping.country,
+            state_name: orderData.shipping.region,
+            state_code: orderData.shipping.regionCode,
+            country_name: orderData.shipping.country,
+            country_code: orderData.shipping.countryCode,
             zip: orderData.shipping.postal_zip_code,
+            email: orderData.shipping.email
         },
         items: shippingItems,
     }

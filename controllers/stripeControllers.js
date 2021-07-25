@@ -12,13 +12,7 @@ export const getClientSecret = async (req, res) => {
     const { id, orderId, orderData} = req.body;
 
     try {
-
-        console.log("STRIPE PAYMENT")
-
-        console.log(orderId)
-
-        console.log(orderData)
-
+        
         const subtotal = Object.values(orderData.items).reduce((t, {product, qty}) => t + Number(product.price)*qty, 0).toFixed(2);
         const shipping = subtotal >= 50 ? 0 : 5.99
         const taxes =  ((Number(subtotal) + Number(shipping)) * 0.0725).toFixed(2)
@@ -44,11 +38,9 @@ export const getClientSecret = async (req, res) => {
             confirm: true,
         });
 
-        console.log("PAYMENTINTENT")
         res.status(200).json({ message: "success"})
     } catch (error) {
         // cancel Printful order
-        console.log("PAYMENT ERROR")
         cancelPrintOrder(orderId)
         res.status(error.raw.statusCode).json({ message: error.raw.message })
     }
