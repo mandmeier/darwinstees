@@ -2,7 +2,7 @@ import React, {useLayoutEffect} from 'react'
 import Layout from '../components/Layout'
 import styled from 'styled-components'
 import {Button} from '@material-ui/core'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const Page = styled.div`
     & .info {

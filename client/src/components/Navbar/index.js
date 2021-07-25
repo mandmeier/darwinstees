@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from "react-redux"
 import { IconButton, Badge, Typography } from '@material-ui/core'
 import { ShoppingCart } from '@material-ui/icons'
-import logo from '../../assets/header_logo_2400x400.svg'
+import logo from '../../assets/bird_logo_2500x500.svg'
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components'
 
@@ -38,7 +38,7 @@ const Navbar = () => {
     return (
             <Nav>
                     <Typography className="logo" component={Link} to="/"variant="h6" color="inherit">
-                        <img src={logo} alt="Darwin's Tees" height="30px"/>
+                        <img src={logo} alt="Darwin's Tees" height="40px"/>
                     </Typography>
                     <div className="cart-btn">
                     { ImOnHome && (

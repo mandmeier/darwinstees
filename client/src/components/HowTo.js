@@ -73,7 +73,7 @@ const HowTo = () => {
             <p>The T-shirt designs you find here are generated through <strong><em className="emph">evolutionary algorithms</em></strong>. Each design will evolve over time and give rise to unique and previously unimagined shapes and forms. This is made possible through a simple two-step evolutionary process: </p>
 
             <ol>
-                <li><strong><em className="emph">variation</em></strong> Once per day, each design produces a "litter" of three mutant designs. The mutant designs are similar to their parent, but not identical.</li>
+                <li><strong><em className="emph">variation</em></strong> Every few days, each design produces a "litter" of three mutant designs. The mutant designs are similar to their parent, but not identical.</li>
                 <li><strong><em className="emph">selection</em></strong> The mutant designs "feed" on your Likes <ThumbUpAltIcon/> and affection. Whichever one manages to garner the most attention in the vast wilderness of the internet will reproduce and give rise to the next generation.</li>
             </ol>
 

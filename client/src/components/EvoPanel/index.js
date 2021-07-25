@@ -154,7 +154,7 @@ const EvoPanel = ({panel}) => {
                     <p className="next-gen-title">Next generation</p>
                     <Countdown mutationTime={panel.mutationTime} lineage={panel.lineage}/>
                 </div>
-                <p className="next-gen-message"><em>Choose your favorite among the 3 mutants and share this with your friends. May the fittest design survive! </em></p>
+                <p className="next-gen-message"><em>Choose your favorite among the 3 mutants and share this with your friends. The most popular design will survive and reproduce. </em></p>
         </Grid>
         </Grid>
         </Element>
