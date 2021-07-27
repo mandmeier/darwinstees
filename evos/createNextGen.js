@@ -77,10 +77,10 @@ export const createNextGen = async (lineage, mutate, draw) => {
 
     // // add winner to thumbs, add next mutation time
     
-    // update metadata: add winner to thumbs, add next mutation time 4 days later
+    // update metadata: add winner to thumbs, add next mutation time 7 days later
     const currentMetadata = await Metadata.findOne({lineage: winner.lineage})
     console.log(currentMetadata)
-    const newDate = new Date(new Date(currentMetadata.nextGenTime) + 60 * 60 * 4*24 * 1000);  
+    const newDate = new Date(new Date(currentMetadata.nextGenTime) + 60 * 60 * 7 * 24 * 1000);  
     const newMetadata = {...currentMetadata.toObject(), thumb: {svg: winner.svg,  generation: winner.generation}, nextGenTime: newDate}
     console.log(newMetadata)
     await Metadata.replaceOne({lineage: winner.lineage}, newMetadata)

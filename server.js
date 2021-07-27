@@ -54,7 +54,7 @@ mongoose.set('useFindAndModify', false);
 
 // schedule mutations
 if (process.env.NODE_ENV === 'production') {
-    cron.schedule('0 0 11 * *', async () => {
+    cron.schedule('0 55 11 * *', async () => {
         scheduleMutations()
     }); 
 }

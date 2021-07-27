@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from "react-redux"
 import styled from 'styled-components'
-import {Button} from '@material-ui/core'
-import Countdown from 'react-countdown';
+import { Button } from '@material-ui/core'
+import Countdown, { zeroPad } from 'react-countdown';
 
 export const Display = styled.div`
     margin: 0 auto;
@@ -35,7 +35,7 @@ const Timer = ({lineage}) => {
     } else {
         return (
             <div className="time">
-                <span>{days}:{hours}:{minutes}:{seconds}</span>
+                <span>{days}:{zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}</span>
             </div>
         )
     }
@@ -43,7 +43,7 @@ const Timer = ({lineage}) => {
 
     return (
             <Display>
-                <Countdown date={evo_data.nextGenTime} zeroPadDays="1" renderer={renderer}/>
+                <Countdown date={evo_data.nextGenTime} renderer={renderer}/>
             </Display>
 
     )
