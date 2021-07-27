@@ -15,15 +15,15 @@ export const getEvos = (lineage) => async dispatch => {
 }
 
 
-export const getThumbs = () => async dispatch => {
-  try {
-      const { data: thumbs } = await api.getThumbs();
-      dispatch({type: "GET_THUMBS", payload: thumbs})         
-    } catch (error) {
-      console.log(error);
-    }
-
-}
+export const getMetadata = () => async dispatch => {
+    try {
+        const { data: metadata } = await api.getMetadata();
+        dispatch({type: "GET_METADATA", payload: metadata})         
+      } catch (error) {
+        console.log(error);
+      }
+  
+  }
 
 
 export const nextEvo = (lineage, current, length) => {

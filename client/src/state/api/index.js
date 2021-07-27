@@ -8,7 +8,7 @@ export const getEvos = (lineage) => axios.get(`${url}/server/evos/${lineage}`)
 
 export const getMutants = (lineage) => axios.get(`${url}/server/mutants/${lineage}`)
 
-export const getThumbs = () => axios.get(`${url}/server/thumbs`)
+export const getMetadata = () => axios.get(`${url}/server/metadata`)
 
 export const likeMutant = (lineage, _id, visitorId, isLiked) => axios.post(`${url}/server/like`, {lineage, _id, visitorId, isLiked})
 

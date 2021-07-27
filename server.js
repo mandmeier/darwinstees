@@ -5,7 +5,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import Routes from './routes/routes.js';
-import {schedule} from './scripts/schedule.js'
+import {scheduleMutations} from './scripts/scheduleMutations.js'
+import cron from 'node-cron';
+
 
 
 const __dirname = path.resolve();
@@ -52,7 +54,10 @@ mongoose.set('useFindAndModify', false);
 
 // schedule mutations
 if (process.env.NODE_ENV === 'production') {
-    schedule('0 0 12 * * *', 'lineax')
-    schedule('0 0 15 * * *', 'ellipticus')
-    schedule('0 0 18 * * *', 'mandalay')
+    cron.schedule('0 0 11 * *', async () => {
+        scheduleMutations()
+    }); 
 }
+
+
+// cron job schedule anew every 24 h to update times

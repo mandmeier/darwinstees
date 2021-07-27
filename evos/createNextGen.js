@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import path from 'path'
 import {EvoSchema} from '../models/Evo.js';
 import {getFirstEvo} from './getFirstEvo.js'
-import Thumb from '../models/Thumb.js';
+import Metadata from '../models/Metadata.js';
 
 
 
@@ -75,8 +75,15 @@ export const createNextGen = async (lineage, mutate, draw) => {
     const loserIds = threeMutants.slice(1).map(evo => evo.id)
     await Evo.deleteMany({_id:{$in:loserIds}})
 
-    // add winner to thumbs
-    await Thumb.findOneAndUpdate({lineage: winner.lineage}, {svg: winner.svg,  generation: winner.generation })
+    // // add winner to thumbs, add next mutation time
+    
+    // update metadata: add winner to thumbs, add next mutation time 4 days later
+    const currentMetadata = await Metadata.findOne({lineage: winner.lineage})
+    console.log(currentMetadata)
+    const newDate = new Date(new Date(currentMetadata.nextGenTime) + 60 * 60 * 4*24 * 1000);  
+    const newMetadata = {...currentMetadata.toObject(), thumb: {svg: winner.svg,  generation: winner.generation}, nextGenTime: newDate}
+    console.log(newMetadata)
+    await Metadata.replaceOne({lineage: winner.lineage}, newMetadata)
 
     // make mutants (next gen)
     const mutants = mutate(winner)

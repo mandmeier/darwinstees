@@ -41,7 +41,7 @@ export const createPrintOrder = async (req, res) => {
         },
     };
     axios.defaults.headers.common = {
-        "Authorization": "Basic MHNjY2N4enItMW5pby1qdWd0OmxteDQtZXJwcW5rMDkwMWhy",
+        "Authorization": `Basic ${process.env.REACT_APP_PRINTFUL_API_KEY_BASE_64}`,
     };
 
     try {

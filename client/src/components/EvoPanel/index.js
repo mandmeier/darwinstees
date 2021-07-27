@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getEvos } from '../../state/actions/evoActions';
 import Mutants from '../Mutants'
 import PanelActions from './PanelActions'
-import Countdown from '../Countdown';
+import Timer from '../Timer';
 import { Grid } from '@material-ui/core'
 import styled from 'styled-components'
 
@@ -152,7 +152,7 @@ const EvoPanel = ({panel}) => {
         <Grid className="clock-panel panel-transparent"  item xs={12} sm={5}>
                 <div className="next-gen">
                     <p className="next-gen-title">Next generation</p>
-                    <Countdown mutationTime={panel.mutationTime} lineage={panel.lineage}/>
+                    <Timer mutationTime={panel.mutationTime} lineage={panel.lineage}/>
                 </div>
                 <p className="next-gen-message"><em>Choose your favorite among the 3 mutants and share this with your friends. The most popular design will survive and reproduce. </em></p>
         </Grid>

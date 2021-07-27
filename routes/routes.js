@@ -1,5 +1,5 @@
 import express from 'express';
-import {getEvos, getMutants, likeMutant, getThumbs} from '../controllers/evoControllers.js';
+import {getEvos, getMutants, likeMutant, getMetadata} from '../controllers/evoControllers.js';
 import {getProduct, getOrCreateItem} from '../controllers/productControllers.js';
 import { getClientSecret } from '../controllers/stripeControllers.js'
 import { addOrUpdateCustomer } from '../controllers/customerControllers.js'
@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/server/evos/:lineage', getEvos);
 router.get('/server/mutants/:lineage', getMutants);
-router.get('/server/thumbs', getThumbs);
+router.get('/server/metadata', getMetadata);
 router.post('/server/like', likeMutant);
 
 router.get('/server/products/:_id', getProduct);

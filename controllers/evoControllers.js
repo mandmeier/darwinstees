@@ -2,17 +2,18 @@
 import fs from 'fs'
 import mongoose from 'mongoose';
 import {EvoSchema} from '../models/Evo.js';
-import Thumb from '../models/Thumb.js'
+import Metadata from '../models/Metadata.js'
 
 
-export const getThumbs = async (req, res) => {
-  try {
-    const thumbs = await Thumb.find();
-    res.status(200).json(thumbs);
-  } catch (error) {
-    res.status(404).json({ message: error });
-  }
-};
+
+export const getMetadata = async (req, res) => {
+    try {
+      const metadata = await Metadata.find();
+      res.status(200).json(metadata);
+    } catch (error) {
+      res.status(404).json({ message: error });
+    }
+  };
 
 
 export const getEvos = async (req, res) => {

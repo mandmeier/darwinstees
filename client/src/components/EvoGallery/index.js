@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useLayoutEffect} from 'react'
 import EvoPanel from '../EvoPanel'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Thumbs } from 'swiper';
 import { SwiperSlide } from 'swiper/react';
@@ -9,9 +9,8 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 import styled from 'styled-components'
 import { Swiper } from 'swiper/react';
 import "swiper/components/thumbs/thumbs.min.css"
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 import SVG from 'react-inlinesvg';
-import {getThumbs} from '../../state/actions/evoActions'
 
 
 
@@ -109,19 +108,17 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Thumbs]);
 
 
 
-const EvoGallery = ({match, panels}) => {
-
-    const dispatch = useDispatch();
-
-    const {evos, thumbs} = useSelector((state) => state.evoState)
-
-    useEffect(() => {
-        dispatch(getThumbs());
-    }, [evos, dispatch]);
+const EvoGallery = ({match, metadata}) => {
 
 
-    // add thumbs to panels
-    panels = panels.map(panel => ({...panel, thumb: thumbs[panel.lineage]}))
+    useLayoutEffect(() => {
+        const urlLineage= match.params.urlLineage
+        if(urlLineage !== undefined) {
+            const slideIndex = metadata.findIndex(p => p.lineage === urlLineage) + 1
+            const swiper = document.querySelector('.swiper-container').swiper;
+            swiper.slideTo(slideIndex)
+        }
+    }, [metadata])
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
@@ -144,7 +141,7 @@ const EvoGallery = ({match, panels}) => {
           }}
         >
             {
-                panels.map((panel) => {
+                metadata.map((panel) => {
                     return (
                         <SwiperSlide style={{ backgroundImage: `url(${panel.img})`, backgroundPosition:"center", backgroundSize: "cover"}} key={panel.lineage}>
                             <EvoPanel panel={panel}/>
@@ -164,11 +161,11 @@ const EvoGallery = ({match, panels}) => {
         </Swiper>
         <Swiper className="swiper-thumbs" onSwiper={setThumbsSwiper} spaceBetween={10} slidesPerView={4} freeMode={true} watchSlidesVisibility={true} watchSlidesProgress={true}>
             {
-                panels.map((panel, idx) => {
+                metadata.map((panel, idx) => {
                     return (
                         <SwiperSlide key={panel.lineage}>
                              <div>
-                                <SVG src={panel.thumb} />
+                                <SVG src={panel.thumb.svg} />
                             </div>                            
                         </SwiperSlide>
                     )
