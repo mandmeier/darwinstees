@@ -54,10 +54,7 @@ mongoose.set('useFindAndModify', false);
 
 // schedule mutations
 if (process.env.NODE_ENV === 'production') {
-    cron.schedule('0 55 11 * *', async () => {
+    cron.schedule('55 11 * * *', async () => {
         scheduleMutations()
-    }); 
+    });  
 }
-
-
-// cron job schedule anew every 24 h to update times
