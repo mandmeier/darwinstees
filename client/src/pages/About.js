@@ -18,8 +18,8 @@ const Page = styled.div`
     }
 
     & .panel-transparent {
-        background: rgba(250, 250, 255, 0.8);
         padding: 1rem;
+        background: rgba(250, 250, 255, 0.8);
         border-radius: 0.3rem;
     }   
 

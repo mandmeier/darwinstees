@@ -6,12 +6,18 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 const How = styled.div`
 max-width: 800px;
 margin: 0 auto;
-color: #111;
 margin-top: 2rem !important;
+/* 
+color: #111;
 background: rgba(250, 250, 255, 0.8);
+border-radius: 0.3rem; */
+
+color: #f9f9f9;
+
+
 padding: 1rem;
 padding-top: 0.1rem;
-border-radius: 0.3rem;
+
 line-height: 2rem;
 
 @media (max-width: 850px) {
@@ -19,7 +25,7 @@ line-height: 2rem;
 }
 
 & .emph {
-        color: #111;
+        color: #f9f9f9;
         font-weight: bold;
         font-size: 1.5rem;
     }

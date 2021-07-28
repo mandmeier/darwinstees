@@ -12,7 +12,7 @@ const Layout = ({children}) => {
     return (
         <div className="layout">
             <Navbar/>
-                <Main style={{ backgroundImage: `url(/img/black_sand.webp)`, backgroundPosition:"center", backgroundSize: "cover"}}>
+                <Main style={{ backgroundImage: `url(/img/black_sand3.webp)`, backgroundPosition:"center", backgroundSize: "cover"}}>
                     <Elements stripe={stripePromise}>
                         {children}
                     </Elements>

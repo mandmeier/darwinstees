@@ -17,7 +17,7 @@ const MetadataSchema = new mongoose.Schema({
             default: '<svg></svg>',
           },
     },
-    nextGenTime: {type: String, default: ''},
+    nextGenTime: {type: Date},
     img: {type: String, default: ''},
     quote: {type: String, default: ''},
     quote_by: {type: String, default: ''},

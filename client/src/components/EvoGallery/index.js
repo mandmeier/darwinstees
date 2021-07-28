@@ -9,7 +9,6 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 import styled from 'styled-components'
 import { Swiper } from 'swiper/react';
 import "swiper/components/thumbs/thumbs.min.css"
-import {useSelector} from 'react-redux'
 import SVG from 'react-inlinesvg';
 
 
@@ -118,7 +117,7 @@ const EvoGallery = ({match, metadata}) => {
             const swiper = document.querySelector('.swiper-container').swiper;
             swiper.slideTo(slideIndex)
         }
-    }, [metadata])
+    }, [metadata, match.params.urlLineage])
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 

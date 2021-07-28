@@ -31,7 +31,7 @@ const Timer = ({lineage}) => {
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
-        return <Button style={{margin: "0.5 auto 0 auto"}} variant="text" size="smamediumll"  onClick={() => handleClick()}>Show Next Gen</Button>
+        return <Button style={{margin: "0.5 auto 0 auto"}} variant="text" size="small"  onClick={() => handleClick()}>Show Next Gen</Button>
     } else {
         return (
             <div className="time">

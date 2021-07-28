@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components';
 import { useSelector, useDispatch } from "react-redux"
 import { Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import {addToCart} from '../../../state/actions/shopActions'
-import { AddShoppingCart } from '@material-ui/icons'
+import AddShoppingCart from '@material-ui/icons/AddShoppingCart'
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { setLayout } from '../../../state/actions/evoActions'
 import GenerationButtons from '../../GenerationButtons'
 import L1b from '../../../assets/L1b.svg'
@@ -38,6 +40,12 @@ const Actions = styled.div`
         margin: 0.25rem 0;
     }
 
+    & .buffer {
+        margin: 0.5rem auto 0 auto;
+        padding: 3px 9px;
+        height: 20px;
+    }
+
     & .selections {
         width: 100%;
         margin: 0 auto;
@@ -67,7 +75,8 @@ const Actions = styled.div`
         margin: 0 0 0.5rem 0 !important;
         //margin-bottom: 0.5rem;
         display: flex;
-        justify-content: left;
+        flex-direction: column;
+        justify-content: center;
 
         & button {
             margin: 0 auto;
@@ -120,12 +129,21 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
         setSelectedSize(size)
     }
 
+
     const evoState = useSelector((state) => state.evoState)
     const layout = evoState.layout[lineage]
-   
-    
-    const handleAddCart = () => {
 
+    const [currentItem, setCurrentItem] = useState('')
+    const shopState = useSelector((state) => state.shopState)
+    const { cart } = shopState
+    const [currentIteminCart, setCurrentItemInCart] = useState(undefined)
+
+
+
+
+
+    useEffect(() => {
+        // get item id for current item
         let productId
         if (selectedSize === "S") {
             productId = "60c2c98b802d4da223643aff"
@@ -134,15 +152,33 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
         } else if (selectedSize === "L") {
             productId = "60c2c9de802d4da223643b01"
         }
+        setCurrentItem(`${productId}-${lineage}-${generation}-${layout}`)
 
+        // check if current item in cart
+        //const itemInCart = cart.find(item => item.itemId === currentItem)
+        setCurrentItemInCart(cart.find(item => item.itemId === currentItem))
+        console.log(currentIteminCart)
+
+        // console.log("itemInCart")
+        // console.log(itemInCart)
+        // if(itemInCart === undefined){
+        //     setInCart(0)
+        // } else {
+        //     setInCart(itemInCart.qty)
+        // }
+
+    }, [lineage, generation, layout, selectedSize, cart, currentItem, currentIteminCart])
+
+
+
+    
+    const handleAddCart = () => {
         const evoIds = []
         displayedEvos.forEach(evo => {
             evoIds.push(evo._id)
         });
 
-        var itemId = `${productId}-${lineage}-${generation}-${layout}`
-
-        dispatch(addToCart(itemId, lineage, generation, layout, evoIds, 1))   
+        dispatch(addToCart(currentItem, lineage, generation, layout, evoIds, 1))  
     }
 
     const handleSetLayout = (newLayout) => {
@@ -183,7 +219,16 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
             <br/>
             <div className={"add-to-cart"}>
                 <Button variant="contained" color="primary" onClick={() => handleAddCart()}>add to cart &nbsp;<AddShoppingCart/></Button>
+             {currentIteminCart !== undefined
+                ? 
+                 <Button style={{margin:"0.5rem auto 0 auto"}} component={Link} variant="outlined" size="small" to="/cart">
+                 <small style={{display:"flex", alignItems:"center"}}>{`${currentIteminCart.qty} added`}&nbsp;<ArrowForwardIcon style={{color:"#c00001", fontSize:"0.825rem"}}/><span style={{color:"#c00001"}}>&nbsp;go to cart</span></small>
+                </Button>
+                
+                : <p className="buffer">&nbsp;</p>}
             </div>
+           
+           
         </Actions>
     )
 }

@@ -40,7 +40,7 @@ const Mutants = ({lineage}) => {
                 })
             } 
         </MutantRow>
-        <Social page={`http://localhost:3000/shop/${lineage}`}/>
+        <Social page={`https://www.darwinstees.com/shop/${lineage}`}/>
         </>
     )
 }

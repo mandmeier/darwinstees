@@ -120,7 +120,7 @@ const Footer = () => {
                     <div className="footer-link"><Link to="/size-chart" target="_blank">Size Chart</Link></div>
                 </Grid>
                 <Grid className="footer-newsletter" item xs={12} sm={6} md={3}>
-                    <h3 className="footer-title">Newsletter</h3>
+                    <h3 className="footer-title">Stay in Touch</h3>
                     {!formSubmitted ?
                         <SignUp onSubmit={onSubmit}/> :
                         <ThankYou/>
