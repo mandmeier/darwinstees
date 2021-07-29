@@ -70,7 +70,7 @@ const Cart = () => {
 
     useLayoutEffect(() => {
         window.scrollTo(0, 0)
-    });
+    }, []);
 
     const dispatch = useDispatch();
 
@@ -105,7 +105,10 @@ const Cart = () => {
         </div>
         <div className="summary panel-transparent">
             <Button className={"empty-button"} size="small" type="button" variant="outlined" color="secondary" onClick={()=>handleEmptyCart()}>Empty Cart</Button>
-                <Typography className={"subtotal"} variant="h5">Subtotal: ${subtotal}</Typography>           
+                <div style={{textAlign:"center"}}>
+                    <Typography className={"subtotal"} variant="h6">Subtotal: ${subtotal}</Typography>
+                    <small style={{margin:"0"}}>{subtotal < 60 ? "– Get free delivery on orders over $60 –" : "– Delivery is FREE –"}</small>
+                </div>          
             <Button component={Link} to="/checkout" className={"checkout-button"} size="large" type="button" variant="contained" color="primary">Checkout</Button>
         </div>
         </>

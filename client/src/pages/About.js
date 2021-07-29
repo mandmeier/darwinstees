@@ -117,7 +117,7 @@ const About = () => {
                     <p> With only a few handful of genes and straightforward drawing instructions, the genetics and "embryogenesis" of our digital organisms are vastly simplified compared to even the most primitive living organisms. However, our digital organisms have all that is required to evolve through a simple two-step process: </p>
         
                     <ol>
-                        <li><strong><em className="emph">variation</em></strong> Once every seven few days, each organism produces a "litter" of three offspring organisms. The offspring are based on the genetics of their parent but they have a single random mutation in a random gene, which often (but not always) manifests in a slightly altered body plan.</li>
+                        <li><strong><em className="emph">variation</em></strong> Once every seven days, each organism produces a "litter" of three offspring individuals. The offspring are based on the genetics of their parent but they have a single random mutation in a random gene, which often (but not always) manifests in a slightly altered body plan.</li>
                         <li><strong><em className="emph">selection</em></strong> There is no evolution without selection. In our simplified universe, the mutant designs "feed" on your Likes <ThumbUpAltIcon/> and affection. Whichever individual manages to garner the most attention in the vast wilderness of the internet and collect the most likes will reproduce and give rise to the next generation.</li>
                     </ol>
     

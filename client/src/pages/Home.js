@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useLayoutEffect, useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import Layout from '../components/Layout'
 import EvoGallery from '../components/EvoGallery'
@@ -9,6 +9,10 @@ import {getMetadata} from '../state/actions/evoActions'
 const Home = ({match}) => {
     const dispatch = useDispatch();
 
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, []);
   
     useEffect(() => {
         dispatch(getMetadata());
