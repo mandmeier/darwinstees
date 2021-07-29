@@ -153,20 +153,8 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
             productId = "60c2c9de802d4da223643b01"
         }
         setCurrentItem(`${productId}-${lineage}-${generation}-${layout}`)
-
-        // check if current item in cart
-        //const itemInCart = cart.find(item => item.itemId === currentItem)
         setCurrentItemInCart(cart.find(item => item.itemId === currentItem))
-        console.log(currentIteminCart)
-
-        // console.log("itemInCart")
-        // console.log(itemInCart)
-        // if(itemInCart === undefined){
-        //     setInCart(0)
-        // } else {
-        //     setInCart(itemInCart.qty)
-        // }
-
+        
     }, [lineage, generation, layout, selectedSize, cart, currentItem, currentIteminCart])
 
 

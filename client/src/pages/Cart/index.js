@@ -54,11 +54,25 @@ const CartContainer = styled.div`
             flex-direction: column;
         }
 
+
+    }
+
+    & .free-shipping {
+        text-align: center;
+
         & .subtotal {
-            text-align: center;
+            //text-align: center;
             @media (max-width: 599px) {
-                margin: 1rem 0;
+                margin-top: 1rem;
             }
+        }
+
+        & small {
+           margin: 0
+        }
+
+        @media (max-width: 599px) {
+                margin-bottom: 1rem;
         }
 
     }
@@ -105,9 +119,9 @@ const Cart = () => {
         </div>
         <div className="summary panel-transparent">
             <Button className={"empty-button"} size="small" type="button" variant="outlined" color="secondary" onClick={()=>handleEmptyCart()}>Empty Cart</Button>
-                <div style={{textAlign:"center"}}>
+                <div className="free-shipping">
                     <Typography className={"subtotal"} variant="h6">Subtotal: ${subtotal}</Typography>
-                    <small style={{margin:"0"}}>{subtotal < 60 ? "– Get free delivery on orders over $60 –" : "– Delivery is FREE –"}</small>
+                    <small >{subtotal < 60 ? "– Get free delivery on orders over $60 –" : "– Delivery is FREE –"}</small>
                 </div>          
             <Button component={Link} to="/checkout" className={"checkout-button"} size="large" type="button" variant="contained" color="primary">Checkout</Button>
         </div>
