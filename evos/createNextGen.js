@@ -47,24 +47,32 @@ export const createNextGen = async (lineage, mutate, draw) => {
 
     // if starting new lineage
     if (winner === undefined) {
-      console.log(`creating new lineage for ${lineage}`)
-    
-      // create first evo
-      var winner = getFirstEvo(lineage, draw)
+        console.log(`creating new lineage for ${lineage}`)
+        
+        // create first evo
+        var winner = getFirstEvo(lineage, draw)
 
-      // save first evo to mongodb
-      const _id = mongoose.Types.ObjectId();
-      winner = {_id, ...winner}
-      const firstEvo = new Evo(winner);
-      firstEvo.save()
+        // save first evo to mongodb
+        const _id = mongoose.Types.ObjectId();
+        winner = {_id, ...winner}
+        const firstEvo = new Evo(winner);
+        firstEvo.save()
 
-      // save first thumb
-      const firstThumb = new Thumb({
-          lineage: winner.lineage,
-          generation: winner.generation,
-          svg: winner.svg
-      })
-      firstThumb.save()
+    //   // save first thumb
+    //   const firstThumb = new Thumb({
+    //       lineage: winner.lineage,
+    //       generation: winner.generation,
+    //       svg: winner.svg
+    //   })
+    //   firstThumb.save()
+
+        const firstThumb = {
+            generation: winner.generation,
+            svg: winner.svg
+        }
+
+      // update metadata: add winner to thumbs, add next mutation time 7 days later
+        await Metadata.findOneAndUpdate({lineage: lineage}, {thumb: firstThumb})
 
     }
 
@@ -79,15 +87,11 @@ export const createNextGen = async (lineage, mutate, draw) => {
     
     // update metadata: add winner to thumbs, add next mutation time 7 days later
     const currentMetadata = await Metadata.findOne({lineage: winner.lineage})
-    console.log("current time")
-    console.log(currentMetadata.nextGenTime)
-    const newDate = new Date(new Date(currentMetadata.nextGenTime) + 60 * 60 * 7 * 24 * 1000);  
-    const newMetadata = {...currentMetadata.toObject(), thumb: {svg: winner.svg,  generation: winner.generation}, nextGenTime: newDate}
-    console.log("next gen time")
-    console.log(newMetadata.nextGenTime)
-    const updatedMetadata = await Metadata.replaceOne({lineage: winner.lineage}, newMetadata)
-    console.log("updated data")
-    console.log(updatedMetadata)
+    var newDate = new Date(currentMetadata.nextGenTime); 
+    newDate.setDate(newDate.getDate() + 7);
+    const newMetadata = {...currentMetadata.toObject(), thumb: {svg: winner.svg,  gneration: winner.generation}, nextGenTime: newDate}
+    await Metadata.replaceOne({lineage: winner.lineage}, newMetadata)
+
 
     // make mutants (next gen)
     const mutants = mutate(winner)
