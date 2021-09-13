@@ -6,6 +6,7 @@ import Introduction from '../components/Introduction'
 import HowTo from '../components/HowTo'
 import {getMetadata} from '../state/actions/evoActions'
 
+
 const Home = ({match}) => {
     const dispatch = useDispatch();
 

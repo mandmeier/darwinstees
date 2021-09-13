@@ -120,7 +120,7 @@ const Review = ({cost, shippingData}) => {
                     <ListItem style={{padding: '10px 0'}} key={item._id}>
                         <Tshirtwrapper>
                             <div className="tshirt">
-                                <img src={tee} alt="tshirt"/>
+                                <img src={tee} alt="tshirt" loading="lazy"/>
                                 <div className="tshirt-content">
                                     <div className="print-area-wrapper">
                                         <div className="print-area">

@@ -134,7 +134,7 @@ const Cart = () => {
         <Layout>
             <CartContainer>
                     <div className="cart-title panel-transparent" >
-                        <h1>Cart</h1> <img src={shopping_icon} alt="shopping evolution" height="45px"/>
+                        <h1>Cart</h1> <img src={shopping_icon} alt="shopping evolution" height="45px" loading="lazy"/>
                     </div>
                     {isEmpty ? <EmptyCart /> : <FilledCart />}
             </CartContainer>

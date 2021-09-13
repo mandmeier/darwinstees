@@ -173,9 +173,9 @@ const PanelActions = ({displayedEvos, lineage, generation}) => {
         dispatch(setLayout(lineage, newLayout))
     }
 
-    const L1 = layout === "1" ? <img src={L1w} height="24px" alt="layout 1"/> : <img src={L1b} height="24px" alt="layout 1"/>
-    const L3 = layout === "3" ? <img src={L3w} height="24px" alt="layout 3"/> : <img src={L3b} height="24px" alt="layout 3"/>
-    const L7 = layout === "7" ? <img src={L7w} height="24px" alt="layout 7"/> : <img src={L7b} height="24px" alt="layout 7"/>
+    const L1 = layout === "1" ? <img src={L1w} height="24px" alt="layout 1"/> : <img src={L1b} height="24px" alt="layout 1" loading="lazy"/>
+    const L3 = layout === "3" ? <img src={L3w} height="24px" alt="layout 3"/> : <img src={L3b} height="24px" alt="layout 3" loading="lazy"/>
+    const L7 = layout === "7" ? <img src={L7w} height="24px" alt="layout 7"/> : <img src={L7b} height="24px" alt="layout 7" loading="lazy"/>
 
     return (
         <Actions>

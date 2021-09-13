@@ -38,7 +38,7 @@ const SizeChart = () => {
                     <div className="panel-transparent">
                     <h1>T-shirt Size Chart</h1>
                     <div style={{marginTop:'2rem', width:'100%', display:'flex', justifyContent:'center'}}>
-                        <img  className="size-img" src={size_chart} alt="T-shirt size chart"/>
+                        <img  className="size-img" src={size_chart} alt="T-shirt size chart" loading="lazy"/>
                     </div>
                 </div>
                 </div>

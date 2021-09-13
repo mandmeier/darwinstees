@@ -38,7 +38,7 @@ const Navbar = () => {
     return (
             <Nav>
                     <Typography className="logo" component={Link} to="/"variant="h6" color="inherit">
-                        <img src={logo} alt="Darwin's Tees" height="40px"/>
+                        <img src={logo} alt="Darwin's Tees" height="40px" loading="lazy"/>
                     </Typography>
                     <div className="cart-btn">
                     { ImOnHome && (

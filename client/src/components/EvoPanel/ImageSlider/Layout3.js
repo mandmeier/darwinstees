@@ -122,7 +122,7 @@ const Layout3 = ({evos, displayedEvos, current, layout}) => {
     return (
         <Tshirtwrapper>
             <div className="tshirt">
-                <img className="dummy-image" src={tee} alt="tshirt dummy"/>
+                <img className="dummy-image" src={tee} alt="tshirt dummy" loading="lazy" />
                 <div className="tshirt-content">
                     <div className="print-area-wrapper">
                         <div className="print-area">
@@ -137,7 +137,7 @@ const Layout3 = ({evos, displayedEvos, current, layout}) => {
                                             <SVG src={displayedEvos[2].svg} />
                                 </div>
                                 <div className="tee-logo">
-                                    <img src={teeLogo} alt="Darwin's Tees Logo"/>
+                                    <img src={teeLogo} alt="Darwin's Tees Logo" loading="lazy" />
                                     <div className="tee-logo-text">{`${capitalize(displayedEvos[2].lineage)} # ${displayedEvos[2].generation}`}</div>
                                 </div>             
                             </div>

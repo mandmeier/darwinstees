@@ -130,7 +130,7 @@ const Footer = () => {
             <div className="footer-bottom">
                 <br/>
                 <hr className="footer-divider"/>
-                <img src={bird} alt="Darwin's Tees" height="50px"/>
+                <img src={bird} alt="Darwin's Tees" height="50px" loading="lazy"/>
                 <p className="footer-text"><small>Copyright &copy; {year} Darwin's Tees</small></p>
                 <br/>
             </div>

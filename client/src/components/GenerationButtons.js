@@ -58,7 +58,7 @@ const GenerationButtons = ({lineage}) => {
     return (
         <Slider>
             <FaArrowAltCircleLeft className="slider-arrow left-arrow" onClick={prevSlide}/>
-            <img className="slider-image" src={evolution} alt='evolution of man'/>
+            <img className="slider-image" src={evolution} alt='evolution of man' loading="lazy"/>
             <FaArrowAltCircleRight className="slider-arrow right-arrow" onClick={nextSlide}/>
         </Slider>
     )

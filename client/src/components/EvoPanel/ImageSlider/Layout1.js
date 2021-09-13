@@ -102,7 +102,7 @@ const Layout1 = ({evos, displayedEvos, current, layout}) => {
                                         <SVG src={displayedEvos[0].svg} />
                             </div>
                             <div className="tee-logo">
-                                <img src={teeLogo} alt="Darwin's Tees Logo"/>
+                                <img src={teeLogo} alt="Darwin's Tees Logo" loading="lazy"/>
                                 <div className="tee-logo-text">{`${capitalize(displayedEvos[0].lineage)} # ${displayedEvos[0].generation}`}</div>
                             </div>  
                         </div>
