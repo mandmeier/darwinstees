@@ -5,8 +5,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import Routes from './routes/routes.js';
-import {scheduleMutations} from './scripts/scheduleMutations.js'
+import {scheduleMutations} from './scripts/scheduleMutations.js';
 import cron from 'node-cron';
+import compression from 'compression';
 
 
 
@@ -21,6 +22,7 @@ app.use('/', Routes);
 
 app.use(express.static('public'));  
 app.use('/designs', express.static('designs')); 
+app.use(compression())
 
 const PORT = process.env.PORT || 5000;
 
